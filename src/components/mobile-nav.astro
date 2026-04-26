@@ -1,0 +1,74 @@
+---
+---
+<div class="md:hidden flex items-center">
+  <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu" class="w-10 h-10 flex items-center justify-center text-[#91918c] hover:text-[#33332e] hover:bg-[#e0e0d9] dark:hover:bg-[#33332e] rounded-full transition-all">
+    <span class="material-symbols-outlined" id="mobile-menu-icon">menu</span>
+  </button>
+</div>
+
+<div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-[#fcfcf9] dark:bg-[#1a1a18] border-b border-[#91918c]/20 z-40">
+  <nav class="flex flex-col gap-0 p-4">
+    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/mission">mission</a>
+    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/games">games</a>
+    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/faq">faq</a>
+    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/privacy">privacy</a>
+  </nav>
+</div>
+
+<script is:inline>
+  (function(){
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('mobile-menu-icon');
+
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      const wasHidden = menu.classList.contains('hidden');
+      if (wasHidden) {
+        menu.classList.remove('hidden');
+        menu.classList.add('block');
+        btn.setAttribute('aria-expanded', 'true');
+        icon.textContent = 'close';
+      } else {
+        menu.classList.add('hidden');
+        menu.classList.remove('block');
+        btn.setAttribute('aria-expanded', 'false');
+        icon.textContent = 'menu';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menu || !btn) return;
+      if (menu.classList.contains('hidden')) return;
+      const target = e.target;
+      if (btn.contains(target) || menu.contains(target)) return;
+      menu.classList.add('hidden');
+      menu.classList.remove('block');
+      btn.setAttribute('aria-expanded', 'false');
+      icon.textContent = 'menu';
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        icon.textContent = 'menu';
+      }
+    });
+
+    try {
+      const currentPath = (location && location.pathname) ? (location.pathname.replace(/\/\/+$/, '') || '/') : '/';
+      menu.querySelectorAll('a.mobile-nav-link').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        const linkPath = (new URL(href, location.origin).pathname || '/').replace(/\/\/+$/, '') || '/';
+        if (linkPath === currentPath) {
+          a.classList.add('text-[#e60023]');
+          a.setAttribute('aria-current','page');
+        }
+      });
+    } catch (e) {
+      // noop
+    }
+  })();
+</script>

@@ -1,0 +1,32 @@
+{
+  "name": "planetary-planet",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:lan": "astro dev --host 0.0.0.0 --port 4321",
+    "build": "astro build",
+    "build:wasm": "wasm-pack build wasm --target web --out-dir ../public/wasm --out-name webrtc_wasm",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/svelte": "^8.0.4",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.1",
+    "babylonjs": "^9.1.0",
+    "nanostores": "^1.2.0",
+    "pixi.js": "^8.17.1",
+    "qrcode": "^1.5.4",
+    "svelte": "^5.55.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "wasm-pack": "^0.13.1"
+  }
+}

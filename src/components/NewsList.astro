@@ -1,0 +1,42 @@
+---
+const modules = import.meta.glob('../content/news/*.md', { eager: true });
+const posts = Object.entries(modules).map(([path, mod]) => {
+  const fileName = path.split('/').pop();
+  const slug = fileName.replace(/\.md$/, '');
+  return {
+    slug,
+    ...(mod.frontmatter || {}),
+    Content: mod.default
+  };
+}).sort((a, b) => new Date(b.date) - new Date(a.date));
+---
+
+<section class="news-section">
+  <ul class="news-list">
+    {posts.map(post => {
+      const { title, date, author, excerpt, slug, Content } = post;
+      return (
+        <li class="news-item" id={slug}>
+          <article>
+            <h2 class="news-title">{title}</h2>
+            <p class="news-meta">{date}{author ? ` — ${author}` : ''}</p>
+            {excerpt ? <p class="news-excerpt">{excerpt}</p> : null}
+            <div class="news-body">
+              <Content />
+            </div>
+          </article>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+.news-section { padding: 1rem 0; }
+.news-list { list-style: none; padding: 0; margin: 0; }
+.news-item { margin-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 1rem; }
+.news-title { margin: 0 0 0.25rem 0; font-size: 1.25rem; }
+.news-meta { margin: 0 0 0.5rem 0; color: #666; font-size: 0.9rem; }
+.news-excerpt { margin: 0 0 1rem 0; color: #333; }
+.news-body :global(p) { margin: 0.5rem 0; }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Typefall from '@/components/svelte/games/typefall.svelte';
+
+const title = 'TypeFall — Typpy';
+const description = 'TypeFall: falling words typing game to sharpen reflexes and accuracy.';
+const url = 'https://typpy.online/games/typefall';
+const image = 'https://typpy.online/games/typefall.svg';
+const keywords = 'typing, arcade, reflex, speed, accuracy, typing game';
+const genre = 'Arcade';
+const releaseDate = '2026-04-26';
+const developer = 'Typpy';
+const publisher = 'Typpy';
+const platform = 'Web';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": title,
+  "description": description,
+  "url": url,
+  "image": image,
+  "applicationCategory": "Arcade Typing Game",
+  "operatingSystem": "Web",
+  "author": { "@type": "Organization", "name": "Typpy" },
+  "publisher": { "@type": "Organization", "name": "Typpy" },
+  "genre": "Arcade",
+  "datePublished": releaseDate
+};
+---
+
+<Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
+  <Typefall client:only="svelte" />
+</Layout>

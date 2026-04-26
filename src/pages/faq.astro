@@ -1,0 +1,119 @@
+---
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout>
+<main class="flex-grow flex flex-col items-center justify-center py-section px-6 md:px-12 w-full max-w-6xl mx-auto">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- General Questions -->
+            <section class="mb-xl">
+                <div class="flex items-center gap-2 mb-lg">
+                    <span class="material-symbols-outlined text-brand-red">help</span>
+                    <h2 class="text-2xl font-bold uppercase tracking-tight">General Questions</h2>
+                </div>
+                <div class="bg-white rounded-3xl border border-outline-variant overflow-hidden shadow-sm">
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">What is Typpy?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant leading-relaxed">
+                            Typpy is a gamified typing platform designed to improve speed, accuracy, and real-world typing ability through interactive challenges and adaptive learning.
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">How is Typpy different from other typing websites?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant">
+                            <p class="mb-sm">Most platforms specialize in one area (Typing.com for lessons, Monkeytype for customization). Typpy combines:</p>
+                            <ul class="list-disc ml-6 space-y-1">
+                                <li>Learning + gaming + analytics</li>
+                                <li>Real-world typing scenarios (emails, code)</li>
+                                <li>Adaptive difficulty that grows with you</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">Is Typpy for beginners or advanced typists?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant">
+                            <p><strong>Beginners:</strong> Guided progression similar to structured curricula. <br>
+                            <strong>Intermediate:</strong> Targeted improvement of weak patterns. <br>
+                            <strong>Advanced:</strong> Optimization and competitive high-speed play.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Learning & Science -->
+            <section class="mb-xl">
+                <div class="flex items-center gap-2 mb-lg">
+                    <span class="material-symbols-outlined text-brand-red">science</span>
+                    <h2 class="text-2xl font-bold uppercase tracking-tight">Learning & Improvement</h2>
+                </div>
+                <div class="bg-white rounded-3xl border border-outline-variant overflow-hidden shadow-sm">
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">Why do I type fast in tests but slow in real life?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant">
+                            Many tests use repeated common words and lack punctuation. This creates a false sense of speed. Typpy uses real-world text like emails and code to ensure your skills translate to your actual work.
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">What is “touch typing” and why is it important?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant">
+                            Touch typing means typing without looking at the keyboard. Studies show it boosts speed to ~61 WPM (vs ~39 WPM when looking down) and significantly reduces cognitive load.
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="flex justify-between items-center p-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <span class="font-bold text-on-surface">Why do I hit a plateau?</span>
+                            <span class="material-symbols-outlined expand-icon text-outline">expand_more</span>
+                        </summary>
+                        <div class="px-lg pb-lg text-on-surface-variant">
+                            Common reasons include repeating easy tests, lack of specific feedback, and avoiding difficult keys. Typpy breaks plateaus by detecting your "weak keys" and forcing smarter practice.
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Gameplay & Features -->
+            <section class="mb-xl">
+                <div class="flex items-center gap-2 mb-lg">
+                    <span class="material-symbols-outlined text-brand-red">sports_esports</span>
+                    <h2 class="text-2xl font-bold uppercase tracking-tight">Gameplay & Features</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-md">
+                    <div class="bg-white p-lg rounded-3xl border border-outline-variant">
+                        <h3 class="font-bold mb-sm">Real-world Content</h3>
+                        <p class="text-sm text-on-surface-variant">We include emails, code snippets, and essays to mimic actual productivity environments.</p>
+                    </div>
+                    <div class="bg-white p-lg rounded-3xl border border-outline-variant">
+                        <h3 class="font-bold mb-sm">Multiplayer Racing</h3>
+                        <p class="text-sm text-on-surface-variant">Engage in real-time races and skill-based matchmaking to test your accuracy under pressure.</p>
+                    </div>
+                    <div class="bg-white p-lg rounded-3xl border border-outline-variant">
+                        <h3 class="font-bold mb-sm">Deep Analytics</h3>
+                        <p class="text-sm text-on-surface-variant">Track WPM trends, accuracy, and consistency over time with advanced visual heatmaps.</p>
+                    </div>
+                    <div class="bg-white p-lg rounded-3xl border border-outline-variant">
+                        <h3 class="font-bold mb-sm">AI Training</h3>
+                        <p class="text-sm text-on-surface-variant">Planned features include personalized training plans based on your specific motor patterns.</p>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+</main>
+</Layout>

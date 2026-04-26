@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0" stop-color="#e9f7ff" />
+      <stop offset="1" stop-color="#d7f0ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g2)" />
+  <g font-family="Plus Jakarta Sans, Arial, Helvetica, sans-serif" fill="#005f90">
+    <text x="60" y="160" font-size="84" font-weight="800">TypeFall</text>
+    <text x="60" y="240" font-size="40" fill="#5d5f5b">Falling words — race the clock and sharpen reflexes</text>
+    <g transform="translate(60,300)">
+      <rect x="0" y="0" width="820" height="160" rx="12" fill="#fff" opacity="0.95" />
+      <text x="24" y="62" font-size="36" fill="#333">cloud storm light dark dream ocean river stone</text>
+    </g>
+  </g>
+</svg>

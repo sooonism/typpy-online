@@ -1,0 +1,44 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Games — Typpy';
+const description = 'Play fun typing games to train your brain.';
+
+const games = [
+  {
+    slug: 'zentype',
+    title: 'ZenType',
+    description: 'Calm typing practice to improve speed & accuracy.',
+    image: '/games/zentype.svg',
+    href: '/games/zentype'
+  },
+  {
+    slug: 'typefall',
+    title: 'TypeFall',
+    description: 'Falling words — race the clock and sharpen reflexes.',
+    image: '/games/typefall.svg',
+    href: '/games/typefall'
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold mb-6">Games</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {games.map(game => (
+        <a href={game.href} class="block rounded-xl border border-outline-variant overflow-hidden hover:shadow-lg transition">
+          <img src={game.image} alt={game.title} class="w-full h-40 object-cover" />
+          <div class="p-4 bg-surface">
+            <h2 class="text-xl font-semibold">{game.title}</h2>
+            <p class="text-sm text-on-surface-variant mt-2">{game.description}</p>
+            <div class="mt-4">
+              <span class="inline-block px-4 py-2 bg-primary text-white rounded-full text-sm font-semibold">Play</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
