@@ -27,6 +27,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "wasm-pack": "^0.13.1"
   }
 }
