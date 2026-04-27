@@ -18,12 +18,9 @@ const posts = Object.entries(modules).map(([path, mod]) => {
       return (
         <li class="news-item" id={slug}>
           <article>
-            <h2 class="news-title">{title}</h2>
+            <h2 class="news-title"><a href={`/blog/${slug}`} class="news-link">{title}</a></h2>
             <p class="news-meta">{date}{author ? ` — ${author}` : ''}</p>
             {excerpt ? <p class="news-excerpt">{excerpt}</p> : null}
-            <div class="news-body">
-              <Content />
-            </div>
           </article>
         </li>
       );

@@ -1,14 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Zentype from '@/components/svelte/games/zentype.svelte';
+import ZentypeReverse from '@/components/svelte/games/zentypereverse.svelte';
 
-const title = 'ZenType — Typpy';
-const description = 'ZenType: calm typing practice to improve speed and accuracy.';
-const url = 'https://typpy.online/games/zentype';
-const image = 'https://typpy.online/games/zentype.svg';
-const keywords = 'typing, practice, zen, speed, accuracy, typing game';
+const title = 'ZenType Reverse — Typpy';
+const description = 'ZenType Reverse: type backwards to train focus, accuracy, and mental agility. Typpy is typping game for brain.';
+const url = 'https://typpy.online/games/zentype-reverse';
+const image = 'https://typpy.online/games/zentype-reverse.svg';
+const keywords = 'zen, typing, reverse, focus, accuracy, brain training, typing game';
 const genre = 'Educational';
-const releaseDate = '2026-04-26';
+const releaseDate = '2026-04-27';
 const developer = 'Typpy';
 const publisher = 'Typpy';
 const platform = 'Web';
@@ -22,11 +22,11 @@ const schema = [
     "url": url,
     "image": image,
     "brand": { "@type": "Brand", "name": "Typpy", "description": "Typpy is typping game for brain" },
-    "applicationCategory": "Typing Game",
+    "applicationCategory": "Educational Typing Game",
     "operatingSystem": "Web",
     "author": { "@type": "Organization", "name": "Typpy" },
     "publisher": { "@type": "Organization", "name": "Typpy" },
-    "genre": "Educational",
+    "genre": genre,
     "datePublished": releaseDate
   },
   {
@@ -35,12 +35,12 @@ const schema = [
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://typpy.online" },
       { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://typpy.online/games" },
-      { "@type": "ListItem", "position": 3, "name": "ZenType", "item": "https://typpy.online/games/zentype" }
+      { "@type": "ListItem", "position": 3, "name": "ZenType Reverse", "item": "https://typpy.online/games/zentype-reverse" }
     ]
   }
 ];
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
-  <Zentype client:only="svelte" />
+  <ZentypeReverse client:only="svelte" />
 </Layout>

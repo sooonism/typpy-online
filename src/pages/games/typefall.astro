@@ -13,20 +13,32 @@ const developer = 'Typpy';
 const publisher = 'Typpy';
 const platform = 'Web';
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": title,
-  "description": description,
-  "url": url,
-  "image": image,
-  "applicationCategory": "Arcade Typing Game",
-  "operatingSystem": "Web",
-  "author": { "@type": "Organization", "name": "Typpy" },
-  "publisher": { "@type": "Organization", "name": "Typpy" },
-  "genre": "Arcade",
-  "datePublished": releaseDate
-};
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": title,
+    "description": description,
+    "url": url,
+    "image": image,
+    "brand": { "@type": "Brand", "name": "Typpy", "description": "Typpy is typping game for brain" },
+    "applicationCategory": "Arcade Typing Game",
+    "operatingSystem": "Web",
+    "author": { "@type": "Organization", "name": "Typpy" },
+    "publisher": { "@type": "Organization", "name": "Typpy" },
+    "genre": "Arcade",
+    "datePublished": releaseDate
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://typpy.online" },
+      { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://typpy.online/games" },
+      { "@type": "ListItem", "position": 3, "name": "TypeFall", "item": "https://typpy.online/games/typefall" }
+    ]
+  }
+];
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>

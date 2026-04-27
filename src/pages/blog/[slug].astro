@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../content/news/*.md', { eager: true });
+  return Object.keys(modules).map(path => {
+    const fileName = path.split('/').pop();
+    const slug = fileName.replace(/\.md$/, '');
+    return { params: { slug } };
+  });
+}
+
+const slug = Astro.params?.slug;
+let post = null;
+if (slug) {
+  const modules = import.meta.glob('../../content/news/*.md', { eager: true });
+  const entry = Object.entries(modules).find(([path]) => {
+    const fileName = path.split('/').pop();
+    return fileName.replace(/\.md$/, '') === slug;
+  });
+  if (entry) {
+    const [, mod] = entry;
+    post = {
+      slug,
+      ...(mod.frontmatter || {}),
+      Content: mod.default
+    };
+  }
+}
+const Content = post ? post.Content : null;
+---
+
+<Layout>
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    {post ? (
+      <article class="prose mx-auto">
+        <h1>{post.title}</h1>
+        <p class="text-sm text-gray-600">{post.date}{post.author ? ` — ${post.author}` : ''}</p>
+        <div>
+          <Content />
+        </div>
+      </article>
+    ) : (
+      <div class="text-center py-20">
+        <h2 class="text-2xl font-bold">Post not found</h2>
+        <p>The post you requested could not be found.</p>
+      </div>
+    )}
+  </main>
+</Layout>
+

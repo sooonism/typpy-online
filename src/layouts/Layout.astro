@@ -4,8 +4,8 @@ import MobileNav from '@/components/mobile-nav.astro';
 import '../styles/global.css';
 
 const {
-  title = "Typpy – Typing Game for Brain",
-  description = "Play Typpy, a fun typing game to prevent brain decline and improve speed, accuracy, and real-world typing skills.",
+  title = "Typpy – Typping Game for Brain",
+  description = "Typpy is typping game for brain. Play Typpy, a fun typing game to prevent brain decline and improve speed, accuracy, and real-world typing skills.",
   url = "https://typpy.online",
   image = "https://typpy.online/og/default.png",
   type = "website",
@@ -196,6 +196,16 @@ const {
             letter-spacing: -0.01em;
         }
     </style>
+    <script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Typpy",
+  "url": "https://typpy.online",
+  "logo": "https://typpy.online/logo.svg",
+  "description": "Typpy is typping game for brain"
+})}
+    </script>
     {schema && (
       <script type="application/ld+json">
 {JSON.stringify(schema)}
