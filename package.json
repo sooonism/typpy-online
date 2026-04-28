@@ -8,10 +8,12 @@
   "scripts": {
     "dev": "astro dev",
     "dev:lan": "astro dev --host 0.0.0.0 --port 4321",
+    "prebuild": "npm run sitemap",
     "build": "astro build",
     "build:wasm": "wasm-pack build wasm --target web --out-dir ../public/wasm --out-name webrtc_wasm",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
