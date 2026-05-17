@@ -2,10 +2,10 @@
 import Layout from '@/layouts/Bloglayout.astro';
 
 export async function getStaticPaths() {
-  const modules = import.meta.glob('../../content/news/*.md', { eager: true });
+  const modules = import.meta.glob('../../content/news/*.{md,mdx}', { eager: true }) as Record<string, any>;
   return Object.keys(modules).map(path => {
-    const fileName = path.split('/').pop();
-    const slug = fileName.replace(/\.md$/, '');
+    const fileName = path.split('/').pop() || '';
+    const slug = fileName.replace(/\.(md|mdx)$/, '');
     return { params: { slug } };
   });
 }
@@ -13,10 +13,10 @@ export async function getStaticPaths() {
 const slug = Astro.params?.slug;
 let post = null;
 if (slug) {
-  const modules = import.meta.glob('../../content/news/*.md', { eager: true });
+  const modules = import.meta.glob('../../content/news/*.{md,mdx}', { eager: true }) as Record<string, any>;
   const entry = Object.entries(modules).find(([path]) => {
-    const fileName = path.split('/').pop();
-    return fileName.replace(/\.md$/, '') === slug;
+    const fileName = path.split('/').pop() || '';
+    return fileName.replace(/\.(md|mdx)$/, '') === slug;
   });
   if (entry) {
     const [, mod] = entry;
@@ -28,9 +28,35 @@ if (slug) {
   }
 }
 const Content = post ? post.Content : null;
+const pageTitle = post?.title ? `${post.title} — Typpy` : 'Post not found — Typpy';
+const pageDescription = post?.excerpt || 'Read the latest Typpy news and typing insights.';
+const pageUrl = slug ? `https://typpy.online/blog/${slug}` : 'https://typpy.online/blog';
+const pageImage = post?.image ? (post.image.match(/^https?:\/\//) ? post.image : `https://typpy.online${post.image}`) : 'https://typpy.online/og/default.png';
+const pageSchema = post ? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: pageDescription,
+  datePublished: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author || 'Typpy Team'
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Typpy',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://typpy.online/logo.svg'
+    }
+  },
+  mainEntityOfPage: pageUrl,
+  url: pageUrl,
+  image: pageImage
+} : null;
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription} url={pageUrl} image={pageImage} schema={pageSchema} noindex={!post}>
   <main class="max-w-4xl mx-auto px-6 py-12 post">
     {post ? (
       <article class="prose mx-auto">
@@ -77,5 +103,4 @@ const Content = post ? post.Content : null;
     max-width: 100%;    
   }
 
-</style>
 </style>
