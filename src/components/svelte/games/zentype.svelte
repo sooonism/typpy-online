@@ -326,7 +326,7 @@
   style="overflow: hidden;">
 
   <!-- Header / Stats – full width -->
-  <header class="w-full p-4 sm:p-6 flex flex-col items-center mt-2 sm:mt-4">
+  <header class="w-full max-w-5xl mx-auto p-4 sm:p-6 flex flex-col items-center mt-2 sm:mt-4">
     <div class="w-full flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6 px-2 sm:px-4 gap-4 sm:gap-0">
       <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-primary">
         zen<span class="text-on-background">type</span>
@@ -347,7 +347,9 @@
         </div>
       </div>
     </div>
-
+    <div class="mb-4 flex bg-surface-container px-6 py-2 rounded-full text-sm font-bold text-on-surface-variant gap-4 shadow-sm border border-outline-variant">
+			<span class="flex items-center gap-1"> Words are joined! Press Space at word boundaries for +50 pts.</span>
+		</div>
     <!-- Word Count Selector -->
     <div class="flex bg-surface-container px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-bold text-on-surface-variant gap-4 sm:gap-6 transition-colors select-none z-20 shadow-sm border border-outline-variant">
       {#each [5, 10, 20, 50] as count}
@@ -367,7 +369,7 @@
   </header>
 
   <!-- Main Typing Area – truly edge to edge -->
-  <main class="flex-grow flex items-center justify-center p-2 sm:p-6 w-full relative group">
+  <main class="flex-grow flex items-center justify-center p-2 sm:p-6 w-full max-w-5xl mx-auto relative group">
     
     <div
       class="absolute inset-0 z-50 flex items-center justify-center blur-overlay rounded-xl cursor-pointer transition-opacity duration-300"
@@ -433,7 +435,7 @@
     </div>
   </main>
 
-  <footer class="w-full pb-8 sm:pb-12 flex justify-center">
+  <footer class="w-full max-w-5xl mx-auto pb-8 sm:pb-12 flex justify-center">
     <button
       id="restart-btn"
       class="group flex items-center justify-center p-3 sm:p-4 rounded-full hover:bg-surface-container-high text-outline hover:text-primary transition-all duration-200 outline-none focus:ring-2 focus:ring-primary focus:text-primary"

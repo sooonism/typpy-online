@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import ZentypeReverse from '@/components/svelte/games/zentypereverse.svelte';
+import ZentypeReverseGame from '@/components/svelte/games/zentypereverse.svelte';
 
 const title = 'ZenType Reverse — Typpy';
 const description = 'ZenType Reverse: type backwards to train focus, accuracy, and mental agility. Typpy — happy typing.';
 const url = 'https://typpy.online/games/zentype-reverse';
-const image = 'https://typpy.online/games/zentype-reverse.svg';
+const image = 'https://typpy.online/games/zentype_reverse.png';
 const keywords = 'zen, typing, reverse, focus, accuracy, brain training, typing game';
 const genre = 'Educational';
 const releaseDate = '2026-04-27';
@@ -42,5 +42,9 @@ const schema = [
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
-  <ZentypeReverse client:only="svelte" />
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">ZenType Reverse</h1>
+    <p class="text-on-surface-variant mb-6">Type words in reverse order to strengthen attention, pattern recognition, and keyboard confidence.</p>
+  </main>
+  <ZentypeReverseGame client:only="svelte" />
 </Layout>

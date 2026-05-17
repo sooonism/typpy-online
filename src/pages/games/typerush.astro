@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Typerush from '@/components/svelte/games/typerush.svelte';
+import TyperushGame from '@/components/svelte/games/typerush.svelte';
 
 const title = 'Type Rush — Typpy';
 const description = 'Type Rush: a fast arcade typing challenge with collectible diamonds. Typpy — happy typing.';
-const url = 'https://typpy.online/games/type-rush';
-const image = 'https://typpy.online/games/type-rush.svg';
+const url = 'https://typpy.online/games/typerush';
+const image = 'https://typpy.online/games/typerush.png';
 const keywords = 'type, rush, typing, arcade, speed, diamonds, typing game, brain training';
 const genre = 'Arcade';
 const releaseDate = '2026-04-27';
@@ -35,12 +35,16 @@ const schema = [
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://typpy.online" },
       { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://typpy.online/games" },
-      { "@type": "ListItem", "position": 3, "name": "Type Rush", "item": "https://typpy.online/games/type-rush" }
+      { "@type": "ListItem", "position": 3, "name": "Type Rush", "item": "https://typpy.online/games/typerush" }
     ]
   }
 ];
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
-  <Typerush client:only="svelte" />
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">Type Rush</h1>
+    <p class="text-on-surface-variant mb-6">Race against the clock in a fast typing arcade challenge. Improve speed, rhythm, and accuracy with real-time feedback.</p>
+  </main>
+  <TyperushGame client:only="svelte" />
 </Layout>

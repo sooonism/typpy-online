@@ -4,12 +4,13 @@ import { fileURLToPath } from 'node:url';
 
 import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 
-import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [svelte(), mdx()],
+  site: 'https://typpy.online',
+  integrations: [svelte(), mdx(), react()],
   vite: {
     resolve: {
       alias: {
@@ -27,6 +28,6 @@ export default defineConfig({
       }
     },
 
-    plugins: [tailwindcss()]
+    // Tailwind is loaded via PostCSS (`postcss.config.cjs`) instead of the Vite plugin.
   }
 });

@@ -1,0 +1,50 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ScrambletypeGame from '@/components/react/scrambletype.jsx';
+
+const title = 'ScrambleType — Typpy';
+const description = 'ScrambleType: unscramble words one letter at a time to train spelling, focus, and typing precision.';
+const url = 'https://typpy.online/games/scrambletype';
+const image = 'https://typpy.online/og/default.png';
+const keywords = 'scrambletype, typing, word scramble, spelling, focus, typing game';
+const genre = 'Puzzle';
+const releaseDate = '2026-05-11';
+const developer = 'Typpy';
+const publisher = 'Typpy';
+const platform = 'Web';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: title,
+    description,
+    url,
+    image,
+    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    applicationCategory: 'Puzzle Typing Game',
+    operatingSystem: 'Web',
+    author: { '@type': 'Organization', name: 'Typpy' },
+    publisher: { '@type': 'Organization', name: 'Typpy' },
+    genre,
+    datePublished: releaseDate
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://typpy.online' },
+      { '@type': 'ListItem', position: 2, name: 'Games', item: 'https://typpy.online/games' },
+      { '@type': 'ListItem', position: 3, name: 'ScrambleType', item: url }
+    ]
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">ScrambleType</h1>
+    <p class="text-on-surface-variant mb-6">Unscramble each word one letter at a time. Build spelling accuracy, reaction speed, and keyboard control under pressure.</p>
+  </main>
+  <ScrambletypeGame client:only="react" />
+</Layout>

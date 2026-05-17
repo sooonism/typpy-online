@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Disclaimer — Typpy';
+const description = 'Read the Typpy disclaimer for service limitations, liability terms, and third-party content notices.';
+const url = 'https://typpy.online/disclaimer';
+---
+
+<Layout title={title} description={description} url={url}>
+  <main class="flex-grow flex flex-col items-center justify-center py-section px-6 md:px-12 w-full max-w-6xl mx-auto">
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="text-center mb-xl">
+        <h1 class="text-3xl md:text-4xl font-black text-brand-red mb-2">Disclaimer</h1>
+        <div class="text-sm text-on-surface-variant mb-2">Last Updated: May 4, 2026</div>
+      </div>
+
+      <div class="space-y-xl text-on-surface-variant leading-relaxed">
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mb-md mt-xl">1. Accuracy of Performance Data</h2>
+          <p>
+            The typing metrics provided by Typpy.online, including but not limited to Words Per Minute
+            (WPM), accuracy percentages, and fluency scores, are for informational and entertainment
+            purposes only. While we strive for precision in our tracking algorithms, results may vary
+            based on hardware latency, browser performance, and internet connection stability.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mb-md mt-xl">2. No Professional Guarantee</h2>
+          <p>
+            Typpy.online is designed as a tool for practice and self-improvement. We do not guarantee
+            specific professional outcomes, employment results, or the attainment of specific skill
+            levels through the use of this platform.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mb-md mt-xl">3. Service Availability and "As-Is" Basis</h2>
+          <p>
+            The platform and all its features are provided on an "as-is" and "as-available" basis. We
+            do not warrant that the service will be uninterrupted, error-free, or free of viruses or
+            other harmful components. We reserve the right to modify, update, or discontinue any
+            feature (such as specific word count modes or game mechanics) at any time without prior
+            notice.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mb-md mt-xl">4. Third-Party Links and Content</h2>
+          <p>
+            The platform may contain links to third-party websites or content. Typpy.online does not
+            endorse, guarantee, or assume responsibility for the accuracy or reliability of any
+            information offered by third-party websites linked through the platform.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-on-surface mb-md mt-xl">5. Limitation of Liability</h2>
+          <p>
+            To the maximum extent permitted by law, Typpy.online and its operators shall not be liable
+            for any direct, indirect, incidental, or consequential damages resulting from your use of,
+            or inability to use, the platform.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>

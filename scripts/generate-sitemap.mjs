@@ -44,6 +44,7 @@ async function collectPages() {
     let url = '/' + rel;
     url = url.replace(/\/+/g, '/');
     if (url !== '/' && url.endsWith('/')) url = url.slice(0, -1);
+    if (url === '/test') continue;
     let lastmod = null;
     try {
       const stat = await fs.stat(f);

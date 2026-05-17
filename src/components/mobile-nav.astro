@@ -1,4 +1,5 @@
 ---
+import { primaryNavLinks } from '@/data/site-links';
 ---
 <div class="md:hidden flex items-center">
   <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu" class="w-10 h-10 flex items-center justify-center text-[#91918c] hover:text-[#33332e] hover:bg-[#e0e0d9] dark:hover:bg-[#33332e] rounded-full transition-all">
@@ -8,10 +9,9 @@
 
 <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-[#fcfcf9] dark:bg-[#1a1a18] border-b border-[#91918c]/20 z-40">
   <nav class="flex flex-col gap-0 p-4">
-    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/mission">mission</a>
-    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/games">games</a>
-    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/faq">faq</a>
-    <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href="/privacy">privacy</a>
+    {primaryNavLinks.map(link => (
+      <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href={link.href}>{link.label}</a>
+    ))}
   </nav>
 </div>
 
@@ -58,10 +58,10 @@
     });
 
     try {
-      const currentPath = (location && location.pathname) ? (location.pathname.replace(/\/\/+$/, '') || '/') : '/';
+      const currentPath = (location && location.pathname) ? (location.pathname.replace(/\/+$/, '') || '/') : '/';
       menu.querySelectorAll('a.mobile-nav-link').forEach(a => {
         const href = a.getAttribute('href') || '';
-        const linkPath = (new URL(href, location.origin).pathname || '/').replace(/\/\/+$/, '') || '/';
+        const linkPath = (new URL(href, location.origin).pathname || '/').replace(/\/+$/, '') || '/';
         if (linkPath === currentPath) {
           a.classList.add('text-[#e60023]');
           a.setAttribute('aria-current','page');

@@ -1,49 +1,54 @@
 ---
+import GameTitleTile from '@/components/GameTitleTile.astro';
 import Layout from '@/layouts/Layout.astro';
+import { games } from '@/data/games';
 
 const title = 'Games — Typpy';
-const description = 'Play fun typing games to train your brain.';
+const description = 'Play Typpy typing games including ZenType, TypeFall, Type Rush, ZenType Reverse, TypeSpace, and ScrambleType to build speed, focus, spelling, and accuracy.';
+const url = 'https://typpy.online/games';
 
-const games = [
+// games list is provided by /src/data/games.ts
+
+const schema = [
   {
-    slug: 'zentype',
-    title: 'ZenType',
-    description: 'Calm typing practice to improve speed & accuracy.',
-    image: '/games/zentype.png',
-    href: '/games/zentype'
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: games.map((game, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: game.title,
+        url: `https://typpy.online${game.href}`
+      }))
+    }
   },
   {
-    slug: 'typefall',
-    title: 'TypeFall',
-    description: 'Falling words — race the clock and sharpen reflexes.',
-    image: '/games/typefall.png',
-    href: '/games/typefall'
-  },
-  {
-    slug: 'typerush',
-    title: 'Type Rush',
-    description: 'Type Rush: a fast arcade typing challenge with collectible diamonds.',
-    image: '/games/typerush.png',
-    href: '/games/type-rush'
-  },
-  {
-    slug: 'zentype-reverse',
-    title: 'ZenType Reverse',
-    description: 'ZenType Reverse: type backwards to train focus and accuracy.',
-    image: '/games/zentype_reverse.png',
-    href: '/games/zentype-reverse'
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://typpy.online' },
+      { '@type': 'ListItem', position: 2, name: 'Games', item: url }
+    ]
   }
 ];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} url={url} schema={schema}>
   <main class="max-w-5xl mx-auto px-6 py-12">
     <h1 class="text-3xl font-bold mb-6">Games</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {games.map(game => (
         <a href={game.href} class="block rounded-xl border border-outline-variant overflow-hidden hover:shadow-lg transition">
-          <img src={game.image} alt={game.title} class="w-full h-40 object-cover" />
+          {game.image ? (
+            <img src={game.image} alt={game.title} class="w-full h-40 object-cover" />
+          ) : (
+            <GameTitleTile title={game.title} subtitle="" badgeText="" compact={true} />
+          )}
           <div class="p-4 bg-surface">
             <h2 class="text-xl font-semibold">{game.title}</h2>
             <p class="text-sm text-on-surface-variant mt-2">{game.description}</p>

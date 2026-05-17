@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Typefall from '@/components/svelte/games/typefall.svelte';
+import TypefallGame from '@/components/svelte/games/typefall.svelte';
 
 const title = 'TypeFall — Typpy';
 const description = 'TypeFall: falling words typing game to sharpen reflexes and accuracy.';
 const url = 'https://typpy.online/games/typefall';
-const image = 'https://typpy.online/games/typefall.svg';
+const image = 'https://typpy.online/games/typefall.png';
 const keywords = 'typing, arcade, reflex, speed, accuracy, typing game';
 const genre = 'Arcade';
 const releaseDate = '2026-04-26';
@@ -42,5 +42,9 @@ const schema = [
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
-  <Typefall client:only="svelte" />
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">TypeFall</h1>
+    <p class="text-on-surface-variant mb-6">Catch falling words before they hit the bottom. Train reflexes, spelling precision, and typing consistency under pressure.</p>
+  </main>
+  <TypefallGame client:only="svelte" />
 </Layout>

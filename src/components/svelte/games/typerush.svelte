@@ -45,7 +45,7 @@
 
 	let cursorLeft = 0;
 	let cursorTop = 0;
-	let rocketTransform = 'scaleX(-1) translate(50%, 20px)';
+	let rocketTransform = 'scaleX(-1)';
 	let audioCtx = null;
 
 	function initAudio() {
@@ -229,16 +229,35 @@
 	}
 
 	function updateCursorPos(index) {
-		const el = document.querySelector(`[data-index="${index}"]`);
-		if (!el) return;
-		const elRect = el.getBoundingClientRect();
-		const parent = el.closest('.typing-area-container') || el.offsetParent || document.body;
-		const parentRect = parent.getBoundingClientRect();
-		const left = elRect.left - parentRect.left;
-		// place cursor slightly before the character
-		cursorLeft = Math.round(left) - 12;
-		// use bounding rect for vertical positioning
-		cursorTop = Math.round(elRect.top - parentRect.top) - (elRect.height - 8);
+		const container = document.querySelector('.typing-area-container');
+		if (!container) return;
+		const parentRect = container.getBoundingClientRect();
+
+		const currentEl = document.querySelector(`[data-index="${index}"]`);
+		const prevEl = index > 0 ? document.querySelector(`[data-index="${index - 1}"]`) : null;
+
+		if (!currentEl && !prevEl) return;
+
+		const currentRect = currentEl ? currentEl.getBoundingClientRect() : null;
+		const prevRect = prevEl ? prevEl.getBoundingClientRect() : null;
+
+		let boundaryX;
+		let referenceRect;
+
+		if (prevRect && currentRect) {
+			const wrapped = Math.abs(prevRect.top - currentRect.top) > currentRect.height * 0.5;
+			boundaryX = wrapped ? currentRect.left : (prevRect.right + currentRect.left) / 2;
+			referenceRect = currentRect;
+		} else if (currentRect) {
+			boundaryX = currentRect.left;
+			referenceRect = currentRect;
+		} else {
+			boundaryX = prevRect.right;
+			referenceRect = prevRect;
+		}
+
+		cursorLeft = Math.round(boundaryX - parentRect.left);
+		cursorTop = Math.round(referenceRect.top - parentRect.top);
 	}
 
 	afterUpdate(() => {
@@ -285,15 +304,15 @@
 			currentTotalScore += PTS_PER_CHAR;
 			currentIndex++;
 			words = [...words];
-			rocketTransform = 'scaleX(-1) translate(50%, 20px)';
-			setTimeout(() => (rocketTransform = 'scaleX(-1) translate(50%, 20px)'), 100);
+			rocketTransform = 'scaleX(-1)';
+			setTimeout(() => (rocketTransform = 'scaleX(-1)'), 100);
 		} else if (currentIndex > 0) {
 			const prev = getCharByGlobalIndex(currentIndex - 1);
 			if (prev && typed === (prev.ch.charObj && prev.ch.charObj.text)) {
 				currentIndex--;
 				if (currentIndex === diamondIndex) collectDiamond();
-				rocketTransform = 'scaleX(1) translate(-50%, 20px)';
-				setTimeout(() => (rocketTransform = 'scaleX(1) translate(-50%, 20px)'), 100);
+				rocketTransform = 'scaleX(1)';
+				setTimeout(() => (rocketTransform = 'scaleX(1)'), 100);
 			} else {
 				currentCharObj.incorrect = true;
 				words = [...words];
@@ -348,6 +367,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="flex bg-surface-container px-6 py-2 rounded-full text-sm font-bold text-on-surface-variant gap-4 shadow-sm border border-outline-variant">
+			<span class="flex items-center gap-1">Type to drive the bike to get the diamonds.</span>
+		</div>
 	</header>
 
 	<main
@@ -379,12 +401,12 @@
 		<div class="typing-area-container w-full break-words relative outline-none select-none text-center">
 			<!-- Cursor container -->
 			<div
-				class="absolute transition-transform duration-100 ease-out pointer-events-none z-10"
-				style="transform: translateX({cursorLeft}px) translateY({cursorTop}px);"
+				class="absolute transition-all duration-100 ease-out pointer-events-none z-10"
+				style="left: {cursorLeft}px; top: {cursorTop}px; transform: translateX(-50%);"
 				class:cursor-blink={!focusLost && !isFinished}
 			>
-				<div style="transform: {rocketTransform};">🚲</div>
-				<div class="w-[3px] h-8 bg-primary rounded-md mt-1"></div>
+				<div class="cursor-bike" style="transform: {rocketTransform};">🚲</div>
+				<div class="cursor-caret w-[3px] h-8 bg-primary rounded-md"></div>
 			</div>
 
 			<!-- Characters (nested words -> chars) -->
@@ -497,6 +519,18 @@
 
 	.cursor-blink div:last-child {
 		animation: blink 1s infinite;
+	}
+
+	.cursor-bike {
+		position: absolute;
+		left: 50%;
+		top: -1.6rem;
+		transform-origin: center bottom;
+		line-height: 1;
+	}
+
+	.cursor-caret {
+		margin: 0 auto;
 	}
 
 	@keyframes blink {

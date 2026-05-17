@@ -294,7 +294,6 @@ function updateCursor() {
           REVERSE
         </span>
       </h1>
-
       <div class="flex gap-8 text-tertiary font-semibold text-xl">
         <div class="flex flex-col items-center">
           <span class="text-[12px] text-outline uppercase tracking-widest mb-1">Time</span>
@@ -310,7 +309,9 @@ function updateCursor() {
         </div>
       </div>
     </div>
-
+<div class="mb-4 flex bg-surface-container px-6 py-2 rounded-full text-sm font-bold text-on-surface-variant gap-4 shadow-sm border border-outline-variant">
+			<span class="flex items-center gap-1">Type from end to start.</span>
+		</div>
     <!-- Word count buttons -->
     <div class="flex bg-surface-container px-6 py-2 rounded-full text-sm font-bold text-on-surface-variant gap-6 select-none z-20 shadow-sm border border-outline-variant">
       {#each [5, 10, 20, 50] as count}

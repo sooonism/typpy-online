@@ -1,9 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import NewsList from '@/components/NewsList.astro';
+
+const title = 'Typpy News';
+const description = 'Latest updates, ideas, and announcements from Typpy about typing games and learning.';
+const url = 'https://typpy.online/blog';
 ---
 
-<Layout>
+<Layout title={title} description={description} url={url}>
   <main class="max-w-4xl mx-auto px-6 py-12">
     <h1 class="text-3xl font-bold mb-6">News</h1>
     <NewsList />

@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Zentype from '@/components/svelte/games/zentype.svelte';
+import ZentypeGame from '@/components/svelte/games/zentype.svelte';
 
 const title = 'ZenType — Typpy';
 const description = 'ZenType: calm typing practice to improve speed and accuracy.';
 const url = 'https://typpy.online/games/zentype';
-const image = 'https://typpy.online/games/zentype.svg';
+const image = 'https://typpy.online/games/zentype.png';
 const keywords = 'typing, practice, zen, speed, accuracy, typing game';
 const genre = 'Educational';
 const releaseDate = '2026-04-26';
@@ -42,5 +42,9 @@ const schema = [
 ---
 
 <Layout title={title} description={description} url={url} image={image} keywords={keywords} genre={genre} releaseDate={releaseDate} developer={developer} publisher={publisher} platform={platform} schema={schema}>
-  <Zentype client:only="svelte" />
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">ZenType</h1>
+    <p class="text-on-surface-variant mb-6">A calmer typing mode focused on rhythm and precision. Build sustainable speed with less stress and better control.</p>
+  </main>
+  <ZentypeGame client:only="svelte" />
 </Layout>
