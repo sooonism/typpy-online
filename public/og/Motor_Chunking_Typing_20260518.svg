@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g2)" />
+
+  <g transform="translate(80,120)">
+    <text x="0" y="0" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700">From effortful keystrokes to effortless flow</text>
+    <text x="0" y="64" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600">motor chunking in typing</text>
+
+    <foreignObject x="0" y="110" width="1040" height="340">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, Arial, sans-serif; color: rgba(255,255,255,0.95); font-size:16px; line-height:1.5;">
+        <p style="max-width:960px;">
+          Repeated sequences become single motor units. Practice common phrases and code snippets to build chunks that make long passages feel automated — here's how to detect and train them.
+        </p>
+      </div>
+    </foreignObject>
+
+    <text x="0" y="420" fill="#ffffffaa" font-family="Inter, Arial, sans-serif" font-size="18">Typpy Team — typpy.online</text>
+  </g>
+</svg>

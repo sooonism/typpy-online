@@ -3,6 +3,7 @@ title: "From effortful keystrokes to effortless flow: motor chunking in typing"
 date: "2026-05-18"
 author: "Typpy Team"
 excerpt: "How repeated practice converts sequences of keystrokes into motor chunks that feel effortless — and how to train them."
+image: "/og/Motor_Chunking_Typing_20260518.svg"
 ---
 
 Have you ever typed a common word or phrase and felt it "pop" out of your fingers without thinking? That's motor chunking: the brain groups frequently repeated action sequences into single motor units. In typing, chunking is the process that turns a string of individual key presses into a fluid, automated motion. Understanding chunking explains why some passages feel easy and why practice focused on phrases — not isolated letters — produces faster, more durable gains.

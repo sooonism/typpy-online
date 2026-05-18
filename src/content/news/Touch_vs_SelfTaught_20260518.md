@@ -3,6 +3,7 @@ title: "Why some typing feels easy: touch-typing vs self-taught & hybrid styles"
 date: "2026-05-18"
 author: "Typpy Team"
 excerpt: "Why ‘easy’ typing is more than just finger count — gaze, chunking, and cognitive load explain the feeling."
+image: "/og/Touch_vs_SelfTaught_20260518.svg"
 ---
 
 Many people assume there is a single “right” way to type: ten-finger touch-typing, home row, eyes-on-screen, and flawless technique. In practice, everyday typists are far more diverse. A large share of modern computer users are self‑taught, use hybrid fingering, or adopt idiosyncratic strategies that trade different kinds of effort (visual, motor, cognitive). What makes a typing mode feel easy is therefore not simply how many fingers you use — it’s how attention, gaze, and motor planning are distributed.

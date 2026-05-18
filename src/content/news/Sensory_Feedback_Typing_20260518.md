@@ -3,6 +3,7 @@ title: "Why click matters: how tactile and auditory feedback change the feel of 
 date: "2026-05-18"
 author: "Typpy Team"
 excerpt: "Tactile, haptic and auditory cues provide timing and error signals that make typing feel more fluent — what the lab evidence says and practical tweaks."
+image: "/og/Sensory_Feedback_Typing_20260518.svg"
 ---
 
 A lot of the magic behind a satisfying typing session is sensory. Tactile feedback (the bump you feel in a mechanical switch), haptic vibration on flat surfaces, and audible key‑clicks all provide timing and confirmation signals the sensorimotor system uses to coordinate movement. When those signals are reliable, typists are better at timing keystrokes, detecting misses early, and maintaining a rhythmic flow — and that often translates into both higher objective performance and higher subjective comfort.

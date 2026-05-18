@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g1)" />
+
+  <g transform="translate(80,120)">
+    <text x="0" y="0" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700">Why some typing feels easy</text>
+    <text x="0" y="72" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">touch-typing vs self-taught &amp; hybrid styles</text>
+
+    <foreignObject x="0" y="110" width="1040" height="340">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, Arial, sans-serif; color: rgba(255,255,255,0.95); font-size:18px; line-height:1.5;">
+        <p style="max-width:960px;">
+          Why “easy” typing is more than finger count — attention, gaze and motor planning shape the feeling. Learn how gaze strategies, motor chunking, and ergonomics change effort and practical steps you can try today.
+        </p>
+      </div>
+    </foreignObject>
+
+    <text x="0" y="420" fill="#ffffffaa" font-family="Inter, Arial, sans-serif" font-size="18">Typpy Team — typpy.online</text>
+  </g>
+</svg>
