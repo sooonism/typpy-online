@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Left column text -->
+  <g transform="translate(80,90)">
+    <text x="0" y="0" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700">Why some typing</text>
+    <text x="0" y="64" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700">feels easy</text>
+
+    <text x="0" y="120" fill="#e6f7ff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">touch-typing vs self-taught &amp; hybrid styles</text>
+
+    <rect x="0" y="160" width="560" height="2" fill="#ffffff15" rx="1" />
+
+    <text x="0" y="200" fill="#dbefff" font-family="Inter, Arial, sans-serif" font-size="18" style="max-width:520px;">More than finger count — ease emerges from where you look, how you chunk sequences, and how you recover from errors. Quick tips and mini-experiments to test your own typing mode.</text>
+
+    <text x="0" y="270" fill="#bfe9ff" font-family="Inter, Arial, sans-serif" font-size="16">Typpy Team — typpy.online</text>
+  </g>
+
+  <!-- Right: keyboard + eye icon -->
+  <g transform="translate(700,120)">
+    <!-- keyboard base -->
+    <rect x="0" y="70" width="420" height="220" rx="18" fill="#ffffff14" stroke="#ffffff22" />
+
+    <!-- keys rows -->
+    <!-- Row 1 -->
+    <g fill="url(#keyGrad)" stroke="#00000010">
+      <!-- small keys -->
+      <!-- create 12 keys -->
+      <!-- compute positions manually -->
+      <rect x="18" y="86" width="34" height="34" rx="6" />
+      <rect x="60" y="86" width="34" height="34" rx="6" />
+      <rect x="102" y="86" width="34" height="34" rx="6" />
+      <rect x="144" y="86" width="34" height="34" rx="6" />
+      <rect x="186" y="86" width="34" height="34" rx="6" />
+      <rect x="228" y="86" width="34" height="34" rx="6" />
+      <rect x="270" y="86" width="34" height="34" rx="6" />
+      <rect x="312" y="86" width="34" height="34" rx="6" />
+      <rect x="354" y="86" width="34" height="34" rx="6" />
+      <rect x="396" y="86" width="34" height="34" rx="6" />
+      <!-- Row 2 -->
+      <rect x="30" y="128" width="36" height="36" rx="6" />
+      <rect x="74" y="128" width="36" height="36" rx="6" />
+      <rect x="118" y="128" width="36" height="36" rx="6" />
+      <rect x="162" y="128" width="36" height="36" rx="6" />
+      <rect x="206" y="128" width="36" height="36" rx="6" />
+      <rect x="250" y="128" width="36" height="36" rx="6" />
+      <rect x="294" y="128" width="36" height="36" rx="6" />
+      <rect x="338" y="128" width="36" height="36" rx="6" />
+      <rect x="382" y="128" width="36" height="36" rx="6" />
+      <!-- Space row -->
+      <rect x="18" y="176" width="384" height="30" rx="8" fill="#ffffff10" />
+    </g>
+
+    <!-- heatmap dots to suggest finger use -->
+    <g>
+      <circle cx="140" cy="104" r="8" fill="#ff7ab6" opacity="0.95" />
+      <circle cx="96" cy="146" r="6" fill="#ffd166" opacity="0.9" />
+      <circle cx="200" cy="146" r="6" fill="#ffd166" opacity="0.9" />
+      <circle cx="260" cy="104" r="7" fill="#a78bfa" opacity="0.95" />
+    </g>
+
+    <!-- eye icon overlay -->
+    <g transform="translate(-480,-30)">
+      <ellipse cx="480" cy="130" rx="46" ry="26" fill="none" stroke="#ffffffcc" stroke-width="3" />
+      <circle cx="480" cy="130" r="10" fill="#ffffffcc" />
+      <line x1="520" y1="124" x2="560" y2="110" stroke="#ffffff55" stroke-width="2" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>
