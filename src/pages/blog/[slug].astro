@@ -92,8 +92,11 @@ const pageSchema = post ? {
     margin-bottom: 0.5rem;
   }
   .post p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    margin: 0;
+    line-height: 1.75;
+  }
+  .post p + p {
+    margin-top: 1rem;
   }
   .post a {
     color: #3b82f6;
