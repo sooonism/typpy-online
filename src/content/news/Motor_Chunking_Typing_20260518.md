@@ -6,6 +6,8 @@ excerpt: "How repeated practice converts sequences of keystrokes into motor chun
 image: "/og/Motor_Chunking_Typing_20260518.svg"
 ---
 
+![](/og/Motor_Chunking_Typing_20260518_alt.svg)
+
 Have you ever typed a common word or phrase and felt it "pop" out of your fingers without thinking? That's motor chunking: the brain groups frequently repeated action sequences into single motor units. In typing, chunking is the process that turns a string of individual key presses into a fluid, automated motion. Understanding chunking explains why some passages feel easy and why practice focused on phrases — not isolated letters — produces faster, more durable gains.
 
 This post walks through the cognitive science and practical training implications of motor chunking. We summarize lab findings from Discrete Sequence Production (DSP) tasks and sequence learning reviews (notably Verwey's work and overviews of sequence learning), show how chunking appears in keystroke data (inter‑key intervals and segmentation), and give a simple week‑long practice plan to intentionally build phrase-level chunks.

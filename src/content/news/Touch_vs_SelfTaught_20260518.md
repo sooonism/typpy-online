@@ -6,6 +6,8 @@ excerpt: "Why ‘easy’ typing is more than just finger count — gaze, chunkin
 image: "/og/Touch_vs_SelfTaught_20260518.svg"
 ---
 
+![](/og/Touch_vs_SelfTaught_20260518_alt.svg)
+
 Many people assume there is a single “right” way to type: ten-finger touch-typing, home row, eyes-on-screen, and flawless technique. In practice, everyday typists are far more diverse. A large share of modern computer users are self‑taught, use hybrid fingering, or adopt idiosyncratic strategies that trade different kinds of effort (visual, motor, cognitive). What makes a typing mode feel easy is therefore not simply how many fingers you use — it’s how attention, gaze, and motor planning are distributed.
 
 This post explains what “feels easy” means for typing, summarizes what researchers have observed in the wild, and gives practical suggestions you can try immediately. We draw on observational HCI work (How We Type: Movement Strategies and Performance in Everyday Typing) and related studies that link gaze, hand movement, and performance. Link: https://dl.acm.org/doi/10.1145/2858036.2858233

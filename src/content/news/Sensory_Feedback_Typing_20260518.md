@@ -6,6 +6,8 @@ excerpt: "Tactile, haptic and auditory cues provide timing and error signals tha
 image: "/og/Sensory_Feedback_Typing_20260518.svg"
 ---
 
+![](/og/Sensory_Feedback_Typing_20260518_alt.svg)
+
 A lot of the magic behind a satisfying typing session is sensory. Tactile feedback (the bump you feel in a mechanical switch), haptic vibration on flat surfaces, and audible key‑clicks all provide timing and confirmation signals the sensorimotor system uses to coordinate movement. When those signals are reliable, typists are better at timing keystrokes, detecting misses early, and maintaining a rhythmic flow — and that often translates into both higher objective performance and higher subjective comfort.
 
 In controlled experiments, adding haptic keyclick feedback to flat keyboards or augmenting virtual keyboards with click sounds improves typing speed and reduces some error types. At the same time, preferences vary: some typists prefer quiet low‑travel keyboards, and in shared spaces loud clicks are undesirable. This post surveys the lab evidence, explains the mechanisms, and gives practical tips for choosing and tuning input feedback to match your use case.
