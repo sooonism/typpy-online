@@ -4,6 +4,7 @@ export const primaryNavLinks = [
   { href: '/about', label: 'about' },
   { href: '/mission', label: 'mission' },
   { href: '/faq', label: 'faq' },
+  { href: '/contact', label: 'contact' },
   { href: '/privacy', label: 'privacy' },
   { href: '/disclaimer', label: 'disclaimer' }
 ];

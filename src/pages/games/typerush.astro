@@ -45,6 +45,42 @@ const schema = [
   <main class="max-w-5xl mx-auto px-6 py-8">
     <h1 class="text-3xl font-bold mb-2">Type Rush</h1>
     <p class="text-on-surface-variant mb-6">Race against the clock in a fast typing arcade challenge. Improve speed, rhythm, and accuracy with real-time feedback.</p>
+
+    <section id="how-to-play" class="mb-8 rounded-lg border border-outline-variant bg-surface-container-low p-6">
+      <h2 class="text-2xl font-bold mb-3">How to play</h2>
+      <p class="text-on-surface-variant mb-4">Type Rush is a 60‑second arcade round where words appear and you type them to collect diamonds and score points. It rewards accuracy and rhythm as much as raw speed.</p>
+
+      <h3 class="font-semibold mt-3">Objective</h3>
+      <ul class="list-disc ml-6 mb-3 text-on-surface-variant">
+        <li>Type as many words correctly as you can within the time limit.</li>
+        <li>Collect diamonds to earn bonus points (+500 points per diamond).</li>
+        <li>Maintain accuracy to preserve score multipliers and streak bonuses.</li>
+      </ul>
+
+      <h3 class="font-semibold mt-3">Controls</h3>
+      <ul class="list-disc ml-6 mb-3 text-on-surface-variant">
+        <li>Start a round by clicking Play or pressing Enter.</li>
+        <li>Type the displayed words into the active input; use Backspace to correct mistakes.</li>
+        <li>Press Space or Enter if the mode requires submission — otherwise typing will advance automatically.</li>
+      </ul>
+
+      <h3 class="font-semibold mt-3">Scoring</h3>
+      <p class="text-on-surface-variant mb-3">Each correctly typed word gives base points. Diamonds grant a fixed bonus (+500). Sustained accuracy and streaks increase overall score — prioritise accuracy over wild speed for best results.</p>
+
+      <h3 class="font-semibold mt-3">Tips</h3>
+      <ul class="list-disc ml-6 mb-3 text-on-surface-variant">
+        <li>Warm up in Practice mode to build rhythm without the timer.</li>
+        <li>Focus on accuracy first; higher accuracy yields better final scores than many fast mistakes.</li>
+        <li>Use a physical keyboard and disable browser extensions that alter typing input.</li>
+        <li>Listen to the sound feedback — the rhythm helps many players maintain flow.</li>
+      </ul>
+
+      <h3 class="font-semibold mt-3">Troubleshooting</h3>
+      <p class="text-on-surface-variant">If the game feels laggy: try a different browser (Chrome/Edge recommended), close heavy tabs, or test in incognito mode to rule out extensions. On mobile, landscape + an external keyboard gives the best experience.</p>
+
+      <p class="mt-4 text-sm text-on-surface-variant">Scores are stored locally by default. To request a feature or report a bug, please visit the <a href="/contact" class="underline">Contact</a> page.</p>
+    </section>
   </main>
+
   <TyperushGame client:only="svelte" />
 </Layout>
