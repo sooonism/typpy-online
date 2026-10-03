@@ -448,6 +448,8 @@
   </footer>
 
   <div
+    role="status"
+    aria-hidden={!showResults}
     class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay transition-opacity duration-300"
     class:opacity-0={!showResults}
     class:pointer-events-none={!showResults}

@@ -392,7 +392,7 @@ function updateCursor() {
 
   <!-- Results modal -->
   {#if showResults}
-    <div class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay opacity-100 transition-opacity duration-300">
+    <div role="alert" class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay opacity-100 transition-opacity duration-300">
       <div class="bg-surface border border-outline-variant p-10 rounded-2xl shadow-2xl transform scale-100 transition-transform duration-300 flex flex-col items-center gap-6 max-w-md w-full text-center">
         <h2 class="text-3xl font-extrabold text-primary mb-2">Backwards Master!</h2>
         <div class="grid grid-cols-2 gap-8 w-full">

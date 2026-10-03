@@ -300,7 +300,7 @@
 	</footer>
 
 	<!-- Results modal -->
-	<div class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay transition-opacity duration-300 {isFinished ? 'opacity-100' : 'opacity-0 pointer-events-none'}">
+	<div role="status" aria-hidden={!isFinished} class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay transition-opacity duration-300 {isFinished ? 'opacity-100' : 'opacity-0 pointer-events-none'}">
 		<div class="bg-surface border border-outline-variant p-4 sm:p-10 rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col items-center gap-4 sm:gap-6 max-w-md w-full">
 			<h2 class="text-3xl font-extrabold text-primary mb-2">Test Complete</h2>
 			<div class="grid grid-cols-2 gap-4 sm:gap-8 w-full text-center">
@@ -377,7 +377,7 @@
 
 	/* Score animations */
 	.score-pop {
-		animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		animation: pop 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 	}
 	.score-shake {
 		animation: shake 0.3s ease-in-out;

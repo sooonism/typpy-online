@@ -402,8 +402,8 @@
 
     <!-- Start overlay -->
     {#if !gameRunning && !gameOver}
-      <div class="absolute inset-0 bg-background/90 backdrop-blur-sm flex flex-col items-center justify-center gap-6 z-20">
-        <h1 class="text-5xl font-display-hero font-bold tracking-tight bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">⌨️ TypeFall</h1>
+      <div role="alert" class="absolute inset-0 bg-background/90 backdrop-blur-sm flex flex-col items-center justify-center gap-6 z-20">
+        <h1 class="text-5xl font-display-hero font-bold tracking-tight text-primary">⌨️ TypeFall</h1>
         <p class="text-sm text-on-surface-variant max-w-xs text-center leading-relaxed">
           Words are falling! Type them <strong>before</strong> they hit the bottom.<br>
           Miss 5 words and it's game over.

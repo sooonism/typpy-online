@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T00:00:00Z",
+  "title": "Design System: Typpy",
+  "extensions": {
+    "colorMeta": {
+      "brand-red": {"role":"primary","displayName":"Signal Red","canonical":"#e60023","tonalRamp":["#410004","#6d000f","#930012","#b7001a","#e60023","#ff5a62","#ffb3ad","#ffdad7"]},
+      "primary": {"role":"primary","displayName":"Deep Berry","canonical":"#b7001a","tonalRamp":["#410004","#650010","#8a0016","#b7001a","#d4172c","#f0525a","#ffb3ad","#ffdad7"]},
+      "background": {"role":"neutral","displayName":"Rose Cream","canonical":"#fff8f7","tonalRamp":["#2a1615","#412b29","#5e3f3c","#936e6b","#e8bcb8","#fedad7","#ffe9e7","#fff8f7"]},
+      "olive-gray": {"role":"neutral","displayName":"Olive Gray","canonical":"#62625b","tonalRamp":["#1a1c19","#33332e","#464744","#62625b","#91918c","#c6c7c2","#e0e0d9","#f6f6f3"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName":"Display","purpose":"Hero and page titles."},
+      "label": {"displayName":"Label","purpose":"Uppercase eyebrow chips and badges."}
+    },
+    "shadows": [
+      {"name":"cta","value":"0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)","purpose":"Lift under the in-card CTA."}
+    ],
+    "motion": [
+      {"name":"hover-lift","value":"transform 150ms ease-out, translateY(-2px)","purpose":"CTA hover."}
+    ],
+    "breakpoints": [
+      {"name":"md","value":"768px"},
+      {"name":"lg","value":"1024px"}
+    ]
+  },
+  "components": [
+    {"name":"Play Button","kind":"button","refersTo":"button-primary","description":"Filled pill for the main play action.",
+     "html":"<button class=\"ds-btn-primary\">Play Random Game</button>",
+     "css":".ds-btn-primary{background:#b7001a;color:#fff;font-weight:700;font-size:16px;padding:12px 24px;border:none;border-radius:9999px;cursor:pointer;transition:background .15s}.ds-btn-primary:hover{background:#930012}.ds-btn-primary:focus-visible{outline:3px solid #435ee5;outline-offset:2px}"},
+    {"name":"CTA Button","kind":"button","refersTo":"button-cta","description":"Red rounded CTA inside the featured card.",
+     "html":"<a class=\"ds-btn-cta\" href=\"#\">Play VowerSplit</a>",
+     "css":".ds-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#e60023;color:#fff;font-weight:700;padding:12px 24px;border-radius:12px;text-decoration:none;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);transition:transform .15s ease-out}.ds-btn-cta:hover{transform:translateY(-2px)}.ds-btn-cta:focus-visible{outline:3px solid #435ee5;outline-offset:2px}"},
+    {"name":"Eyebrow Chip","kind":"chip","refersTo":"chip-eyebrow","description":"Uppercase pill above hero titles.",
+     "html":"<span class=\"ds-chip\">Featured game</span>",
+     "css":".ds-chip{display:inline-flex;padding:8px 16px;border-radius:9999px;background:rgba(255,255,255,.8);border:1px solid #e8bcb8;color:#b7001a;font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}"},
+    {"name":"Feature Card","kind":"card","refersTo":"card-feature","description":"Blush gradient hero or featured-game container.",
+     "html":"<div class=\"ds-card\"><h3>VowerSplit</h3><p>Spot the hidden vowel.</p></div>",
+     "css":".ds-card{padding:32px;border-radius:32px;border:1px solid #e8bcb8;background:radial-gradient(circle at top right,rgba(230,0,35,.12),transparent 28%),linear-gradient(135deg,#fff8f7,#fff0ef);color:#2a1615}.ds-card h3{margin:0 0 8px;font-weight:900;font-size:36px;letter-spacing:-.025em;line-height:.95}.ds-card p{margin:0;color:#5e3f3c}"},
+    {"name":"Nav Link","kind":"nav","refersTo":"nav-link","description":"Header link, active state is red with a red underline.",
+     "html":"<nav class=\"ds-nav\"><a href=\"#\">Games</a><a class=\"ds-active\" href=\"#\" aria-current=\"page\">Blog</a></nav>",
+     "css":".ds-nav{display:flex;gap:32px;font-weight:500;font-size:14px}.ds-nav a{color:#62625b;text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent}.ds-nav a:hover{color:#33332e}.ds-nav a.ds-active{color:#e60023;border-bottom-color:#e60023}.ds-nav a:focus-visible{outline:3px solid #435ee5;outline-offset:2px}"}
+  ],
+  "narrative": {
+    "northStar": "The Warm Arcade",
+    "overview": "Typpy looks like a friendly shelf of small games in a warm room: cream and rose surfaces, one bright red, soft rounded cards, and big confident black-weight titles. Calm modes and timed modes share the same shelf, so the interface stays inviting rather than tense.",
+    "keyCharacteristics": ["One font, many weights","Rose-cream surfaces with red as the only saturated chrome hue","32px container radii, pill chips and primary button","Tonal depth with a single pink hairline","Material Symbols Outlined icons"],
+    "rules": [
+      {"name":"The Signal Red Rule","body":"Red marks one thing at a time: the logo, the current location, or the next action.","section":"colors"},
+      {"name":"The Warm Silver Rule","body":"#91918c is never text. Use Olive Gray for any muted words.","section":"colors"},
+      {"name":"The One Family Rule","body":"Only Plus Jakarta Sans for UI. Monospace is allowed solely for the typing area.","section":"typography"},
+      {"name":"The Tint-Not-Shadow Rule","body":"Separate surfaces with a surface step and a hairline, not with a bigger shadow.","section":"elevation"}
+    ],
+    "dos": ["Do use tailwind.config.cjs color tokens instead of raw hex.","Do use Olive Gray (#62625b) for any muted text.","Do keep red to the logo, the current location and the next action.","Do give every interactive element a visible :focus-visible ring.","Do honour prefers-reduced-motion in all game and hover animation."],
+    "donts": ["Don't use gradient text on titles.","Don't use thick colored side borders on callouts or cards.","Don't use bounce or elastic easing.","Don't set text in Warm Silver (#91918c).","Don't add yellow or orange page gradients."]
+  }
+}

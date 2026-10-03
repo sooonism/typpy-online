@@ -449,7 +449,7 @@
 
 <!-- Results Modal -->
 {#if showResults}
-	<div class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay transition-opacity duration-300">
+	<div role="alert" class="fixed inset-0 z-[100] flex items-center justify-center blur-overlay transition-opacity duration-300">
 		<div class="bg-white border border-outline-variant p-12 rounded-[40px] shadow-2xl scale-100 transition-transform duration-300 flex flex-col items-center gap-8 max-w-md w-full">
 			<div class="text-center">
 				<h2 class="text-4xl font-black text-primary italic">TIME'S UP!</h2>

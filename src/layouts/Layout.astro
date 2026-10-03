@@ -96,16 +96,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             letter-spacing: -0.01em;
         }
     </style>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        /* Custom utilities for the typing area to ensure perfect rendering */
-        .typing-text {
-            word-spacing: 0.25em;
-            letter-spacing: -0.01em;
-        }
-    </style>
     <script type="application/ld+json">
 {JSON.stringify({
   "@context": "https://schema.org",
@@ -128,45 +118,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <!-- TopNavBar -->
-<header class="sticky top-0 w-full z-50 bg-[#fcfcf9] dark:bg-[#1a1a18] border-b border-[#91918c]/20">
+<header class="sticky top-0 w-full z-50 bg-header-cream border-b border-warm-silver/20">
 <div class="flex justify-between items-center h-16 px-8 w-full max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
 <!-- Brand -->
-<a class="text-2xl font-black text-[#e60023] tracking-tighter" href="/"><img src="/logo.svg" alt="Typpy Logo" width="140"></a>
+<a class="text-2xl font-black text-brand-red tracking-tighter" href="/"><img src="/logo.svg" alt="Typpy Logo" width="140"></a>
 <!-- Navigation Links (Desktop) -->
 <nav id="top-nav" class="hidden md:flex items-center gap-8">
         {primaryNavLinks.map(link => (
-            <a class="nav-link text-[#91918c] hover:text-[#33332e] dark:hover:text-[#fcfcf9] transition-colors pb-1 border-b-2 border-transparent" href={link.href}>{link.label}</a>
+            <a class="nav-link text-olive-gray hover:text-dark-surface transition-colors pb-1 border-b-2 border-transparent" href={link.href}>{link.label}</a>
         ))}
 </nav>
 <!-- Mobile nav (mobile only) -->
 <MobileNav />
 <!-- Trailing Actions -->
-<!-- <div class="flex items-center gap-4">
-<button class="w-10 h-10 flex items-center justify-center text-[#91918c] hover:text-[#33332e] dark:hover:text-[#fcfcf9] hover:bg-[#e0e0d9] dark:hover:bg-[#33332e] rounded-full transition-all">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center text-[#91918c] hover:text-[#33332e] dark:hover:text-[#fcfcf9] hover:bg-[#e0e0d9] dark:hover:bg-[#33332e] rounded-full transition-all">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-</button>
-</div> -->
 </div>
 </header>
 <script is:inline>
     (function () {
         const nav = document.getElementById('top-nav');
         if (!nav) return;
-        const normalize = p => (p || '/').replace(/\/+$|^$/g, s => s === '' ? '/' : s).replace(/\/+$/, '') || '/';
         const currentPath = (location && location.pathname) ? (location.pathname.replace(/\/+$/, '') || '/') : '/';
         nav.querySelectorAll('a.nav-link').forEach(a => {
             const href = a.getAttribute('href') || '';
             const linkPath = (new URL(href, location.origin).pathname || '/').replace(/\/+$/, '') || '/';
             if (linkPath === currentPath) {
-                a.classList.add('text-[#e60023]', 'border-[#e60023]');
-                a.classList.remove('text-[#91918c]', 'border-transparent');
+                a.classList.add('text-brand-red', 'border-brand-red');
+                a.classList.remove('text-olive-gray', 'border-transparent');
                 a.setAttribute('aria-current', 'page');
             } else {
-                a.classList.remove('text-[#e60023]', 'border-[#e60023]');
-                a.classList.add('text-[#91918c]', 'border-transparent');
+                a.classList.remove('text-brand-red', 'border-brand-red');
+                a.classList.add('text-olive-gray', 'border-transparent');
                 a.removeAttribute('aria-current');
             }
         });

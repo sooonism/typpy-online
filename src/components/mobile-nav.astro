@@ -2,15 +2,15 @@
 import { primaryNavLinks } from '@/data/site-links';
 ---
 <div class="md:hidden flex items-center">
-  <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu" class="w-10 h-10 flex items-center justify-center text-[#91918c] hover:text-[#33332e] hover:bg-[#e0e0d9] dark:hover:bg-[#33332e] rounded-full transition-all">
+  <button id="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" class="w-11 h-11 flex items-center justify-center text-olive-gray hover:text-dark-surface hover:bg-warm-light rounded-full transition-all">
     <span class="material-symbols-outlined" id="mobile-menu-icon">menu</span>
   </button>
 </div>
 
-<div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-[#fcfcf9] dark:bg-[#1a1a18] border-b border-[#91918c]/20 z-40">
+<div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-header-cream border-b border-warm-silver/20 z-40">
   <nav class="flex flex-col gap-0 p-4">
     {primaryNavLinks.map(link => (
-      <a class="mobile-nav-link text-[#91918c] hover:text-[#33332e] py-3 px-2 border-b border-transparent" href={link.href}>{link.label}</a>
+      <a class="mobile-nav-link text-olive-gray hover:text-dark-surface py-3 px-2 border-b border-transparent" href={link.href}>{link.label}</a>
     ))}
   </nav>
 </div>
@@ -49,6 +49,15 @@ import { primaryNavLinks } from '@/data/site-links';
       icon.textContent = 'menu';
     });
 
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || menu.classList.contains('hidden')) return;
+      menu.classList.add('hidden');
+      menu.classList.remove('block');
+      btn.setAttribute('aria-expanded', 'false');
+      icon.textContent = 'menu';
+      btn.focus();
+    });
+
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 768 && !menu.classList.contains('hidden')) {
         menu.classList.add('hidden');
@@ -63,7 +72,7 @@ import { primaryNavLinks } from '@/data/site-links';
         const href = a.getAttribute('href') || '';
         const linkPath = (new URL(href, location.origin).pathname || '/').replace(/\/+$/, '') || '/';
         if (linkPath === currentPath) {
-          a.classList.add('text-[#e60023]');
+          a.classList.add('text-brand-red');
           a.setAttribute('aria-current','page');
         }
       });

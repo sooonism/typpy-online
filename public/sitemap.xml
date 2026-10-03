@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://typpy.online/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/about</loc>
@@ -37,6 +37,10 @@
     <lastmod>2026-04-25</lastmod>
   </url>
   <url>
+    <loc>https://typpy.online/blog/VowerSplit_20260804</loc>
+    <lastmod>2026-08-04</lastmod>
+  </url>
+  <url>
     <loc>https://typpy.online/blog/Welcome_to_MDX_20260516</loc>
     <lastmod>2026-05-16</lastmod>
   </url>
@@ -46,7 +50,7 @@
   </url>
   <url>
     <loc>https://typpy.online/contact</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/disclaimer</loc>
@@ -58,31 +62,35 @@
   </url>
   <url>
     <loc>https://typpy.online/games</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/scrambletype</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typefall</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typerush</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typespace</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-08-04</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/games/vowelsplit</loc>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/zentype</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/zentype-reverse</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-08-04</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/mission</loc>
@@ -90,6 +98,6 @@
   </url>
   <url>
     <loc>https://typpy.online/privacy</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
 </urlset>

@@ -2,13 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fallback: ensure mobile nav is hidden on desktop if responsive utilities are missing */
-@media (min-width: 768px) {
-	#mobile-menu,
-	#mobile-menu-button {
-		display: none !important;
-	}
-	#top-nav {
-		display: flex !important;
+/* Visible keyboard focus everywhere; mouse clicks stay quiet. */
+:focus-visible {
+	outline: 3px solid #435ee5;
+	outline-offset: 2px;
+}
+
+/* Keep state changes, drop movement for users who ask. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 1ms !important;
 	}
 }

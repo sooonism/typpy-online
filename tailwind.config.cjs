@@ -57,6 +57,7 @@ module.exports = {
         'on-tertiary-fixed-variant': '#004b73',
         'outline': '#936e6b',
         'fog': '#f6f6f3',
+        'header-cream': '#fcfcf9',
         'primary-container': '#e60023',
         'outline-variant': '#e8bcb8',
         'inverse-surface': '#412b29',

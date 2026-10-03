@@ -31,28 +31,28 @@ const schema = [
     <section class="rounded-lg border border-outline-variant bg-white p-6">
       <form id="contact-form" class="space-y-4" on:submit preventDefault>
         <div>
-          <label class="block text-sm font-medium">Your name</label>
-          <input name="name" required class="mt-1 block w-full rounded-md border px-3 py-2" />
+          <label for="c-name" class="block text-sm font-medium">Your name</label>
+          <input id="c-name" name="name" required class="mt-1 block w-full rounded-md border px-3 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium">Your email</label>
-          <input name="email" type="email" required class="mt-1 block w-full rounded-md border px-3 py-2" />
+          <label for="c-email" class="block text-sm font-medium">Your email</label>
+          <input id="c-email" name="email" type="email" required class="mt-1 block w-full rounded-md border px-3 py-2" />
         </div>
 
-        <div style="display:none">
+        <div style="display:none" aria-hidden="true">
           <label>Website (leave blank)</label>
           <input name="website" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium">Subject</label>
-          <input name="subject" class="mt-1 block w-full rounded-md border px-3 py-2" placeholder="Bug report / Idea / Partnership" />
+          <label for="c-subject" class="block text-sm font-medium">Subject</label>
+          <input id="c-subject" name="subject" class="mt-1 block w-full rounded-md border px-3 py-2" placeholder="Bug report / Idea / Partnership" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium">Message</label>
-          <textarea name="message" rows="6" required class="mt-1 block w-full rounded-md border px-3 py-2"></textarea>
+          <label for="c-message" class="block text-sm font-medium">Message</label>
+          <textarea id="c-message" name="message" rows="6" required class="mt-1 block w-full rounded-md border px-3 py-2"></textarea>
         </div>
 
         <div>
