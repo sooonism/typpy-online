@@ -72,8 +72,7 @@
 		wpm = 0;
 		accuracy = 100;
 		startTime = null;
-		chars = [];
-		charRefs = [];
+		// charRefs is filled by bind:this and reused DOM nodes are not rebound, so don't clear it
 		floats = [];
 		cursorBlink = true;
 		scoreClass = '';
@@ -101,6 +100,7 @@
 			}
 		});
 		chars = newChars;
+		cursorStyle = 'transform: translate(0px, 4px)';
 
 		// Wait for the DOM to render, then focus
 		tick().then(() => {
