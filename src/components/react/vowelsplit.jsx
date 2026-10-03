@@ -49,9 +49,9 @@ const GAME_DURATION = 10; // seconds
 
 // ─── Difficulty levels ───────────────────────────────────────
 const LEVELS = [
-	{ id: "easy", label: "Easy", words: 2, desc: "2 words" },
-	{ id: "medium", label: "Medium", words: 3, desc: "3 words" },
-	{ id: "hard", label: "Hard", words: [4, 5], desc: "4–5 words" },
+	{ id: "easy", label: "Easy", words: 2, desc: "2 words, 1 gap" },
+	{ id: "medium", label: "Medium", words: 3, desc: "3 words, 2 gaps" },
+	{ id: "hard", label: "Hard", words: [4, 5], desc: "4–5 words, 3–4 gaps" },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────
@@ -72,10 +72,9 @@ function generateRound(level) {
 		? pickRandom(level.words)
 		: level.words;
 	const words = pickWords(count);
-	const junction = Math.floor(Math.random() * (count - 1)); // where the vowel hides
 	const vowel = pickRandom(VOWELS);
-	const merged = words.map((w, i) => (i === junction ? w + vowel : w)).join("");
-	return { words, junction, vowel, merged, level: level.id };
+	const merged = words.join(vowel); // same vowel fills every gap
+	return { words, vowel, merged, level: level.id };
 }
 
 // ─── Main component ──────────────────────────────────────────
@@ -96,6 +95,7 @@ export default function VowerSplit() {
 	const [feedback, setFeedback] = useState(null); // 'correct' | 'wrong' | null
 	const [feedbackMsg, setFeedbackMsg] = useState("");
 	const [wordAnim, setWordAnim] = useState("");
+	const [ghost, setGhost] = useState(null); // the solved word, splitting apart
 
 	// ── Refs ──
 	const timerRef = useRef(null);
@@ -113,6 +113,7 @@ export default function VowerSplit() {
 		setFeedback(null);
 		setFeedbackMsg("");
 		setWordAnim("");
+		setGhost(null);
 		setGameState("playing");
 	}, [level]);
 
@@ -191,7 +192,8 @@ export default function VowerSplit() {
 				setScore((s) => s + 1);
 				setFeedback("correct");
 				setFeedbackMsg(`✓ "${round.vowel}"`);
-				setWordAnim("correct");
+				setGhost({ ...round, id: Date.now() });
+				setRound(generateRound(level));
 
 				if (scorePopRef.current) {
 					scorePopRef.current.classList.remove("pop");
@@ -200,11 +202,9 @@ export default function VowerSplit() {
 				}
 
 				setTimeout(() => {
-					setRound(generateRound(level));
 					setFeedback(null);
 					setFeedbackMsg("");
-					setWordAnim("");
-				}, 120);
+				}, 400);
 			} else {
 				setFeedback("wrong");
 				setFeedbackMsg(`✗ "${char}"`);
@@ -283,11 +283,28 @@ export default function VowerSplit() {
 					>
 						{isIdle ? "⟳" : round.merged}
 					</div>
+					{ghost && (
+						<div
+							key={ghost.id}
+							className="word-ghost"
+							aria-hidden="true"
+							onAnimationEnd={() => setGhost(null)}
+						>
+							{ghost.words.map((w, i) => (
+								<span key={i} className="ghost-part">
+									<span>{w}</span>
+									{i < ghost.words.length - 1 && (
+										<span className="ghost-vowel">{ghost.vowel}</span>
+									)}
+								</span>
+							))}
+						</div>
+					)}
 					<div className="hint-text">
 						{isIdle && "Press START to begin"}
 						{isPlaying && (
 							<>
-								Type the <strong>vowel</strong> hidden inside
+								Type the <strong>vowel</strong> that fills every gap
 							</>
 						)}
 						{isDone && "Time\u2019s up!"}
@@ -576,6 +593,57 @@ export default function VowerSplit() {
           line-height: 1.2;
           word-break: break-all;
           padding: 0 4px;
+        }
+        .word-ghost {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 0;
+          font-size: clamp(44px, 10vw, 88px);
+          font-weight: 800;
+          color: #103c25;
+          letter-spacing: 2px;
+          line-height: 1.2;
+          pointer-events: none;
+          transform: translateY(-50%);
+          animation: ghostSplit 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .ghost-part {
+          display: inline-flex;
+        }
+        .ghost-vowel {
+          color: #e60023;
+          animation: ghostVowel 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes ghostSplit {
+          0% {
+            gap: 0;
+            opacity: 1;
+            transform: translateY(-50%);
+          }
+          60% {
+            opacity: 1;
+          }
+          100% {
+            gap: 0.35em;
+            opacity: 0;
+            transform: translateY(-85%);
+          }
+        }
+        @keyframes ghostVowel {
+          0% {
+            transform: scale(1);
+          }
+          40% {
+            transform: scale(1.5) translateY(-0.1em);
+          }
+          100% {
+            transform: scale(1.5) translateY(-0.4em);
+          }
         }
         .word-display.correct {
           color: #103c25;

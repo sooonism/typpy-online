@@ -31,11 +31,11 @@ That's the whole game: **your own brain is the difficulty.**
 
 Because "easy to learn" is nice, but games need a climb:
 
-- **Easy** — 2 words, 1 hidden vowel. You get your bearings.
-- **Medium** — 3 words smash together. Now there are 2 possible junctions. Which one hides the vowel?
-- **Hard** — 4 to 5 words. The string is long, the junctions multiply, and your eyes have to work for it.
+- **Easy** — 2 words, 1 gap. You get your bearings.
+- **Medium** — 3 words, 2 gaps. The same vowel fills every gap, so once you spot one, you have the answer.
+- **Hard** — 4 to 5 words, 3 to 4 gaps. The string gets long and your eyes have to work for it.
 
-Same rule at every level: exactly one vowel is missing, and it's hiding somewhere in the mess. The bigger the mess, the harder the hunt. It's a tiny little puzzle of attention — and it feels *great* when your eye locks onto the gap instantly.
+Same rule at every level: one vowel fills every gap between the words. Type it and the words split apart. The bigger the mess, the harder the hunt. It's a tiny little puzzle of attention — and it feels *great* when your eye locks onto the gap instantly.
 
 ## Why it's fun
 
