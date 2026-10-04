@@ -109,7 +109,13 @@
 	}
 
 	function handleKeydown(e) {
-		if (isFinished) return;
+		if (isFinished) {
+			if (e.key === 'Enter' && !e.repeat) {
+				e.preventDefault();
+				initGame();
+			}
+			return;
+		}
 		if (e.key === 'Backspace') {
 			if (currentIndex > 0) {
 				currentIndex--;
@@ -169,7 +175,7 @@
 		isFinished = true;
 		isPlaying = false;
 		cursorBlink = false;
-		// Stats are already up to date
+		focusInput(); // keep the keyboard listener alive so Enter can restart
 	}
 
 	function updateStats() {
@@ -313,7 +319,7 @@
 					<p class="text-3xl font-bold text-tertiary">{wpm} <span class="text-sm">WPM</span></p>
 				</div>
 			</div>
-			<button class="mt-4 sm:mt-6 px-6 sm:px-12 py-3 sm:py-5 bg-primary text-white text-xl sm:text-2xl font-extrabold rounded-2xl border-4 border-primary shadow-2xl hover:bg-primary-container hover:text-primary transition-all w-full flex items-center justify-center gap-2 sm:gap-3" on:click={initGame}>Try Again</button>
+			<button class="mt-4 sm:mt-6 px-6 sm:px-12 py-3 sm:py-5 bg-primary text-white text-xl sm:text-2xl font-extrabold rounded-2xl border-4 border-primary shadow-2xl hover:bg-primary-container hover:text-primary transition-all w-full flex items-center justify-center gap-2 sm:gap-3" on:click={initGame}>Try Again <span class="text-sm font-semibold opacity-80">(Enter)</span></button>
 		</div>
 	</div>
 </div>
