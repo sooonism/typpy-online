@@ -1,0 +1,14 @@
+networks:
+  npm_web:
+    external: true
+services:
+  nginx:
+    container_name: nginx-server
+    image: nginx:latest
+    networks:
+    - npm_web
+    restart: unless-stopped
+    volumes:
+    - ./public:/usr/share/nginx/html
+    - ./absolute-redirect-off.conf:/etc/nginx/conf.d/absolute-redirect-off.conf:ro
+version: '3.8'

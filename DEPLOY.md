@@ -4,7 +4,7 @@ Static site, built locally and copied to the VPS by hand. No CI.
 
 - **Host / SSH alias:** `minda-vps` (user `mindaadmin`)
 - **Path on server:** `/home/mindaadmin/typpy/public` (served as `/usr/share/nginx/html`)
-- **How it's served:** docker nginx container `nginx-server` (`/home/mindaadmin/typpy/docker-compose.yml`, image `nginx:latest`, network `npm_web`), fronted by Nginx Proxy Manager (`~/nginx_proxy_manager`, host config `proxy_host/10.conf` for `typpy.online`).
+- **How it's served:** docker nginx container `nginx-server` (`/home/mindaadmin/typpy/docker-compose.yml`, image `nginx:latest`, network `npm_web`), fronted by Nginx Proxy Manager (`~/nginx_proxy_manager`, host config `proxy_host/10.conf` for `typpy.online`). `docker-compose.yml` and the `absolute_redirect off;` conf snippet it mounts are versioned here in `infra/` — if the VPS copy ever needs restoring, `scp infra/* minda-vps:~/typpy/` then `cd ~/typpy && docker compose up -d`. `absolute_redirect off;` exists because the backend only speaks plain HTTP (TLS ends at NPM/Cloudflare); without it, nginx's built-in directory redirect (`/about` → `/about/`) emitted an absolute `http://` Location header, silently downgrading every non-trailing-slash request to HTTP for one hop before NPM forced it back to HTTPS — wasteful and one plausible cause of Search Console's "page with redirect" / "redirect error" flags (fixed 2026-10-18).
 - **Build:** `npm run build` (runs `prebuild` sitemap script, then Astro; outputs `dist/`; Node >= 22.12.0).
 - **Ship:**
   1. `npm run build`
