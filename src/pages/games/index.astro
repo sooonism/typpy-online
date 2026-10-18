@@ -85,8 +85,7 @@ const schema = [
     </div>
   </main>
 
-  <script is:inline>
-    const GAMES = {JSON.stringify(games)};
+  <script define:vars={{ GAMES: games }}>
     document.getElementById('random-game-btn')?.addEventListener('click', () => {
       if (!GAMES || !GAMES.length) { location.href = '/games'; return; }
       const idx = Math.floor(Math.random() * GAMES.length);
