@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 
 const site = 'https://typpy.online';
-const pathname = (Astro.url?.pathname || '/').replace(/\/+$/, '') || '/';
+const pathname = (Astro.url?.pathname || '/').replace(/\/*$/, '/');
 const canonicalUrl = url || new URL(pathname, site).toString();
 ---
 

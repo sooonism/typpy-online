@@ -43,7 +43,7 @@ async function collectPages() {
     rel = rel.replace(/\.astro$/, '');
     let url = '/' + rel;
     url = url.replace(/\/+/g, '/');
-    if (url !== '/' && url.endsWith('/')) url = url.slice(0, -1);
+    if (!url.endsWith('/')) url += '/';
     if (url === '/test') continue;
     let lastmod = null;
     try {
@@ -67,11 +67,11 @@ async function collectContent() {
     const slug = fileName.replace(/\.mdx?$/, '');
     let url;
     if (parts[0] === 'news') {
-      url = `/blog/${encodeURIComponent(slug)}`;
+      url = `/blog/${encodeURIComponent(slug)}/`;
     } else if (parts.length > 1) {
-      url = `/${parts.slice(0, -1).join('/')}/${encodeURIComponent(slug)}`;
+      url = `/${parts.slice(0, -1).join('/')}/${encodeURIComponent(slug)}/`;
     } else {
-      url = `/${encodeURIComponent(slug)}`;
+      url = `/${encodeURIComponent(slug)}/`;
     }
     let lastmod = null;
     try {

@@ -5,7 +5,7 @@ import { games } from '@/data/games';
 
 const title = 'Games — Typpy';
 const description = 'Play Typpy typing games including Tidy, VowerSplit, ZenType, TypeFall, Type Rush, ZenType Reverse, TypeSpace, and ScrambleType to build speed, focus, spelling, and accuracy.';
-const url = 'https://typpy.online/games';
+const url = 'https://typpy.online/games/';
 
 // games list is provided by /src/data/games.ts
 
@@ -22,7 +22,7 @@ const schema = [
         '@type': 'ListItem',
         position: index + 1,
         name: game.title,
-        url: `https://typpy.online${game.href}`
+        url: `https://typpy.online${game.href.replace(/\/?$/, "/")}`
       }))
     }
   },
