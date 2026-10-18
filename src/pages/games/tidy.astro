@@ -1,5 +1,5 @@
 ---
-const title = 'Tidy — Typpy';
+const title = 'Tidy — A Calm, No-Rush Typing Game — Typpy';
 const description = 'Tidy: a calm, no-rush typing game. Clear a cluttered room one word at a time and feel the satisfaction build as it empties.';
 const keywords = 'tidy, calm typing game, zen typing game, relaxing typing practice, no pressure typing, declutter game, typing game online';
 const url = 'https://typpy.online/games/tidy/';
@@ -9,7 +9,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: title,
+    name: title.split(" — ")[0],
     description,
     url,
     brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },

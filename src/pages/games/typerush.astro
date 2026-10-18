@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import TyperushGame from '@/components/svelte/games/typerush.svelte';
 
-const title = 'Type Rush — Typpy';
-const description = 'Type Rush: a fast arcade typing challenge with collectible diamonds. Typpy — happy typing.';
+const title = 'Type Rush — Fast Arcade Typing Game — Typpy';
+const description = 'Type Rush: a fast arcade typing game with collectible diamonds. Free to play in your browser.';
 const url = 'https://typpy.online/games/typerush/';
 const image = 'https://typpy.online/games/typerush.png';
-const keywords = 'type, rush, typing, arcade, speed, diamonds, typing game, brain training';
+const keywords = 'fast typing game, arcade typing game, typing speed game, free typing game';
 const genre = 'Arcade';
 const releaseDate = '2026-04-27';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": title,
+    "name": title.split(" — ")[0],
     "description": description,
     "url": url,
     "image": image,

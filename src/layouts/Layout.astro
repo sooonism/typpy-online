@@ -96,20 +96,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             letter-spacing: -0.01em;
         }
     </style>
-    <script type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Typpy",
-  "url": "https://typpy.online",
-  "logo": "https://typpy.online/logo.svg",
-  "description": "Typpy — happy typing"
-})}
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Typpy",
+        "url": "https://typpy.online/",
+        "logo": "https://typpy.online/logo.svg",
+        "description": "Typpy — relaxing typing games. Type to chill."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Typpy",
+        "url": "https://typpy.online/",
+        "description": "A free collection of relaxing typing games."
+      }
+    ])} />
     {schema && (
-      <script type="application/ld+json">
-{JSON.stringify(schema)}
-      </script>
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 </head>
 <body class="bg-background min-h-screen flex flex-col font-body text-body text-on-background selection:bg-brand-red selection:text-on-primary-container">

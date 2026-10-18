@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import TypespaceGame from '@/components/svelte/games/typespace.svelte';
 
-const title = 'TypeSpace — Typpy';
-const description = 'TypeSpace: a focused quote typing challenge for building speed, rhythm, and accuracy.';
+const title = 'TypeSpace — Quote Typing Practice Game — Typpy';
+const description = 'TypeSpace: type short quotes at your own rhythm. A focused, relaxing typing practice game for speed and accuracy.';
 const url = 'https://typpy.online/games/typespace/';
 const image = 'https://typpy.online/og/default.png';
-const keywords = 'typespace, typing, quote typing, focus, speed, accuracy, typing game';
+const keywords = 'quote typing practice, typing rhythm, relaxing typing game, typing speed practice';
 const genre = 'Educational';
 const releaseDate = '2026-05-11';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: title,
+    name: title.split(" — ")[0],
     description,
     url,
     image,

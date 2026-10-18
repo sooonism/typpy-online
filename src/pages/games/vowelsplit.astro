@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import VowerSplitGame from '@/components/react/vowelsplit.jsx';
 
-const title = 'VowerSplit — Typpy';
-const description = 'VowerSplit: spot the missing vowel hidden inside compound words and type it before time runs out.';
+const title = 'VowerSplit — Missing Vowel Typing Word Game — Typpy';
+const description = 'VowerSplit: spot the hidden vowel between two words and type it. A quick typing word puzzle for spelling and focus.';
 const url = 'https://typpy.online/games/vowelsplit/';
 const image = 'https://typpy.online/og/default.png';
-const keywords = 'vowersplit, typing, vowel game, compound words, typing game, speed game';
+const keywords = 'typing word game, missing vowel game, spelling typing game, word puzzle typing';
 const genre = 'Puzzle';
 const releaseDate = '2026-08-04';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: title,
+    name: title.split(" — ")[0],
     description,
     url,
     image,

@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import ScrambletypeGame from '@/components/react/scrambletype.jsx';
 
-const title = 'ScrambleType — Typpy';
-const description = 'ScrambleType: unscramble words one letter at a time to train spelling, focus, and typing precision.';
+const title = 'ScrambleType — Word Scramble Typing Game — Typpy';
+const description = 'ScrambleType: unscramble words one letter at a time. A calm typing and spelling puzzle that trains focus and precision.';
 const url = 'https://typpy.online/games/scrambletype/';
 const image = 'https://typpy.online/og/default.png';
-const keywords = 'scrambletype, typing, word scramble, spelling, focus, typing game';
+const keywords = 'word scramble typing game, spelling typing game, typing puzzle, calm typing game';
 const genre = 'Puzzle';
 const releaseDate = '2026-05-11';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: title,
+    name: title.split(" — ")[0],
     description,
     url,
     image,

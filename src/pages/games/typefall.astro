@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import TypefallGame from '@/components/svelte/games/typefall.svelte';
 
-const title = 'TypeFall — Typpy';
-const description = 'TypeFall: falling words typing game to sharpen reflexes and accuracy.';
+const title = 'TypeFall — Falling Words Typing Game — Typpy';
+const description = 'TypeFall: clear falling words before they land in this arcade typing game that sharpens reflexes and accuracy.';
 const url = 'https://typpy.online/games/typefall/';
 const image = 'https://typpy.online/games/typefall.png';
-const keywords = 'typing, arcade, reflex, speed, accuracy, typing game';
+const keywords = 'falling words typing game, arcade typing game, typing reflexes, typing game online';
 const genre = 'Arcade';
 const releaseDate = '2026-04-26';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": title,
+    "name": title.split(" — ")[0],
     "description": description,
     "url": url,
     "image": image,

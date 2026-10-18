@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import ZentypeReverseGame from '@/components/svelte/games/zentypereverse.svelte';
 
-const title = 'ZenType Reverse — Typpy';
-const description = 'ZenType Reverse: type backwards to train focus, accuracy, and mental agility. Typpy — happy typing.';
+const title = 'ZenType Reverse — Backwards Typing Game — Typpy';
+const description = 'ZenType Reverse: type words backwards in a calm, focused typing game that trains accuracy and mental agility.';
 const url = 'https://typpy.online/games/zentype-reverse/';
 const image = 'https://typpy.online/games/zentype_reverse.png';
-const keywords = 'zen, typing, reverse, focus, accuracy, brain training, typing game';
+const keywords = 'backwards typing game, reverse typing, focus typing game, calm typing game, typing practice';
 const genre = 'Educational';
 const releaseDate = '2026-04-27';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": title,
+    "name": title.split(" — ")[0],
     "description": description,
     "url": url,
     "image": image,

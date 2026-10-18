@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro';
 import ZentypeGame from '@/components/svelte/games/zentype.svelte';
 
-const title = 'ZenType — Typpy';
-const description = 'ZenType: calm typing practice to improve speed and accuracy.';
+const title = 'ZenType — Calm Typing Practice Game — Typpy';
+const description = 'ZenType: a relaxing typing game for calm, untimed practice. Build speed and accuracy without the pressure.';
 const url = 'https://typpy.online/games/zentype/';
 const image = 'https://typpy.online/games/zentype.png';
-const keywords = 'typing, practice, zen, speed, accuracy, typing game';
+const keywords = 'relaxing typing game, calm typing practice, zen typing, no timer typing, typing game';
 const genre = 'Educational';
 const releaseDate = '2026-04-26';
 const developer = 'Typpy';
@@ -17,7 +17,7 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": title,
+    "name": title.split(" — ")[0],
     "description": description,
     "url": url,
     "image": image,
