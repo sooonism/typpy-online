@@ -20,10 +20,10 @@
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/react": "^5.0.4",
     "@astrojs/svelte": "^8.0.4",
-    
     "astro": "^6.1.1",
     "babylonjs": "^9.1.0",
     "lucide-react": "^1.14.0",
+    "matter-js": "^0.20.0",
     "nanostores": "^1.2.0",
     "pixi.js": "^8.17.1",
     "qrcode": "^1.5.4",
@@ -34,7 +34,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "wasm-pack": "^0.13.1",
-    "autoprefixer": "^10.4.14"
+    "autoprefixer": "^10.4.14",
+    "wasm-pack": "^0.13.1"
   }
 }

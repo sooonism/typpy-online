@@ -1,12 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import VowerSplitGame from '@/components/react/vowelsplit.jsx';
 import { games } from '@/data/games';
 
 const title = 'Typpy — Happy Typing Games';
 const description = 'Play fun typing games to improve speed, accuracy, and focus. Typpy helps you build real-world typing skills through playful challenges.';
 const url = 'https://typpy.online/';
-const featured = games[0];
+const featured = games.find(g => g.slug === 'tidy');
 ---
 
 <Layout title={title} description={description} url={url}>
@@ -31,15 +30,20 @@ const featured = games[0];
 							<span class="material-symbols-outlined text-[18px]">sports_esports</span>
 							Featured game
 						</div>
-						<h2 class="text-4xl md:text-5xl font-black tracking-tight text-on-surface mb-4 leading-[0.95]">VowerSplit</h2>
-						<p class="text-on-surface-variant leading-relaxed mb-6">Two words merge with a hidden vowel in between. Spot it and type it — fast as you can!</p>
-						<a href="/games/vowelsplit" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+						<h2 class="text-4xl md:text-5xl font-black tracking-tight text-on-surface mb-4 leading-[0.95]">Tidy</h2>
+						<p class="text-on-surface-variant leading-relaxed mb-6">A cluttered room of words, and nothing but your typing to clear it. No clock, no pressure — just you, the keys, and the satisfaction of watching the pile shrink to nothing.</p>
+						<a href="/games/tidy" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
 							<span class="material-symbols-outlined text-[18px]">play_arrow</span>
-							Play VowerSplit
+							Play Tidy
 						</a>
 					</div>
 					<div class="lg:w-[62%] w-full">
-						<VowerSplitGame client:only="react" />
+						<iframe
+							src="/games/tidy"
+							title="Tidy — play now"
+							loading="lazy"
+							class="w-full h-[420px] md:h-[480px] rounded-2xl border border-outline-variant"
+						></iframe>
 					</div>
 				</div>
 			</div>

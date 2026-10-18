@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://typpy.online/</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/about</loc>
@@ -23,6 +23,10 @@
   <url>
     <loc>https://typpy.online/blog/Thought_to_Screen_20260428</loc>
     <lastmod>2026-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/blog/Tidy_20261018</loc>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/blog/Touch_Typing_20260428</loc>
@@ -62,11 +66,15 @@
   </url>
   <url>
     <loc>https://typpy.online/games</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/scrambletype</loc>
     <lastmod>2026-08-04</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/games/tidy</loc>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typefall</loc>

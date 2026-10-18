@@ -1,0 +1,759 @@
+---
+const title = 'Tidy — Typpy';
+const description = 'Tidy: a calm, no-rush typing game. Clear a cluttered room one word at a time and feel the satisfaction build as it empties.';
+const keywords = 'tidy, calm typing game, zen typing game, relaxing typing practice, no pressure typing, declutter game, typing game online';
+const url = 'https://typpy.online/games/tidy';
+const image = 'https://typpy.online/og/default.png';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: title,
+    description,
+    url,
+    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    applicationCategory: 'Casual Typing Game',
+    operatingSystem: 'Web',
+    author: { '@type': 'Organization', name: 'Typpy' },
+    publisher: { '@type': 'Organization', name: 'Typpy' },
+    genre: 'Casual',
+    datePublished: '2026-10-18'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://typpy.online' },
+      { '@type': 'ListItem', position: 2, name: 'Games', item: 'https://typpy.online/games' },
+      { '@type': 'ListItem', position: 3, name: 'Tidy', item: url }
+    ]
+  }
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<link rel="canonical" href={url} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Typpy" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<style>
+  html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#efe7da; }
+  canvas { display:block; position:fixed; inset:0; outline:none; }
+  .back-link {
+    position: fixed; top: 14px; left: 14px; z-index: 10;
+    font: 500 12px system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #8a7a66; text-decoration: none; letter-spacing: 0.04em;
+    padding: 6px 10px; border-radius: 999px; opacity: 0.45;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 1; }
+  html.framed .back-link { display: none; }
+</style>
+<script is:inline>
+  if (window.self !== window.top) document.documentElement.classList.add('framed');
+</script>
+</head>
+<body>
+<a class="back-link" href="/games">← Games</a>
+<canvas id="c" tabindex="0"></canvas>
+<script>
+// @ts-nocheck — plain JS game loop, not written against the strict tsconfig
+import Matter from 'matter-js';
+(function () {
+  'use strict';
+
+  var Engine = Matter.Engine, Bodies = Matter.Bodies, Composite = Matter.Composite;
+
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+
+  var W = 0, H = 0, FLOOR = 0;
+
+  var words = [];
+  var parts = [];
+  var motes = [];
+
+  var buffer = '';
+  var shake = 0;
+  var started = false;
+  var hintA = 1;
+  var idleT = 0;
+  var audio = null;
+  var remaining = 0;
+
+  var ROUND_MIN = 30, ROUND_MAX = 500;
+  var roundChoice = '';
+
+  // Real rigid-body physics instead of a hand-rolled AABB stack — gravity,
+  // resting, and crumbling when a support word is removed all fall out of
+  // the engine for free, so the pile settles and topples naturally.
+  var engine = Engine.create();
+  engine.enableSleeping = false;
+  var DT = 1 / 60, DT_MS = 1000 / 60;
+  var BODY_OPTS = { friction: 0.6, frictionStatic: 1.2, restitution: 0.02, density: 0.0012 };
+  var ground = null, wallL = null, wallR = null;
+
+  var FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  var ACCENT = 'rgb(206,106,58)';
+
+  /* ------------------------------------------------------------ vocab */
+  var RAW = ('breathe stillness light drift calm gentle quiet soft float rest ' +
+    'peace slow warm open clear space ease flow melt hush mist cloud rain leaf ' +
+    'stone river moon dawn dusk ash sand wind snow moss fern bloom seed root ' +
+    'bark wave tide shore sky glow ember silence patience kindness gratitude ' +
+    'presence balance ground release settle gather sweep tidy wash fold dust ' +
+    'shine polish arrange order empty listen notice ' +
+    'sun star comet nebula frost dew fog haze storm thunder breeze gale stream ' +
+    'brook lake pond ocean sea cliff peak hill valley meadow field forest grove ' +
+    'garden petal branch trunk thorn vine reed grass grain wheat rice herb ' +
+    'spice tea honey milk bread salt sugar lemon apple pear plum fig nut oil ' +
+    'wax clay iron copper silver gold glass paper cloth wool silk linen cotton ' +
+    'wood coal chalk ink paint brush pencil page book shelf desk chair table ' +
+    'lamp candle match smoke flame spark heat cold ice steam vapor air breath ' +
+    'sigh whisper murmur pause grace mercy truth trust faith hope joy bliss love ' +
+    'care tender smooth bright pale dim dark deep wide vast free loose wild ' +
+    'tame mild plain simple humble modest honest patient present steady ' +
+    'morning evening night noon twilight midnight summer winter autumn spring ' +
+    'season weather earth water fire metal ether atom sparkle shimmer twinkle ' +
+    'glisten ripple bubble droplet puddle pebble coral shell feather wing nest ' +
+    'burrow hollow cave canyon desert dune oasis island harbor bridge path ' +
+    'trail stair window door wall roof floor beam column arch dome tower ' +
+    'street lane alley courtyard balcony attic cellar kitchen garden ' +
+    'acorn almond amber anchor angle antler apricot arbor armor aroma arrow ' +
+    'ascend aspen aura awake bamboo barn basin basket bay beacon bean beaver ' +
+    'bell belt bench berry birch blade blaze bless blink blossom blue boat bog ' +
+    'bolt bond bone bonfire boot bottle bough boulder bowl box brace braid ' +
+    'bramble brass brave bream brew brick bristle broom bud bug bulb bull ' +
+    'bundle burn bush butter cabin cable cage cake camp canal canopy canvas cap ' +
+    'cape carpet carve cascade cashew cedar cell ceramic chain chamber channel ' +
+    'charcoal charm chase cheer cherry chestnut chime chip chive chord cinder ' +
+    'cinnamon circle citrus clasp claw clean cleanse clever climb cling clip ' +
+    'cloak clock clover cluster coast coat cobble cocoa coconut coil colt comb ' +
+    'comfort compass cone content cook cool cord core cork corn corner cove ' +
+    'cradle craft crane crate cream creek crescent crest crimson crumb crust ' +
+    'crystal cub cube cup cupboard curl current curtain curve cushion cypress ' +
+    'daisy dale dandelion daybreak daylight deck deer delight delta den dial ' +
+    'diamond dill dimple dirt dish ditch dive dock dolphin dot dove down downy ' +
+    'drape dream drip drizzle drop duck dusty duvet dwell eagle earthen east ' +
+    'echo eddy eel egg elbow elder elm embark emerald energy essence fable ' +
+    'facet fade faint fairy falcon fallow fan farm feast fence fender fennel ' +
+    'fiber filament fin finch fjord flagstone flake flannel flare flask flax ' +
+    'fleck flicker flint flora flour flute foam folk forage ford forge form ' +
+    'fountain fox foxglove fragrance frame freckle fresh fringe').split(' ');
+
+  var POOL = (function () {
+    var seen = {}, out = [];
+    for (var i = 0; i < RAW.length; i++) {
+      var w = RAW[i];
+      if (w && !seen[w]) { seen[w] = 1; out.push(w); }
+    }
+    return out;
+  })();
+
+  var HUES = [24, 38, 148, 188, 258, 328, 92, 12];
+
+  function pick(a) { return a[(Math.random() * a.length) | 0]; }
+
+  function rr(x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w * 0.5, h * 0.5));
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  /* ------------------------------------------------------------ sizing */
+  function buildBounds() {
+    var old = [];
+    if (ground) old.push(ground, wallL, wallR);
+    if (old.length) Composite.remove(engine.world, old);
+
+    var t = 80;
+    ground = Bodies.rectangle(W * 0.5, FLOOR + t * 0.5, W + 2000, t, { isStatic: true, friction: 1 });
+    wallL = Bodies.rectangle(-t * 0.5, H * 0.5, t, H * 6, { isStatic: true });
+    wallR = Bodies.rectangle(W + t * 0.5, H * 0.5, t, H * 6, { isStatic: true });
+    Composite.add(engine.world, [ground, wallL, wallR]);
+  }
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    FLOOR = Math.round(H - 90);
+    buildBounds();
+  }
+  window.addEventListener('resize', resize);
+
+  /* ------------------------------------------------------------ words */
+  function makeWord(text) {
+    var size = 12 + Math.random() * 5;
+    var font = '600 ' + size.toFixed(1) + 'px ' + FONT;
+    ctx.font = font;
+    var tw = ctx.measureText(text).width;
+    var hue = pick(HUES);
+    var w = {
+      text: text, font: font, tw: tw,
+      w: tw + size * 1.35,
+      h: size * 1.75,
+      x: 0, y: 0,
+      visualRot: 0,
+      state: 'active',
+      body: null,
+      matched: 0,
+      t: 0, delay: 0, drift: 0,
+      a: 1, s: 1,
+      hue: hue,
+      bg: 'hsl(' + hue + ', 34%, 97%)',
+      border: 'hsl(' + hue + ', 24%, 86%)',
+      ink: 'hsl(' + hue + ', 18%, 30%)'
+    };
+    w.hw = w.w * 0.5;
+    w.hh = w.h * 0.5;
+    return w;
+  }
+
+  function spawnWord(w, x, y) {
+    w.x = x; w.y = y;
+    w.body = Bodies.rectangle(x, y, w.w, w.h, BODY_OPTS);
+    Composite.add(engine.world, w.body);
+    words.push(w);
+  }
+
+  /* ------------------------------------------- room (round) formation */
+  function shuffled(arr) {
+    var out = arr.slice();
+    for (var i = out.length - 1; i > 0; i--) {
+      var j = (Math.random() * (i + 1)) | 0;
+      var t = out[i]; out[i] = out[j]; out[j] = t;
+    }
+    return out;
+  }
+
+  function fillRoom(count) {
+    var deck = [];
+    while (deck.length < count) deck = deck.concat(shuffled(POOL));
+
+    var idx = 0;
+    var bottom = FLOOR - 1;
+    var topLimit = Math.max(H * 0.12, FLOOR - H * 0.86);
+    var totalH = Math.max(1, bottom - topLimit);
+    var guard = 0;
+    var placed = [];
+
+    while (bottom > topLimit && placed.length < count && guard++ < 400) {
+      var prog = 1 - (bottom - topLimit) / totalH;
+      var rowW = W * (1 - 0.42 * prog);
+      var left = (W - rowW) * 0.5;
+      var x = left + 2;
+      var rowH = 0;
+
+      while (placed.length < count) {
+        var w = makeWord(deck[idx]);
+        if (x + w.w > left + rowW - 2) break;
+        idx++;
+
+        placed.push({ w: w, x: x + w.hw, y: bottom - w.hh });
+        rowH = Math.max(rowH, w.h);
+        x += w.w + 2;
+      }
+
+      if (rowH === 0) break;
+      bottom -= rowH;
+    }
+
+    // shift the whole pile one screen up — they'll rain down and reform
+    var bottomY = -Infinity;
+    for (var k = 0; k < placed.length; k++) {
+      var b = placed[k].y + placed[k].w.hh;
+      if (b > bottomY) bottomY = b;
+    }
+    var shift = -H - 60 - bottomY;
+    for (var m = 0; m < placed.length; m++) {
+      spawnWord(placed[m].w, placed[m].x, placed[m].y + shift);
+    }
+  }
+
+  function startRound(count) {
+    for (var i = 0; i < words.length; i++) {
+      if (words[i].body) Composite.remove(engine.world, words[i].body);
+    }
+    words.length = 0;
+    idleT = 0;
+    roundChoice = '';
+    fillRoom(count);
+  }
+
+  // Each cleared word is replaced by a duplicate of a word still on screen —
+  // never a new word from the pool. That means the room's vocabulary can
+  // only narrow over a round, never grow: duplicates concentrate on whatever
+  // survives, and the very last word clears every remaining instance of
+  // itself at once with nothing left to spawn, ending the round on its own.
+  function spawnDuplicates(count) {
+    var sources = [];
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (w.state !== 'leaving') sources.push(w.text);
+    }
+    if (!sources.length) return;
+
+    for (var n = 0; n < count; n++) {
+      var text = sources[(Math.random() * sources.length) | 0];
+      var d = makeWord(text);
+      var pad = d.hw + 10;
+      var x = pad + Math.random() * Math.max(1, W - pad * 2);
+      var y = -d.h - Math.random() * 220;
+      spawnWord(d, x, y);
+    }
+  }
+
+  /* ------------------------------------------------------------ effects */
+  function burst(w) {
+    if (parts.length > 520) return;
+    var n = 8 + ((Math.random() * 6) | 0);
+    for (var i = 0; i < n; i++) {
+      var ang = Math.random() * Math.PI * 2;
+      var sp = 25 + Math.random() * 90;
+      var life = 0.45 + Math.random() * 0.7;
+      parts.push({
+        x: w.x + (Math.random() - 0.5) * w.w * 0.6,
+        y: w.y + (Math.random() - 0.5) * w.h * 0.6,
+        vx: Math.cos(ang) * sp,
+        vy: Math.sin(ang) * sp - 30,
+        life: life,
+        max: life,
+        size: 0.8 + Math.random() * 2.2,
+        hue: w.hue
+      });
+    }
+  }
+
+  function complete(w, delay) {
+    if (w.body) { Composite.remove(engine.world, w.body); w.body = null; }
+    w.state = 'leaving';
+    w.t = 0;
+    w.delay = delay || 0;
+    w.drift = (Math.random() - 0.5) * 42;
+    w.baseRot = w.visualRot;
+    burst(w);
+  }
+
+  function initAudio() {
+    if (audio) return;
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audio = new AC();
+    } catch (e) { audio = null; }
+  }
+
+  function chime(delay) {
+    if (!audio) return;
+    if (audio.state === 'suspended' && audio.resume) audio.resume();
+    var t = audio.currentTime + (delay || 0);
+    var o = audio.createOscillator();
+    var g = audio.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(480 + Math.random() * 260, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.04, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+    o.connect(g);
+    g.connect(audio.destination);
+    o.start(t);
+    o.stop(t + 0.5);
+  }
+
+  /* ------------------------------------------------------------ input */
+  function refresh() {
+    var n = buffer.length;
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (w.state === 'leaving' || n === 0) { w.matched = 0; continue; }
+      w.matched = (w.text.lastIndexOf(buffer, 0) === 0) ? n : 0;
+    }
+  }
+
+  function focusGame() { try { canvas.focus(); } catch (e) {} }
+
+  window.addEventListener('pointerdown', function () { focusGame(); initAudio(); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    initAudio();
+    started = true;
+
+    if (remaining === 0) {
+      if (e.key === 'Backspace') { e.preventDefault(); roundChoice = roundChoice.slice(0, -1); return; }
+      if (e.key === 'Enter') {
+        var n = parseInt(roundChoice, 10);
+        if (roundChoice && n >= ROUND_MIN && n <= ROUND_MAX) { startRound(n); }
+        else { shake = 5; roundChoice = ''; }
+        return;
+      }
+      if (e.key.length === 1 && e.key >= '0' && e.key <= '9') {
+        if (roundChoice.length < String(ROUND_MAX).length) roundChoice += e.key;
+      }
+      return;
+    }
+
+    if (e.key === 'Backspace') { e.preventDefault(); buffer = buffer.slice(0, -1); refresh(); return; }
+    if (e.key === 'Escape') { buffer = ''; refresh(); return; }
+    if (e.key.length !== 1) return;
+
+    var ch = e.key.toLowerCase();
+    if (ch < 'a' || ch > 'z') return;
+
+    var next = buffer + ch;
+    var anyPrefix = false;
+    var exact = null;
+
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (w.state === 'leaving') continue;
+      if (w.text.lastIndexOf(next, 0) === 0) {
+        anyPrefix = true;
+        if (w.text === next && (!exact || w.y > exact.y)) exact = w;
+      }
+    }
+
+    if (!anyPrefix) { shake = 5; return; }
+
+    buffer = next;
+
+    if (exact) {
+      var target = exact.text;
+      var toClear = [];
+      for (var k = 0; k < words.length; k++) {
+        var w2 = words[k];
+        if (w2.state !== 'leaving' && w2.text === target) toClear.push(w2);
+      }
+
+      toClear.sort(function (a, b) { return b.y - a.y; });
+      var stagger = Math.min(0.07, 1.6 / Math.max(1, toClear.length));
+
+      for (var c = 0; c < toClear.length; c++) {
+        var d = c * stagger;
+        complete(toClear[c], d);
+        if (c < 6) chime(d);
+      }
+
+      // whatever was resting on the cleared words has nothing holding it up
+      // now — the physics engine topples it next step, no bookkeeping needed
+
+      // replace each cleared word with a duplicate of one still standing —
+      // the room narrows toward fewer distinct words until it runs itself out
+      spawnDuplicates(toClear.length);
+
+      buffer = '';
+    }
+    refresh();
+  });
+
+  /* ------------------------------------------------------------ update */
+  function syncFromPhysics() {
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (!w.body) continue;
+      w.x = w.body.position.x;
+      w.y = w.body.position.y;
+      w.visualRot = w.body.angle;
+    }
+  }
+
+  function update(dt) {
+    var i, w;
+
+    for (i = words.length - 1; i >= 0; i--) {
+      w = words[i];
+      if (w.state !== 'leaving') continue;
+      w.t += dt;
+      if (w.t < w.delay) continue;
+      var k = (w.t - w.delay) / 1.1;
+      if (k >= 1) { words.splice(i, 1); continue; }
+      w.y -= (45 + 140 * k) * dt;
+      w.x += w.drift * dt;
+      w.a = 1 - k * k;
+      w.s = 1 + 0.12 * Math.sin(k * Math.PI) - 0.22 * k;
+      w.visualRot = w.baseRot + Math.sin(k * 8) * 0.08 * k;
+    }
+
+    for (i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.life -= dt;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      p.vy += 220 * dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vx *= 0.97;
+    }
+
+    for (i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      m.ph += dt * 0.5;
+      m.x += Math.sin(m.ph) * 6 * dt + m.vx * dt;
+      m.y += m.vy * dt;
+      if (m.y < -14) { m.y = H + 14; m.x = Math.random() * W; }
+      if (m.x < -14) m.x = W + 14;
+      if (m.x > W + 14) m.x = -14;
+    }
+
+    shake *= Math.pow(0.002, dt);
+    if (shake < 0.05) shake = 0;
+
+    if (started) hintA = Math.max(0, hintA - dt * 1.2);
+
+    remaining = 0;
+    for (i = 0; i < words.length; i++) if (words[i].state !== 'leaving') remaining++;
+    if (remaining === 0 && !buffer) idleT += dt; else idleT = 0;
+
+    refresh();
+  }
+
+  /* ------------------------------------------------------------ draw */
+  function drawWord(w) {
+    ctx.save();
+    ctx.globalAlpha = w.a;
+    ctx.translate(w.x, w.y);
+    ctx.rotate(w.visualRot);
+    ctx.scale(w.s, w.s);
+
+    var hw = w.hw, hh = w.hh;
+    var rad = Math.min(6, hh * 0.8);
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(110, 88, 62, 0.16)';
+    ctx.shadowBlur = 7;
+    ctx.shadowOffsetY = 2;
+    rr(-hw, -hh, w.w, w.h, rad);
+    ctx.fillStyle = w.bg;
+    ctx.fill();
+    ctx.restore();
+
+    rr(-hw, -hh, w.w, w.h, rad);
+    if (w.matched > 0) {
+      ctx.strokeStyle = 'rgba(206, 106, 58, 0.6)';
+      ctx.lineWidth = 1.3;
+    } else {
+      ctx.strokeStyle = w.border;
+      ctx.lineWidth = 0.9;
+    }
+    ctx.stroke();
+
+    ctx.font = w.font;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    var x0 = -w.tw * 0.5;
+
+    if (w.matched > 0) {
+      var pre = w.text.slice(0, w.matched);
+      var post = w.text.slice(w.matched);
+      var preW = ctx.measureText(pre).width;
+      ctx.fillStyle = w.ink;
+      ctx.fillText(post, x0 + preW, 0.5);
+      ctx.fillStyle = ACCENT;
+      ctx.fillText(pre, x0, 0.5);
+      ctx.fillStyle = 'rgba(206, 106, 58, 0.65)';
+      ctx.fillRect(x0, hh * 0.36, preW, 1.6);
+    } else {
+      ctx.fillStyle = w.ink;
+      ctx.fillText(w.text, x0, 0.5);
+    }
+
+    ctx.restore();
+  }
+
+  function render() {
+    var i;
+
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#faf6ef');
+    g.addColorStop(0.6, '#f1e9dd');
+    g.addColorStop(1, '#e6dbcb');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    var rg = ctx.createRadialGradient(W * 0.5, -H * 0.15, 0, W * 0.5, -H * 0.15, Math.max(W, H) * 0.9);
+    rg.addColorStop(0, 'rgba(255,255,255,0.85)');
+    rg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = rg;
+    ctx.fillRect(0, 0, W, H);
+
+    for (i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      ctx.globalAlpha = m.a * (0.55 + 0.45 * Math.sin(m.ph));
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    var fg = ctx.createLinearGradient(0, FLOOR - 40, 0, FLOOR + 8);
+    fg.addColorStop(0, 'rgba(120,98,72,0)');
+    fg.addColorStop(1, 'rgba(120,98,72,0.10)');
+    ctx.fillStyle = fg;
+    ctx.fillRect(0, FLOOR - 40, W, 50);
+
+    ctx.strokeStyle = 'rgba(150,128,100,0.28)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, FLOOR + 0.5);
+    ctx.lineTo(W, FLOOR + 0.5);
+    ctx.stroke();
+
+    if (remaining > 0) {
+      ctx.globalAlpha = 0.28;
+      ctx.font = '500 12px ' + FONT;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = '#7d6d59';
+      ctx.fillText(remaining + ' left', W - 18, 18);
+      ctx.globalAlpha = 1;
+    }
+
+    if (idleT > 0.8) {
+      var a = Math.min((idleT - 0.8) * 0.5, 0.2);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = '#6d5f4e';
+      ctx.font = '300 42px ' + FONT;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('clarity', W * 0.5, H * 0.4);
+      ctx.globalAlpha = 1;
+    }
+
+    if (idleT > 1.8) {
+      var py = H * 0.4 + 56;
+      var promptA = Math.min((idleT - 1.8) * 0.8, 1);
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '600 28px ' + FONT;
+      ctx.globalAlpha = promptA * (roundChoice ? 1 : 0.4);
+      ctx.fillStyle = roundChoice ? ACCENT : '#8a7a66';
+      ctx.fillText(roundChoice || (ROUND_MIN + '–' + ROUND_MAX), W * 0.5, py);
+
+      ctx.globalAlpha = promptA * 0.45;
+      ctx.font = '500 11px ' + FONT;
+      ctx.fillStyle = '#8a7a66';
+      ctx.fillText('TYPE A NUMBER (' + ROUND_MIN + '–' + ROUND_MAX + ') AND PRESS ENTER', W * 0.5, py + 30);
+      ctx.globalAlpha = 1;
+    }
+
+    for (i = 0; i < words.length; i++) drawWord(words[i]);
+
+    for (i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      var kk = p.life / p.max;
+      ctx.globalAlpha = kk * 0.9;
+      ctx.fillStyle = 'hsl(' + p.hue + ', 55%, 58%)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * kk, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    ctx.save();
+    ctx.translate(shake, 0);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    var y = H - 38;
+
+    if (buffer) {
+      ctx.font = '600 22px ' + FONT;
+      ctx.fillStyle = ACCENT;
+      ctx.fillText(buffer, W * 0.5, y);
+      var tw = ctx.measureText(buffer).width;
+      ctx.globalAlpha = 0.3 + 0.7 * Math.abs(Math.sin(performance.now() / 420));
+      ctx.fillRect(W * 0.5 + tw * 0.5 + 4, y - 12, 2.4, 24);
+      ctx.globalAlpha = 1;
+    } else if (remaining === 0) {
+      // the center prompt already shows the number being typed
+    } else if (!started || hintA > 0.05) {
+      ctx.globalAlpha = Math.max(0.25, hintA * 0.55);
+      ctx.font = '500 12px ' + FONT;
+      ctx.fillStyle = '#8a7a66';
+      ctx.fillText('TYPE WHAT YOU SEE TO TIDY THE ROOM', W * 0.5, y);
+      ctx.globalAlpha = 1;
+    } else {
+      ctx.globalAlpha = 0.2 + 0.35 * Math.abs(Math.sin(performance.now() / 420));
+      ctx.fillStyle = '#8a7a66';
+      ctx.fillRect(W * 0.5, y - 11, 2.4, 22);
+      ctx.globalAlpha = 1;
+    }
+    ctx.restore();
+  }
+
+  /* ------------------------------------------------------------ loop */
+  var last = 0;
+  var acc = 0;
+
+  function frame(now) {
+    if (!last) last = now;
+    var dt = (now - last) / 1000;
+    last = now;
+    if (dt > 0.1) dt = 0.1;
+
+    acc += dt;
+    var guard = 0;
+    while (acc >= DT && guard < 5) {
+      Engine.update(engine, DT_MS);
+      acc -= DT;
+      guard++;
+    }
+    if (guard >= 5) acc = 0;
+
+    syncFromPhysics();
+    update(dt);
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  /* ------------------------------------------------------------ boot */
+  resize();
+
+  for (var mi = 0; mi < 40; mi++) {
+    motes.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.6 + Math.random() * 1.6,
+      vx: (Math.random() - 0.5) * 6,
+      vy: -3 - Math.random() * 8,
+      a: 0.1 + Math.random() * 0.26,
+      ph: Math.random() * Math.PI * 2
+    });
+  }
+
+  startRound(30);
+
+  focusGame();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

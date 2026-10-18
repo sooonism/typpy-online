@@ -49,4 +49,11 @@ export const games = [
 			"Unscramble words one letter at a time to sharpen focus and spelling.",
 		href: "/games/scrambletype",
 	},
+	{
+		slug: "tidy",
+		title: "Tidy",
+		description:
+			"A minimalist typing zen — tidy a drifting pile of words before it settles again.",
+		href: "/games/tidy",
+	},
 ];
