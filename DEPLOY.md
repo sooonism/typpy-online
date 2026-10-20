@@ -23,7 +23,7 @@ Static site, built locally and copied to the VPS by hand. No CI.
      `COPYFILE_DISABLE=1` stops macOS tar from embedding AppleDouble `._*` resource-fork files that GNU tar on the remote end would otherwise extract as literal junk files.
 - **Do not replace the `public` directory itself** (`mv`, `rm -rf` + recreate, etc.) — `nginx-server`'s Docker bind mount is attached to that directory's inode, so swapping in a new directory at the same path silently breaks the mount (the container keeps serving an empty/stale view) until `docker restart nginx-server`. Sync files *into* the existing directory instead, as above.
 - **Restart requirements:** none for a normal in-place sync; nginx serves the new files directly. Only needed if the `public` directory itself was ever replaced (see above) — `docker restart nginx-server`.
-- **Env vars / secrets:** none for the site. AdSense and GA/GTM IDs are in `src/layouts/Layout.astro`.
+- **Env vars / secrets:** none for the site. AdSense and GA/GTM IDs are in `src/layouts/Layout.astro`. The three standalone Tidy pages (`tidy`, `tidy-es`, `tidy-ja`) don't use the layout, so each carries its own GA4 tag (`G-FKXKL01WVD`) and sends `round_start` / `round_complete` events with `game`, `language`, `room_size` (and `duration_s`).
 - **Git:** `origin` is `https://github.com/sooonism/typpy-online.git`, branch `main`.
 
 ## Bing Webmaster Tools
