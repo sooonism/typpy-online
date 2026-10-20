@@ -1,0 +1,115 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Learn Japanese Vocabulary by Typing — Typpy';
+const description = 'Learn 3,000 common Japanese words by typing their romaji. Calm, no-timer typing practice that shows each word with its kana reading and an English meaning.';
+const url = 'https://typpy.online/learn-japanese/';
+const keywords = 'learn japanese vocabulary, japanese typing game, romaji typing practice, common japanese words, learn japanese by typing, japanese vocabulary practice';
+
+const faqs = [
+  {
+    q: 'Can you learn Japanese vocabulary by typing?',
+    a: 'Typing the romaji for each word gives you repetition, and Typpy shows the kana reading and the English meaning each time you clear a word. It works best next to other study, like a course or reading, and it is an experiment rather than a proven method.'
+  },
+  {
+    q: 'Which Japanese words are included?',
+    a: 'About 3,000 common words from the JMdict dictionary, picking everyday-tagged words first and then the most frequent ones in written Japanese. A lot of the vocabulary leans toward news and formal writing. Particles, suffixes and words under three romaji letters are left out.'
+  },
+  {
+    q: 'Do I need a Japanese keyboard or to know romaji?',
+    a: 'No. You type with a normal keyboard. Each word shows its romaji underneath, so you learn the reading as you type. Common alternatives work too: both "shi" and "si", "chi" and "ti", "tsu" and "tu", "fu" and "hu".'
+  },
+  {
+    q: 'Does it teach kanji?',
+    a: 'It shows you each word in its usual kanji form next to its reading, so you see the characters again and again. It does not teach stroke order or writing.'
+  },
+  {
+    q: 'Will it repeat the words I already know?',
+    a: 'New rooms use words you have not cleared yet first. Your progress is saved in your browser, so it stays on that device.'
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes. There is no sign-up and no timer.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: 'en'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing · 日本語</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Learn Japanese vocabulary by <span class="text-brand-red italic">typing</span>
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          Textbooks and apps get you the basics, but real sentences still read like a wall of unknown words.
+          Tidy 日本語 gives you 3,000 common Japanese words to clear one at a time. Each shows the kanji, the reading, and an English meaning.
+        </p>
+        <a href="/games/tidy-ja" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy 日本語
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">How it works</h2>
+        <ol class="space-y-3 text-on-surface-variant leading-relaxed list-decimal pl-6">
+          <li>Pick a room size from 30 to 500 words. A pile of Japanese words drops onto the screen, each with its romaji underneath.</li>
+          <li>Type the romaji to clear a word. The reading and meaning appear underneath, for example <em>森 (もり) mori = forest</em>.</li>
+          <li>As the room empties, the same few words come around again and again, which is the repetition vocabulary needs.</li>
+          <li>Words you have cleared are remembered in your browser, so new rooms start with words you haven&apos;t met yet.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Who it&apos;s for</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          People learning Japanese who want more exposure to common words and their readings. It complements lessons rather
+          than replacing them: you get repetition, the reading and the meaning, but not grammar, listening or writing.
+        </p>
+        <p class="text-on-surface-variant leading-relaxed">
+          It started as a <a class="text-brand-red font-semibold" href="/learn-spanish">Spanish</a> experiment, and the idea carried over.
+          The story is in <a class="text-brand-red font-semibold" href="/blog/Tidy_Japanese_20261020">the blog post</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <p class="text-xs text-on-surface-variant/70 leading-relaxed">
+        Word data from <a class="underline" href="https://www.edrdg.org/jmdict/j_jmdict.html" rel="noopener">JMdict</a>,
+        &copy; the Electronic Dictionary Research and Development Group, used under
+        <a class="underline" href="https://www.edrdg.org/edrdg/licence.html" rel="noopener">their licence</a> (CC BY-SA 4.0).
+      </p>
+    </div>
+  </main>
+</Layout>

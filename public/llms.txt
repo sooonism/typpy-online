@@ -8,6 +8,7 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 
 - [Tidy](https://typpy.online/games/tidy/): A calm, no-rush typing game. Clear a physics-based pile of cluttered words, one at a time, with no clock — the vocabulary narrows as you play until the room empties. Choose a room size from 30 to 500 words. This is Typpy's benchmark "craft-paced" game: steady, cumulative, satisfying work rather than a race against time.
 - [Tidy en español](https://typpy.online/games/tidy-es/): Spanish version of Tidy using the 3000 most common Spanish words, each with an English meaning shown when cleared (accents optional when typing).
+- [Tidy 日本語](https://typpy.online/games/tidy-ja/): Japanese version of Tidy with 3000 common words (JMdict); type the romaji, see the kana reading and an English meaning when cleared.
 - [VowerSplit](https://typpy.online/games/vowelsplit/): Spot the hidden vowel merged between two words and type it, against a 10-second timer.
 - [ZenType](https://typpy.online/games/zentype/): Calm, untimed typing practice for speed and accuracy.
 - [ZenType Reverse](https://typpy.online/games/zentype-reverse/): Type words backwards to train focus and accuracy.
@@ -20,6 +21,7 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 
 - [Games catalogue](https://typpy.online/games/): full list of playable games.
 - [Learn Spanish by typing](https://typpy.online/learn-spanish/): overview of Tidy en español and how it complements a course like Duolingo; FAQ on the word list and method.
+- [Learn Japanese by typing](https://typpy.online/learn-japanese/): overview of Tidy 日本語, word source (JMdict) and FAQ.
 - [About](https://typpy.online/about/): who makes Typpy and why.
 - [Mission](https://typpy.online/mission/): what Typpy is trying to do for players.
 - [Blog](https://typpy.online/blog/): posts on typing, focus, and how/why each game was built — including the [Tidy launch post](https://typpy.online/blog/Tidy_20261018/) on the craft-paced design philosophy behind it.

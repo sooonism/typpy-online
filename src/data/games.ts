@@ -63,4 +63,11 @@ export const games = [
 			"Tidy con las 3000 palabras más comunes del español, con su significado — ordena la habitación escribiendo, sin prisa.",
 		href: "/games/tidy-es",
 	},
+	{
+		slug: "tidy-ja",
+		title: "Tidy 日本語",
+		description:
+			"Tidy with 3000 common Japanese words — type the romaji, see the reading and meaning, no rush.",
+		href: "/games/tidy-ja",
+	},
 ];
