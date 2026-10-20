@@ -2,8 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import { games } from '@/data/games';
 
-const title = 'Typpy — Relaxing Typing Games';
-const description = 'A collection of relaxing typing games to build speed, accuracy, and focus without the pressure. Type to chill.';
+const title = 'Typpy — Relaxing Typing Games, No Timer';
+const description = 'Cozy typing games with no timer and no score pressure. Tidy a room of words, clear your head, and let your typing settle. Free in your browser.';
 const url = 'https://typpy.online/';
 const featured = games.find(g => g.slug === 'tidy');
 ---
@@ -12,11 +12,12 @@ const featured = games.find(g => g.slug === 'tidy');
 	<main class="flex-grow w-full home">
 		<!-- Hero -->
 		<section class="flex flex-col items-center justify-center px-6 md:px-12 w-full max-w-6xl mx-auto py-section">
-			<h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-center">Typpy — Relaxing Typing Games</h1>
-			<p class="text-lg md:text-xl text-on-surface-variant max-w-3xl text-center mb-6">Typpy helps you build real-world typing skills through playful challenges — improve speed, accuracy, and focus with bite-sized games.</p>
+			<h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-center">Relaxing typing games, no timer</h1>
+			<p class="text-lg md:text-xl text-on-surface-variant max-w-3xl text-center mb-6">Typpy is a cozy place to type. Clear your head with Tidy and other calm games with no countdown, and get faster and more accurate as a side effect.</p>
 
 			<div class="mb-4 flex items-center gap-3">
-				<button id="random-game-btn" class="px-6 py-3 rounded-full bg-primary text-white font-bold hover:opacity-95">Play Random Game</button>
+				<a href="/games/tidy" class="px-6 py-3 rounded-full bg-primary text-white font-bold hover:opacity-95">Play Tidy — no timer</a>
+				<button id="random-game-btn" class="px-6 py-3 rounded-full border border-outline-variant font-bold text-on-surface hover:opacity-95">Random game</button>
 				<a href="/games" class="ml-4 text-sm text-on-surface-variant hover:text-primary">Browse games</a>
 			</div>
 		</section>
@@ -57,6 +58,43 @@ const featured = games.find(g => g.slug === 'tidy');
 					</div>
 				</div>
 			</div>
+		</section>
+
+		<!-- Calm vs timed -->
+		<section class="px-6 md:px-12 pb-section w-full max-w-5xl mx-auto">
+			<h2 class="text-2xl md:text-3xl font-extrabold mb-2">Calm games, and the ones with a clock</h2>
+			<p class="text-on-surface-variant mb-6">We label every game honestly, so you can pick the mood you're in.</p>
+			<div class="grid md:grid-cols-2 gap-6">
+				<div class="rounded-2xl border border-outline-variant bg-surface-container-low p-6">
+					<h3 class="font-bold mb-3">No countdown, take your time</h3>
+					<ul class="space-y-2 text-on-surface-variant">
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/tidy">Tidy</a> — clear a drifting pile of words (also in <a class="underline" href="/games/tidy-es">Español</a>, <a class="underline" href="/games/tidy-ms">Bahasa Melayu</a>, <a class="underline" href="/games/tidy-ja">日本語</a>)</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/zentype">ZenType</a> — calm typing practice</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/zentype-reverse">ZenType Reverse</a> — type backwards, slowly</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/typespace">TypeSpace</a> — quotes at your own rhythm</li>
+					</ul>
+				</div>
+				<div class="rounded-2xl border border-outline-variant bg-surface-container-low p-6">
+					<h3 class="font-bold mb-3">Against the clock</h3>
+					<ul class="space-y-2 text-on-surface-variant">
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/typefall">TypeFall</a> — falling words</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/typerush">Type Rush</a> — arcade challenge</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/vowelsplit">VowerSplit</a> — 10-second sprint</li>
+						<li><a class="font-semibold text-on-surface hover:text-primary" href="/games/scrambletype">ScrambleType</a> — unscramble words</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQ -->
+		<section class="px-6 md:px-12 pb-section w-full max-w-3xl mx-auto">
+			<h2 class="text-2xl md:text-3xl font-extrabold mb-4">Questions</h2>
+			<h3 class="font-bold">What is a relaxing typing game?</h3>
+			<p class="text-on-surface-variant mb-4">One without a countdown or a score to beat. In Typpy's Tidy you clear a pile of words at your own pace, and nothing happens if you pause.</p>
+			<h3 class="font-bold">Is there a typing game with no timer?</h3>
+			<p class="text-on-surface-variant mb-4">Tidy has no clock at all. ZenType, ZenType Reverse and TypeSpace show your time for stats, but they never cut you off or count down. All are free, with no signup.</p>
+			<h3 class="font-bold">Will it still make me a faster typist?</h3>
+			<p class="text-on-surface-variant">Yes. Steady, low-stress practice builds accuracy and rhythm, and speed follows.</p>
 		</section>
 	</main>
 

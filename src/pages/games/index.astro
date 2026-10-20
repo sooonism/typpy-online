@@ -3,8 +3,12 @@ import GameTitleTile from '@/components/GameTitleTile.astro';
 import Layout from '@/layouts/Layout.astro';
 import { games } from '@/data/games';
 
-const title = 'Relaxing Typing Games Collection — Typpy';
-const description = 'A collection of relaxing typing games: Tidy, ZenType, VowerSplit, TypeFall, Type Rush, ZenType Reverse, TypeSpace, and ScrambleType. Build speed, focus, and accuracy at your own pace.';
+const title = 'Relaxing Typing Games, No Timer — Typpy';
+const description = 'Cozy typing games with no countdown, led by Tidy, plus a few arcade ones against the clock. Each game is labeled so you can pick your mood. Free in your browser.';
+
+// no countdown (Tidy has no clock at all; the others count up for stats only)
+const calm = new Set(['tidy', 'tidy-es', 'tidy-ja', 'tidy-ms', 'zentype', 'zentype-reverse', 'typespace']);
+const sorted = [...games].sort((a, b) => Number(calm.has(b.slug)) - Number(calm.has(a.slug)));
 const url = 'https://typpy.online/games/';
 
 // games list is provided by /src/data/games.ts
@@ -47,7 +51,7 @@ const schema = [
             Games
           </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-on-surface mb-5 leading-[0.95]">Relaxing typing games</h1>
-          <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-7">Play fun typing games to build speed, focus, spelling, and accuracy.</p>
+          <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-7">Calm typing games with no countdown, led by <a href="/games/tidy" class="underline hover:text-primary">Tidy</a>. A few arcade games with a clock are here too, and every game is labeled so you can pick your mood.</p>
           <div class="flex flex-wrap gap-4 items-center">
             <button
               id="random-game-btn"
@@ -65,7 +69,7 @@ const schema = [
       </section>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {games.map(game => (
+        {sorted.map(game => (
           <a href={game.href} class="block rounded-2xl border border-outline-variant overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition duration-200 group bg-white">
             {game.image ? (
               <img src={game.image} alt={game.title} class="w-full h-40 object-cover" />
@@ -73,6 +77,7 @@ const schema = [
               <GameTitleTile title={game.title} subtitle="" badgeText="" compact={true} />
             )}
             <div class="p-4 bg-surface">
+              <span class="inline-block mb-2 px-2 py-0.5 rounded-full border border-outline-variant text-[11px] uppercase tracking-[0.15em] text-on-surface-variant">{calm.has(game.slug) ? 'No countdown' : 'Against the clock'}</span>
               <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{game.title}</h2>
               <p class="text-sm text-on-surface-variant mt-2">{game.description}</p>
               <div class="mt-4">
@@ -82,6 +87,11 @@ const schema = [
           </a>
         ))}
       </div>
+
+      <section class="rounded-2xl border border-outline-variant bg-surface-container-low p-6 md:p-8">
+        <h2 class="text-xl font-bold mb-2">Learning a language? Pair Tidy with Duolingo.</h2>
+        <p class="text-on-surface-variant leading-relaxed">Duolingo gives you structure and a push. Tidy is the opposite: no streaks, no hearts, no clock, just the words that won't stick. They work well together. <a class="underline hover:text-primary" href="/blog/Duolingo_and_Tidy_20261021">Read why</a>.</p>
+      </section>
     </div>
   </main>
 

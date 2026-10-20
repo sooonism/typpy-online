@@ -2,13 +2,13 @@
 import Layout from '@/layouts/Layout.astro';
 
 const title = 'Typpy Mission — Happy Typing';
-const description = 'The heart of Typpy: happy typing, Typing Solitaire, and a calmer, more human way to practice at the keyboard.';
+const description = 'Typpy makes relaxing, timer-free typing games. Tidy, our calm word-clearing game, is built to clear your head and sits alongside tools like Duolingo, not against them.';
 const url = 'https://typpy.online/mission/';
 
 const principles = [
   {
     title: 'The pressure is off',
-    body: 'No heart-pounding timers. No red panic bars. Just you, the words, and a little room to breathe.'
+    body: 'Our calm games, led by Tidy, have no countdown and no red panic bars. A few arcade games do run against the clock, and we label them so you always know what you are choosing.'
   },
   {
     title: 'The vibe is right',
@@ -96,7 +96,7 @@ const audience = [
                   <p class="font-semibold text-on-surface">No one watching your hands.</p>
                 </div>
                 <div class="mini-card rounded-[1.25rem] p-5 border border-white/40">
-                  <p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant mb-2">No stopwatch</p>
+                  <p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant mb-2">No countdown</p>
                   <p class="font-semibold text-on-surface">No pressure to perform.</p>
                 </div>
                 <div class="mini-card rounded-[1.25rem] p-5 border border-white/40">
@@ -189,6 +189,27 @@ const audience = [
               <p class="text-on-surface-variant leading-relaxed">{principle.body}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section class="section-card rounded-[2rem] p-8 md:p-10 lg:p-12 border border-outline-variant bg-surface-container-low">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 text-primary font-semibold mb-4">
+            <span class="material-symbols-outlined">handshake</span>
+            <span>Tidy and Duolingo</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight text-on-surface mb-4">
+            A companion, not a competitor.
+          </h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed mb-4">
+            Duolingo is structure: guided lessons, streaks, and a little pressure that works for a lot of people.
+            <a class="underline hover:text-primary" href="/games/tidy">Tidy</a> is its polar opposite: no streaks,
+            no hearts, no clock. It is for the words that still won&apos;t stick, practised at your own pace.
+          </p>
+          <p class="text-on-surface-variant text-lg leading-relaxed">
+            Use Duolingo for how the language fits together and Tidy for the words that fill it in.
+            <a class="underline hover:text-primary" href="/blog/Duolingo_and_Tidy_20261021">Read the full story</a>.
+          </p>
         </div>
       </section>
 
