@@ -36,7 +36,7 @@ const schema = [
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-visual" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
@@ -57,6 +57,7 @@ const schema = [
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 <style>
   html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#efe7da; }
+  #mi { position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; border:0; padding:0; font-size:16px; pointer-events:none; }
   canvas { display:block; position:fixed; inset:0; outline:none; }
   .back-link {
     position: fixed; top: 14px; left: 14px; z-index: 10;
@@ -82,6 +83,7 @@ const schema = [
 <body>
 <a class="back-link" href="/games">← ゲーム</a>
 <canvas id="c" tabindex="0"></canvas>
+<input id="mi" type="text" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-label="Type here" tabindex="-1" />
 <script>
 // @ts-nocheck — plain JS game loop, not written against the strict tsconfig
 import Matter from 'matter-js';
@@ -89,7 +91,7 @@ import WORDS from '../../data/tidy-ja-words.json';
 (function () {
   'use strict';
 
-  var Engine = Matter.Engine, Bodies = Matter.Bodies, Composite = Matter.Composite;
+  var Engine = Matter.Engine, Bodies = Matter.Bodies, Composite = Matter.Composite, Body = Matter.Body;
 
   var canvas = document.getElementById('c');
   var ctx = canvas.getContext('2d');
@@ -110,7 +112,8 @@ import WORDS from '../../data/tidy-ja-words.json';
 
   // GA4: one event when a round begins, one when the room is emptied (not per word — too noisy)
   var GAME = 'tidy-ja', LANG = 'ja';
-  var roundOpen = false, roundSize = 0, roundT0 = 0;
+  // a room auto-starts on page load, so a round only counts once the player types into it
+  var roundOpen = false, roundCounted = false, roundSize = 0, roundT0 = 0;
   function track(name, params) {
     try { if (window.gtag) window.gtag('event', name, Object.assign({ game: GAME, language: LANG }, params)); } catch (e) {}
   }
@@ -176,17 +179,33 @@ import WORDS from '../../data/tidy-ja-words.json';
 
   function resize() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth;
-    H = window.innerHeight;
+    // visualViewport shrinks when a phone's soft keyboard opens; fit the room to what's actually visible
+    var vv = window.visualViewport;
+    W = Math.round(vv ? vv.width : window.innerWidth);
+    H = Math.round(vv ? vv.height : window.innerHeight);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
+    canvas.style.top = (vv ? vv.offsetTop : 0) + 'px';
+    canvas.style.left = (vv ? vv.offsetLeft : 0) + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     FLOOR = Math.round(H - 90);
     buildBounds();
+    // a shorter/narrower view would leave words under the new floor or off the side: lift them back in
+    for (var i = 0; i < words.length; i++) {
+      var b = words[i].body;
+      if (!b) continue;
+      var nx = Math.min(Math.max(b.position.x, words[i].hw), W - words[i].hw);
+      var ny = Math.min(b.position.y, FLOOR - words[i].hh - 1);
+      if (nx !== b.position.x || ny !== b.position.y) {
+        Body.setPosition(b, { x: nx, y: ny });
+        Body.setVelocity(b, { x: 0, y: 0 });
+      }
+    }
   }
   window.addEventListener('resize', resize);
+  if (window.visualViewport) { window.visualViewport.addEventListener('resize', resize); window.visualViewport.addEventListener('scroll', resize); }
 
   /* ------------------------------------------------------------ words */
   // `id` is the canonical romaji spelling, unique per word in the pool
@@ -303,8 +322,7 @@ import WORDS from '../../data/tidy-ja-words.json';
     idleT = 0;
     roundChoice = '';
     fillRoom(count);
-    roundOpen = true; roundSize = count; roundT0 = performance.now();
-    track('round_start', { room_size: count });
+    roundOpen = true; roundCounted = false; roundSize = count;
   }
 
   // Each cleared word is replaced by a duplicate of a word still on screen —
@@ -401,7 +419,27 @@ import WORDS from '../../data/tidy-ja-words.json';
 
   function focusGame() { try { canvas.focus(); } catch (e) {} }
 
-  window.addEventListener('pointerdown', function () { focusGame(); initAudio(); });
+  // Touch devices have no hardware keyboard: a hidden input opens the soft keyboard and
+  // replays what it types as ordinary keydown events, so the one handler below serves both.
+  var COARSE = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  var softInput = document.getElementById('mi');
+  function openKeyboard() { if (COARSE) { try { softInput.focus({ preventScroll: true }); } catch (e) {} } }
+  function replay(key) { window.dispatchEvent(new KeyboardEvent('keydown', { key: key })); }
+  function flushInput() {
+    var v = softInput.value; softInput.value = '';
+    for (var i = 0; i < v.length; i++) replay(v[i]);
+  }
+  softInput.addEventListener('input', function (e) { if (!e.isComposing) flushInput(); });
+  softInput.addEventListener('compositionend', flushInput);
+  // soft keyboards often report Backspace only as an edit, not a keydown
+  softInput.addEventListener('beforeinput', function (e) { if (e.inputType === 'deleteContentBackward') replay('Backspace'); });
+  function setKeyboardMode() {
+    // number pad for the room-size prompt, letters while playing
+    var m = remaining === 0 ? 'numeric' : 'email';
+    if (softInput.getAttribute('inputmode') !== m) softInput.setAttribute('inputmode', m);
+  }
+  window.addEventListener('pointerdown', function () { focusGame(); initAudio(); openKeyboard(); });
+  window.addEventListener('pointerup', openKeyboard);
 
   window.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -446,6 +484,7 @@ import WORDS from '../../data/tidy-ja-words.json';
     if (!anyPrefix) { shake = 5; return; }
 
     buffer = next;
+    if (roundOpen && !roundCounted) { roundCounted = true; roundT0 = performance.now(); track('round_start', { room_size: roundSize }); }
 
     if (exact) {
       var target = exact.id;
@@ -533,13 +572,14 @@ import WORDS from '../../data/tidy-ja-words.json';
 
     remaining = 0;
     for (i = 0; i < words.length; i++) if (words[i].state !== 'leaving') remaining++;
-    if (roundOpen && remaining === 0) {
+    if (roundOpen && roundCounted && remaining === 0) {
       roundOpen = false;
       track('round_complete', { room_size: roundSize, duration_s: Math.round((performance.now() - roundT0) / 1000) });
     }
     if (remaining === 0 && !buffer) idleT += dt; else idleT = 0;
 
     refresh();
+    setKeyboardMode();
   }
 
   /* ------------------------------------------------------------ draw */
@@ -672,7 +712,7 @@ import WORDS from '../../data/tidy-ja-words.json';
       ctx.globalAlpha = promptA * 0.45;
       ctx.font = '500 11px ' + FONT;
       ctx.fillStyle = '#8a7a66';
-      ctx.fillText('数字を入力 (' + ROUND_MIN + '–' + ROUND_MAX + ') して ENTER', W * 0.5, py + 30);
+      ctx.fillText(COARSE && document.activeElement !== softInput ? 'タップして入力' : '数字を入力 (' + ROUND_MIN + '–' + ROUND_MAX + ') して ENTER', W * 0.5, py + 30);
       ctx.globalAlpha = 1;
     }
 
@@ -720,7 +760,7 @@ import WORDS from '../../data/tidy-ja-words.json';
       ctx.globalAlpha = Math.max(0.25, hintA * 0.55);
       ctx.font = '500 12px ' + FONT;
       ctx.fillStyle = '#8a7a66';
-      ctx.fillText('ローマ字で入力して部屋を片付けよう  ·  TYPE THE ROMAJI', W * 0.5, y);
+      ctx.fillText(COARSE && document.activeElement !== softInput ? 'タップして入力' : 'ローマ字で入力して部屋を片付けよう  ·  TYPE THE ROMAJI', W * 0.5, y);
       ctx.globalAlpha = 1;
     } else {
       ctx.globalAlpha = 0.2 + 0.35 * Math.abs(Math.sin(performance.now() / 420));
