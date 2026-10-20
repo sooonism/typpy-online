@@ -19,6 +19,7 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 ## About
 
 - [Games catalogue](https://typpy.online/games/): full list of playable games.
+- [Learn Spanish by typing](https://typpy.online/learn-spanish/): overview of Tidy en español and how it complements a course like Duolingo; FAQ on the word list and method.
 - [About](https://typpy.online/about/): who makes Typpy and why.
 - [Mission](https://typpy.online/mission/): what Typpy is trying to do for players.
 - [Blog](https://typpy.online/blog/): posts on typing, focus, and how/why each game was built — including the [Tidy launch post](https://typpy.online/blog/Tidy_20261018/) on the craft-paced design philosophy behind it.

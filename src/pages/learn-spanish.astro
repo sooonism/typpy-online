@@ -1,0 +1,108 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Learn Spanish Vocabulary by Typing — Typpy';
+const description = 'Learn the 3,000 most common Spanish words by typing them. Calm, no-timer typing practice with an English meaning for every word, built to complement Duolingo-style grammar lessons.';
+const url = 'https://typpy.online/learn-spanish/';
+const keywords = 'learn spanish vocabulary, spanish typing game, learn spanish by typing, common spanish words, spanish vocabulary practice, spanish typing practice';
+
+const faqs = [
+  {
+    q: 'Can you learn Spanish vocabulary by typing?',
+    a: 'Typing helps with spelling and repetition, and Typpy shows the English meaning each time you clear a word. It works best alongside other practice, like a course or reading, rather than on its own. This is an experiment, not a proven method.'
+  },
+  {
+    q: 'Which Spanish words are included?',
+    a: 'The 3,000 most common words from a Spanish subtitle frequency list, so it is everyday spoken Spanish. Words under three letters and character names are left out.'
+  },
+  {
+    q: 'Do I need a Spanish keyboard or accents?',
+    a: 'No. Words are shown with their accents, but you type them without. Typing "esta" clears "está", and "n" matches "ñ".'
+  },
+  {
+    q: 'Will it repeat the words I already know?',
+    a: 'New rooms use words you have not cleared yet first. Your progress is saved in your browser, so it stays on that device and resets only when you have cleared all 3,000.'
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes. There is no sign-up and no timer.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: 'en'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Learn Spanish vocabulary by <span class="text-brand-red italic">typing</span>
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          You can follow the grammar, but the sentences still read like noise because you don&apos;t know enough words.
+          Tidy en español gives you the 3,000 most common Spanish words to clear one at a time, each with its English meaning.
+        </p>
+        <a href="/games/tidy-es" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy en español
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">How it works</h2>
+        <ol class="space-y-3 text-on-surface-variant leading-relaxed list-decimal pl-6">
+          <li>Pick a room size from 30 to 500 words. A pile of Spanish words drops onto the screen.</li>
+          <li>Type a word to clear it. Its English meaning appears underneath, for example <em>casa = house, home</em>.</li>
+          <li>As the room empties, the same few words come around again and again, which is the repetition vocabulary needs.</li>
+          <li>Words you have cleared are remembered in your browser, so new rooms start with words you haven&apos;t met yet.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Who it&apos;s for</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          People who are learning Spanish with a course like Duolingo, have the grammar basics, and want to build
+          vocabulary faster. It is a complement to lessons, not a replacement: typing gives you exposure and
+          repetition, and the meaning line gives you the translation, but you still need reading and conversation.
+        </p>
+        <p class="text-on-surface-variant leading-relaxed">
+          Why we built it, and how we&apos;re testing it, is in
+          <a class="text-brand-red font-semibold" href="/blog/Tidy_Spanish_20261020">the blog post</a>.
+          Prefer English words? <a class="text-brand-red font-semibold" href="/games/tidy">Tidy</a> is the original.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
