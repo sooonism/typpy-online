@@ -70,4 +70,11 @@ export const games = [
 			"Tidy with 3000 common Japanese words — type the romaji, see the reading and meaning, no rush.",
 		href: "/games/tidy-ja",
 	},
+	{
+		slug: "tidy-ms",
+		title: "Tidy Bahasa Melayu",
+		description:
+			"Tidy with the 3000 most common Malay words, with English meanings — clear the room by typing, no rush.",
+		href: "/games/tidy-ms",
+	},
 ];

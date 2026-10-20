@@ -1,0 +1,108 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Learn Malay Vocabulary by Typing — Typpy';
+const description = 'Learn the 3,000 most common Malay (Bahasa Melayu) words by typing them. Calm, no-timer typing practice with an English meaning for every word, built to complement grammar lessons.';
+const url = 'https://typpy.online/learn-malay/';
+const keywords = 'learn malay vocabulary, bahasa melayu typing game, learn malay by typing, common malay words, malay vocabulary practice, malay typing practice';
+
+const faqs = [
+  {
+    q: 'Can you learn Malay vocabulary by typing?',
+    a: 'Typing helps with spelling and repetition, and Typpy shows the English meaning each time you clear a word. It works best alongside other practice, like a course or reading, rather than on its own. This is an experiment, not a proven method.'
+  },
+  {
+    q: 'Which Malay words are included?',
+    a: 'The 3,000 most common words from a Malay subtitle frequency list, so it is everyday spoken Malay (some Indonesian-style forms appear too). Foreign words and character names are removed by hand. Words under three letters are left out.'
+  },
+  {
+    q: 'Do I need a special keyboard?',
+    a: 'No. Malay uses the plain Latin alphabet with no accents, so any keyboard works.'
+  },
+  {
+    q: 'Will it repeat the words I already know?',
+    a: 'New rooms use words you have not cleared yet first. Your progress is saved in your browser, so it stays on that device and resets only when you have cleared all 3,000.'
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes. There is no sign-up and no timer.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: 'en'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Learn Malay vocabulary by <span class="text-brand-red italic">typing</span>
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          You can follow the grammar, but the sentences still read like noise because you don&apos;t know enough words.
+          Tidy Bahasa Melayu gives you the 3,000 most common Malay words to clear one at a time, each with its English meaning.
+        </p>
+        <a href="/games/tidy-ms" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy Bahasa Melayu
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">How it works</h2>
+        <ol class="space-y-3 text-on-surface-variant leading-relaxed list-decimal pl-6">
+          <li>Pick a room size from 30 to 500 words. A pile of Malay words drops onto the screen.</li>
+          <li>Type a word to clear it. Its English meaning appears underneath, for example <em>rumah = house, home</em>.</li>
+          <li>As the room empties, the same few words come around again and again, which is the repetition vocabulary needs.</li>
+          <li>Words you have cleared are remembered in your browser, so new rooms start with words you haven&apos;t met yet.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Who it&apos;s for</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          People who are learning Malay with a course or app, have the grammar basics, and want to build
+          vocabulary faster. It is a complement to lessons, not a replacement: typing gives you exposure and
+          repetition, and the meaning line gives you the translation, but you still need reading and conversation.
+        </p>
+        <p class="text-on-surface-variant leading-relaxed">
+          Why we built it, and how we&apos;re testing it, is in
+          <a class="text-brand-red font-semibold" href="/blog/Tidy_Malay_20261020">the blog post</a>.
+          Prefer English words? <a class="text-brand-red font-semibold" href="/games/tidy">Tidy</a> is the original.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
