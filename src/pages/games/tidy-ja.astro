@@ -57,7 +57,7 @@ const schema = [
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 <style>
   html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#efe7da; }
-  #mi { position:fixed; top:0; left:0; width:1px; height:1px; opacity:0; border:0; padding:0; font-size:16px; pointer-events:none; }
+  #mi { position:fixed; top:0; left:0; width:1px; height:1px; opacity:0.01; border:0; padding:0; font-size:16px; caret-color:transparent; }
   canvas { display:block; position:fixed; inset:0; outline:none; }
   .back-link {
     position: fixed; top: 14px; left: 14px; z-index: 10;
@@ -417,16 +417,20 @@ import WORDS from '../../data/tidy-ja-words.json';
     }
   }
 
-  function focusGame() { try { canvas.focus(); } catch (e) {} }
+  function focusGame() { if (COARSE) return; try { canvas.focus(); } catch (e) {} }
 
   // Touch devices have no hardware keyboard: a hidden input opens the soft keyboard and
   // replays what it types as ordinary keydown events, so the one handler below serves both.
-  var COARSE = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  var COARSE = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || (navigator.maxTouchPoints || 0) > 0;
   var softInput = document.getElementById('mi');
   function openKeyboard() { if (COARSE) { try { softInput.focus({ preventScroll: true }); } catch (e) {} } }
   function replay(key) { window.dispatchEvent(new KeyboardEvent('keydown', { key: key })); }
+  // a real keydown already bubbled up to the window handler; don't replay it a second time
+  var hwKey = false;
+  softInput.addEventListener('keydown', function (e) { if (e.key && e.key.length === 1) hwKey = true; });
   function flushInput() {
     var v = softInput.value; softInput.value = '';
+    if (hwKey) { hwKey = false; return; }
     for (var i = 0; i < v.length; i++) replay(v[i]);
   }
   softInput.addEventListener('input', function (e) { if (!e.isComposing) flushInput(); });
@@ -439,7 +443,10 @@ import WORDS from '../../data/tidy-ja-words.json';
     if (softInput.getAttribute('inputmode') !== m) softInput.setAttribute('inputmode', m);
   }
   window.addEventListener('pointerdown', function () { focusGame(); initAudio(); openKeyboard(); });
+  // iOS only raises the soft keyboard from a focus() made inside a tap/click handler
   window.addEventListener('pointerup', openKeyboard);
+  window.addEventListener('touchend', openKeyboard);
+  window.addEventListener('click', openKeyboard);
 
   window.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
