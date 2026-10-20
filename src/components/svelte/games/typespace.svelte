@@ -22,6 +22,7 @@
 	let isFinished = false;
 	let score = 0;
 	let wpm = 0;
+	let showStats = false;
 	let accuracy = 100;
 	let startTime = null;
 	let scoreClass = '';
@@ -212,7 +213,17 @@
 	}
 
 	// --- Lifecycle ---
-	onMount(() => {
+	
+  // Zen by default: live stats stay hidden unless the player opts in (remembered per browser)
+  const STATS_KEY = 'typpy-show-stats';
+  function toggleStats() {
+    showStats = !showStats;
+    try { localStorage.setItem(STATS_KEY, showStats ? '1' : '0'); } catch (e) {}
+  }
+  function loadStats() { try { showStats = localStorage.getItem(STATS_KEY) === '1'; } catch (e) {} }
+
+onMount(() => {
+		loadStats();
 		initGame();
 	});
 
@@ -247,7 +258,8 @@
 						<div class="floating-points {f.type === 'positive' ? 'points-positive' : 'points-negative'}">{f.text}</div>
 					{/each}
 				</div>
-				<div class="flex flex-col items-center">
+				{#if showStats}
+<div class="flex flex-col items-center">
 					<span class="text-[10px] text-outline uppercase tracking-widest mb-1">WPM</span>
 					<span>{wpm}</span>
 				</div>
@@ -255,6 +267,8 @@
 					<span class="text-[10px] text-outline uppercase tracking-widest mb-1">Accuracy</span>
 					<span>{accuracy}%</span>
 				</div>
+{/if}
+<button type="button" tabindex="-1" on:click={e => { toggleStats(); e.currentTarget.blur(); }} class="self-center text-xs text-outline underline hover:text-primary" aria-pressed={showStats}>{showStats ? 'Hide stats' : 'Show stats'}</button>
 			</div>
 		</div>
 

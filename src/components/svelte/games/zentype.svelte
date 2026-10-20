@@ -26,6 +26,7 @@
   let isPlaying = $state(false);
   let isFinished = $state(false);
   let timeElapsed = $state(0);
+  let showStats = $state(false);
   let selectedWordCount = $state(50);
   let startTime = $state(null);
   let wpm = $state(0);
@@ -307,7 +308,17 @@
     }
   }
 
-  onMount(() => {
+  
+  // Zen by default: live stats stay hidden unless the player opts in (remembered per browser)
+  const STATS_KEY = 'typpy-show-stats';
+  function toggleStats() {
+    showStats = !showStats;
+    try { localStorage.setItem(STATS_KEY, showStats ? '1' : '0'); } catch (e) {}
+  }
+  function loadStats() { try { showStats = localStorage.getItem(STATS_KEY) === '1'; } catch (e) {} }
+
+onMount(() => {
+    loadStats();
     initGame();
   });
 </script>
@@ -333,7 +344,8 @@
       </h1>
 
       <div class="flex gap-4 sm:gap-8 text-tertiary font-semibold text-lg sm:text-xl">
-        <div class="flex flex-col items-center">
+        {#if showStats}
+<div class="flex flex-col items-center">
           <span class="text-caption text-outline uppercase tracking-widest mb-1">Time</span>
           <span>{timeElapsed}</span>
         </div>
@@ -345,6 +357,8 @@
           <span class="text-caption text-outline uppercase tracking-widest mb-1">Accuracy</span>
           <span>{accuracy}%</span>
         </div>
+{/if}
+<button type="button" tabindex="-1" onclick={e => { toggleStats(); e.currentTarget.blur(); }} class="self-center text-xs text-outline underline hover:text-primary" aria-pressed={showStats}>{showStats ? 'Hide stats' : 'Show stats'}</button>
       </div>
     </div>
     <div class="mb-4 flex bg-surface-container px-6 py-2 rounded-full text-sm font-bold text-on-surface-variant gap-4 shadow-sm border border-outline-variant">
