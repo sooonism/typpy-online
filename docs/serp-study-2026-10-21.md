@@ -38,6 +38,13 @@ Updated `src/pages/index.astro` (no separate landing page — homepage already r
 
 ## Not done / next
 
-- `site:typpy.online` pages 2–3 (are game pages indexed?).
+- ~~`site:typpy.online` pages 2–3~~ done, see below.
 - Search Console data (impressions/queries) to replace this snapshot.
 - Re-run these queries in ~4 weeks after changes.
+
+## site:typpy.online pages 2–3 (checked 2026-10-21, before re-crawl)
+
+Google shows 21 results total (rest "filtered as very similar").
+- **Indexed game pages:** Tidy, ZenType, ZenType Reverse, Type Rush, TypeFall, TypeSpace, VowerSplit. Snippets are still the OLD copy (Tidy: "A Calm, No-Rush Typing Game"), confirming no re-crawl of today's changes yet.
+- **Indexed blog posts:** manifesto (04-25), "What do typpy mean" (04-27), MDX welcome (05-16), VowerSplit (08-04), plus the two 05-18 posts.
+- **NOT seen in the 21:** ScrambleType, Tidy es/ms/ja, learn-spanish/malay/japanese pages, the Duolingo post (new today). Likely not yet indexed or folded into "similar" — request indexing for these in Search Console.
