@@ -56,4 +56,11 @@ export const games = [
 			"A minimalist typing zen — tidy a drifting pile of words before it settles again.",
 		href: "/games/tidy",
 	},
+	{
+		slug: "tidy-es",
+		title: "Tidy en español",
+		description:
+			"Tidy con las 3000 palabras más comunes del español, con su significado — ordena la habitación escribiendo, sin prisa.",
+		href: "/games/tidy-es",
+	},
 ];

@@ -25,3 +25,11 @@ Static site, built locally and copied to the VPS by hand. No CI.
 - **Restart requirements:** none for a normal in-place sync; nginx serves the new files directly. Only needed if the `public` directory itself was ever replaced (see above) — `docker restart nginx-server`.
 - **Env vars / secrets:** none for the site. AdSense and GA/GTM IDs are in `src/layouts/Layout.astro`.
 - **Git:** `origin` is `https://github.com/sooonism/typpy-online.git`, branch `main`.
+
+## Bing Webmaster Tools
+
+Verified 2026-10-20 via the `<meta name="msvalidate.01" content="FDCE188679599DD2E14450C8E7AF810B" />` tag in src/layouts/Layout.astro (one token per Bing account, same on all sites). **Do not remove it** or Bing drops verification. Sitemap submitted: https://typpy.online/sitemap.xml.
+
+## IndexNow
+
+Key file `public/b52fe43a7c38c995c3b5ff2a819a95c1.txt` (same key on all four sites) is served at the site root. After any deploy that adds or changes pages, re-ping: `~/gitlab/pi_agents/marketing-agents/scripts/indexnow.sh <host> [sitemap-url]` (sitemap defaults to `/sitemap.xml`; tinymath and tinyform use `/sitemap-index.xml`). Set up 2026-10-20.

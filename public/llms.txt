@@ -7,6 +7,7 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 ## Games
 
 - [Tidy](https://typpy.online/games/tidy/): A calm, no-rush typing game. Clear a physics-based pile of cluttered words, one at a time, with no clock — the vocabulary narrows as you play until the room empties. Choose a room size from 30 to 500 words. This is Typpy's benchmark "craft-paced" game: steady, cumulative, satisfying work rather than a race against time.
+- [Tidy en español](https://typpy.online/games/tidy-es/): Spanish version of Tidy using the 3000 most common Spanish words, each with an English meaning shown when cleared (accents optional when typing).
 - [VowerSplit](https://typpy.online/games/vowelsplit/): Spot the hidden vowel merged between two words and type it, against a 10-second timer.
 - [ZenType](https://typpy.online/games/zentype/): Calm, untimed typing practice for speed and accuracy.
 - [ZenType Reverse](https://typpy.online/games/zentype-reverse/): Type words backwards to train focus and accuracy.
