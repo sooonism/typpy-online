@@ -68,6 +68,13 @@ const schema = [
   .back-link:hover { opacity: 1; }
   html.framed .back-link { display: none; }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FKXKL01WVD"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FKXKL01WVD');
+</script>
 <script is:inline>
   if (window.self !== window.top) document.documentElement.classList.add('framed');
 </script>
@@ -100,6 +107,13 @@ import WORDS from '../../data/tidy-ja-words.json';
   var idleT = 0;
   var audio = null;
   var remaining = 0;
+
+  // GA4: one event when a round begins, one when the room is emptied (not per word — too noisy)
+  var GAME = 'tidy-ja', LANG = 'ja';
+  var roundOpen = false, roundSize = 0, roundT0 = 0;
+  function track(name, params) {
+    try { if (window.gtag) window.gtag('event', name, Object.assign({ game: GAME, language: LANG }, params)); } catch (e) {}
+  }
 
   var ROUND_MIN = 30, ROUND_MAX = 500;
   var roundChoice = '';
@@ -289,6 +303,8 @@ import WORDS from '../../data/tidy-ja-words.json';
     idleT = 0;
     roundChoice = '';
     fillRoom(count);
+    roundOpen = true; roundSize = count; roundT0 = performance.now();
+    track('round_start', { room_size: count });
   }
 
   // Each cleared word is replaced by a duplicate of a word still on screen —
@@ -517,6 +533,10 @@ import WORDS from '../../data/tidy-ja-words.json';
 
     remaining = 0;
     for (i = 0; i < words.length; i++) if (words[i].state !== 'leaving') remaining++;
+    if (roundOpen && remaining === 0) {
+      roundOpen = false;
+      track('round_complete', { room_size: roundSize, duration_s: Math.round((performance.now() - roundT0) / 1000) });
+    }
     if (remaining === 0 && !buffer) idleT += dt; else idleT = 0;
 
     refresh();
