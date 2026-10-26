@@ -1,0 +1,130 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Type Accents Online: Spanish, French & German Characters — Typpy';
+const description = 'Click to copy á, é, ñ, ¿, ç, ü, ß and more, with the Windows and Mac shortcuts for typing Spanish, French and German accents on a normal keyboard. Free, no sign-up.';
+const url = 'https://typpy.online/type-accents/';
+const keywords = 'type spanish accents online, type spanish characters online, how to type accents, typing french characters with english keyboard, german umlaut keyboard, ñ keyboard shortcut';
+
+const langs = [
+  {
+    id: 'spanish', name: 'Spanish',
+    chars: ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ'],
+    win: 'Add the US-International keyboard layout. Then press the apostrophe key and a vowel for á, é, í, ó, ú, and Shift+` (~) then n for ñ.',
+    mac: 'Option+e then a vowel gives á, é, í, ó, ú. Option+n then n gives ñ. Option+u then u gives ü. Option+Shift+? gives ¿ and Option+1 gives ¡.'
+  },
+  {
+    id: 'french', name: 'French',
+    chars: ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'î', 'ï', 'ô', 'ù', 'û', 'ü', 'œ', 'É', 'À', 'Ç'],
+    win: 'With the US-International layout: apostrophe then e gives é, apostrophe then c gives ç, ` then a vowel gives à, è, ù, " then a vowel gives ë, ï, ü, and Shift+6 (^) then a vowel gives â, ê, î, ô, û.',
+    mac: 'Option+e then a vowel gives é. Option+` then a vowel gives à, è, ù. Option+i then a vowel gives â, ê, î, ô, û. Option+u then a vowel gives ë, ï, ü. Option+c gives ç and Option+q gives œ.'
+  },
+  {
+    id: 'german', name: 'German',
+    chars: ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'],
+    win: 'With the US-International layout: " then a, o or u gives ä, ö, ü, and Right Alt+s gives ß.',
+    mac: 'Option+u then a, o or u gives ä, ö, ü. Option+s gives ß.'
+  }
+];
+
+const faqs = [
+  {
+    q: 'How do I type Spanish accents and ñ on a normal keyboard?',
+    a: 'Click a letter above to copy it, or use a shortcut. On Windows, add the US-International layout and press the apostrophe key then a vowel for á, é, í, ó, ú. On a Mac, press Option+e then the vowel, and Option+n then n for ñ.'
+  },
+  {
+    q: 'Do I need to type accents to practise on Typpy?',
+    a: 'No. In Tidy en español you type words without accents: typing "esta" clears "está", and "n" matches "ñ". This page is for when you want to write them properly.'
+  },
+  {
+    q: 'Why does the apostrophe key not print an apostrophe on the US-International layout?',
+    a: 'On that layout the apostrophe is a dead key that waits for the next letter. To get a plain apostrophe, press it and then the space bar.'
+  }
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: title.split(' — ')[0], description, url, inLanguage: 'en' },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Free tool</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Type accents online: <span class="text-brand-red italic">Spanish, French, German</span>
+        </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Click any character to copy it and add it to the box below, then copy the whole text. Each section lists the Windows and Mac shortcuts for typing it on a normal keyboard.
+        </p>
+        <textarea id="accent-box" rows="3" class="w-full rounded-xl border border-outline-variant bg-white p-4 text-lg" placeholder="Your text appears here" aria-label="Your text"></textarea>
+        <div class="mt-3 flex gap-3">
+          <button id="accent-copy" type="button" class="px-5 py-2 rounded-xl bg-brand-red text-white font-bold">Copy text</button>
+          <button id="accent-clear" type="button" class="px-5 py-2 rounded-xl border border-outline-variant font-bold text-on-surface">Clear</button>
+          <span id="accent-msg" class="self-center text-sm text-on-surface-variant" aria-live="polite"></span>
+        </div>
+      </header>
+
+      {langs.map(l => (
+        <section id={l.id}>
+          <h2 class="text-2xl font-bold tracking-tight mb-4">{l.name} characters</h2>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {l.chars.map(c => (
+              <button type="button" data-char={c} class="accent-key w-12 h-12 rounded-xl border border-outline-variant bg-white text-xl font-bold hover:-translate-y-0.5 transition-transform" aria-label={`Insert ${c}`}>{c}</button>
+            ))}
+          </div>
+          <p class="text-on-surface-variant leading-relaxed mb-2"><strong class="text-on-surface">Windows:</strong> {l.win}</p>
+          <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface">Mac:</strong> {l.mac}</p>
+        </section>
+      ))}
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Practise without the accents</h2>
+        <p class="text-on-surface-variant leading-relaxed">
+          Learning Spanish words? <a class="text-brand-red font-semibold" href="/games/tidy-es">Tidy en español</a> lets you clear
+          the 3,000 most common Spanish words without typing a single accent, and shows the English meaning of each.
+          More in <a class="text-brand-red font-semibold" href="/learn-spanish">Spanish typing practice</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const box = document.getElementById('accent-box') as HTMLTextAreaElement;
+  const msg = document.getElementById('accent-msg')!;
+  const say = (t: string) => { msg.textContent = t; setTimeout(() => (msg.textContent = ''), 1500); };
+  document.querySelectorAll<HTMLButtonElement>('.accent-key').forEach((b) =>
+    b.addEventListener('click', () => {
+      const c = b.dataset.char!;
+      const s = box.selectionStart ?? box.value.length;
+      const e = box.selectionEnd ?? box.value.length;
+      box.value = box.value.slice(0, s) + c + box.value.slice(e);
+      box.focus();
+      box.setSelectionRange(s + c.length, s + c.length);
+      (window as any).gtag?.('event', 'accent_insert', { character: c });
+    })
+  );
+  document.getElementById('accent-copy')!.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(box.value); say('Copied'); } catch { box.select(); say('Press Ctrl/Cmd+C'); }
+  });
+  document.getElementById('accent-clear')!.addEventListener('click', () => { box.value = ''; box.focus(); });
+</script>
