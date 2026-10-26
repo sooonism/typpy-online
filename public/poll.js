@@ -1,5 +1,5 @@
 // SEO E06: one-question segment poll, shown once per browser after the first completed round.
-// Sends GA4 `poll_answer` { answer }. Listens for the `typpy:round_complete` event fired by the games' track().
+// Sends GA4 `poll_answer` { answer } and sets user property `segment` (register both as custom dimensions: Event `answer`, User `segment`). Listens for the `typpy:round_complete` event fired by the games' track().
 (function () {
   var KEY = 'typpy_poll';
   try { if (localStorage.getItem(KEY)) return; } catch (e) { return; }
@@ -26,7 +26,7 @@
       b.textContent = o[1];
       b.style.cssText = 'margin:0 6px 6px 0;padding:6px 12px;border-radius:999px;border:1px solid #d9cdbd;background:#faf6ef;color:inherit;font:inherit;cursor:pointer';
       b.onclick = function () {
-        try { if (window.gtag) window.gtag('event', 'poll_answer', { answer: o[0] }); } catch (e) {}
+        try { if (window.gtag) { window.gtag('set', 'user_properties', { segment: o[0] }); window.gtag('event', 'poll_answer', { answer: o[0] }); } } catch (e) {}
         done(o[0]);
         box.textContent = 'Thanks!';
         setTimeout(function () { box.remove(); }, 1500);
