@@ -68,6 +68,7 @@ const schema = [
   }
   .back-link:hover { opacity: 1; }
   html.framed .back-link { display: none; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKXKL01WVD"></script>
 <script is:inline src="/poll.js" defer></script>
@@ -83,6 +84,8 @@ const schema = [
 </head>
 <body>
 <a class="back-link" href="/games">← ゲーム</a>
+<h1 class="sr-only">Tidy 日本語: Japanese typing game in romaji</h1>
+<p class="sr-only">Tidy 日本語 is a free Japanese typing game with no timer. Type the romaji of 3,000 common Japanese words to clear the room; each word shows its kanji, kana reading and English meaning. Choose a room size from 30 to 500 words.</p>
 <canvas id="c" tabindex="0"></canvas>
 <input id="mi" type="text" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-label="Type here" tabindex="-1" />
 <script>

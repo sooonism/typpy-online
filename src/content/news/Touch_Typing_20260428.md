@@ -1,5 +1,5 @@
 ---
-title: "Touch Typing"
+title: "Why Learn Touch Typing: Speed, Focus and Less Strain"
 date: "2026-04-28"
 author: "Typpy Team"
 excerpt: "Why learning touch typing is still one of the best productivity and wellbeing investments you can make."

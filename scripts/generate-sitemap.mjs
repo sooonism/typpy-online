@@ -74,6 +74,7 @@ async function collectContent() {
       url = `/${encodeURIComponent(slug)}/`;
     }
     let lastmod = null;
+    let skip = false;
     try {
       const txt = await fs.readFile(f, 'utf8');
       const fm = txt.match(/---\s*([\s\S]*?)\s*---/);
@@ -81,6 +82,7 @@ async function collectContent() {
         const fmBody = fm[1];
         const dateMatch = fmBody.match(/date:\s*["']?(\d{4}-\d{2}-\d{2})["']?/);
         if (dateMatch) lastmod = isoDate(dateMatch[1]);
+        if (/^noindex:\s*true/m.test(fmBody)) skip = true;
       }
     } catch (e) {}
     if (!lastmod) {
@@ -89,7 +91,7 @@ async function collectContent() {
         lastmod = isoDate(stat.mtime);
       } catch (e) {}
     }
-    items.push({ url, lastmod });
+    if (!skip) items.push({ url, lastmod });
   }
   return items;
 }

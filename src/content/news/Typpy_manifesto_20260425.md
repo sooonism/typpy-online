@@ -2,7 +2,7 @@
 title: "Typpy, My Manifesto (and confession)"
 date: "2026-04-25"
 author: "Typpy Team"
-excerpt: "Typing as brain training, my honest take"
+excerpt: "Why I make wacky typing games: my honest take on typing as brain training, and the confession behind Typpy."
 ---
 
 ## TLDR: I want to find brain rot with wacky typing game.

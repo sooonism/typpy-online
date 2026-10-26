@@ -1,8 +1,8 @@
 ---
-title: "Thought to Screen"
+title: "Thought to Screen: Capture Ideas Faster by Typing Better"
 date: "2026-04-28"
 author: "Typpy Team"
-excerpt: "Reduce friction between thinking and writing: simple habits and tools."
+excerpt: "Ideas arrive faster than our fingers. Simple habits and tools that reduce the friction between thinking and writing, so thoughts survive long enough to be shaped."
 ---
 
 Ideas often arrive faster than our fingers. The point of "Thought to Screen" is simple: make capture fast and forgiving so thoughts survive long enough to be shaped.

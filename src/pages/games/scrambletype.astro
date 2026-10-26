@@ -13,7 +13,31 @@ const developer = 'Typpy';
 const publisher = 'Typpy';
 const platform = 'Web';
 
+const faq = [
+  [
+    "What is ScrambleType?",
+    "ScrambleType is a word game: each word is shown scrambled, and you type the correct letters one at a time to unscramble it."
+  ],
+  [
+    "What happens if I type a wrong letter?",
+    "A wrong letter costs a life and clears what you have typed for that word. You have 5 lives, and a correct word can win one back."
+  ],
+  [
+    "Does it get harder?",
+    "Yes. Early words keep some letters in place to help you, and later words are fully scrambled."
+  ],
+  [
+    "Is ScrambleType free?",
+    "Yes. It runs in your browser with no account or download."
+  ]
+];
+
 const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
@@ -53,6 +77,17 @@ const schema = [
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-on-surface mb-5 leading-[0.95]">ScrambleType</h1>
           <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed">Unscramble each word one letter at a time. Build spelling accuracy, reaction speed, and keyboard control under pressure.</p>
         </div>
+      </section>
+      <section class="mt-10">
+        <h2 class="text-2xl font-black tracking-tight text-on-surface mb-4">ScrambleType: questions</h2>
+        <dl class="space-y-4">
+          {faq.map(([q, a]) => (
+            <div>
+              <dt class="font-bold text-on-surface">{q}</dt>
+              <dd class="text-on-surface-variant leading-relaxed">{a}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
     </div>
   </main>

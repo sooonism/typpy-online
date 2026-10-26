@@ -13,7 +13,31 @@ const developer = 'Typpy';
 const publisher = 'Typpy';
 const platform = 'Web';
 
+const faq = [
+  [
+    "What is VowerSplit?",
+    "VowerSplit is a fast word game. Words are shown merged together with a vowel hidden in between, and you spot the vowel and type it."
+  ],
+  [
+    "How long is a round?",
+    "10 seconds. You score as many as you can before the time runs out."
+  ],
+  [
+    "What are the difficulty levels?",
+    "Easy shows 2 words with 1 gap, Medium shows 3 words with 2 gaps, and Hard shows 4 to 5 words with 3 to 4 gaps."
+  ],
+  [
+    "Is VowerSplit free?",
+    "Yes. It runs in your browser with no account or download."
+  ]
+];
+
 const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
@@ -53,6 +77,17 @@ const schema = [
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-on-surface mb-5 leading-[0.95]">VowerSplit</h1>
           <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed">Two words merge with a hidden vowel in between. Spot it and type it — fast as you can!</p>
         </div>
+      </section>
+      <section class="mt-10">
+        <h2 class="text-2xl font-black tracking-tight text-on-surface mb-4">VowerSplit: questions</h2>
+        <dl class="space-y-4">
+          {faq.map(([q, a]) => (
+            <div>
+              <dt class="font-bold text-on-surface">{q}</dt>
+              <dd class="text-on-surface-variant leading-relaxed">{a}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
     </div>
   </main>
