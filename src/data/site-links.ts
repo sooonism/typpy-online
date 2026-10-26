@@ -2,7 +2,7 @@ export const primaryNavLinks = [
   { href: '/games', label: 'games' },
   { href: '/learn-spanish', label: 'spanish typing practice' },
   { href: '/learn-japanese', label: 'japanese typing practice' },
-  { href: '/learn-malay', label: 'learn malay' },
+  { href: '/learn-malay', label: 'malay typing game' },
   { href: '/blog', label: 'blog' },
   { href: '/about', label: 'about' },
   { href: '/mission', label: 'mission' },

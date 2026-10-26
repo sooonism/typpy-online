@@ -1,12 +1,20 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Learn Malay Vocabulary by Typing — Typpy';
-const description = 'Learn the 3,000 most common Malay (Bahasa Melayu) words by typing them. Calm, no-timer typing practice with an English meaning for every word, built to complement grammar lessons.';
+const title = 'Malay Typing Game: Bahasa Melayu Typing Practice, 3,000 Words — Typpy';
+const description = 'Free Malay typing game: type the 3,000 most common Bahasa Melayu words on any keyboard, with an English meaning for every word. No timer, no sign-up.';
 const url = 'https://typpy.online/learn-malay/';
-const keywords = 'learn malay vocabulary, bahasa melayu typing game, learn malay by typing, common malay words, malay vocabulary practice, malay typing practice';
+const keywords = 'malay typing game, bahasa melayu typing game, malay typing practice, malay typing, permainan menaip, learn malay vocabulary, common malay words, learn malay by typing';
 
 const faqs = [
+  {
+    q: 'Is this a Malay typing test (ujian menaip)?',
+    a: 'No. There is no timer, no WPM score and no ranking, so it will not prepare you for a timed or official typing exam. It is a calm Malay typing game for practising spelling and vocabulary.'
+  },
+  {
+    q: 'Is there a Malay typing game for learners?',
+    a: 'Tidy Bahasa Melayu is one. You clear a room of the 3,000 most common Malay words by typing them, and each word shows its English meaning when you clear it. The game itself is also available with a Malay interface.'
+  },
   {
     q: 'Can you learn Malay vocabulary by typing?',
     a: 'Typing helps with spelling and repetition, and Typpy shows the English meaning each time you clear a word. It works best alongside other practice, like a course or reading, rather than on its own. This is an experiment, not a proven method.'
@@ -56,8 +64,11 @@ const schema = [
       <header>
         <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing</p>
         <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
-          Learn Malay vocabulary by <span class="text-brand-red italic">typing</span>
+          Malay typing game, <span class="text-brand-red italic">Bahasa Melayu practice</span>
         </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Free Malay typing game: type the 3,000 most common Bahasa Melayu words on any keyboard and see each word&apos;s English meaning. No timer, no account.
+        </p>
         <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
           You can follow the grammar, but the sentences still read like noise because you don&apos;t know enough words.
           Tidy Bahasa Melayu gives you the 3,000 most common Malay words to clear one at a time, each with its English meaning.
