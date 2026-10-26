@@ -7,6 +7,7 @@
 </svelte:head>
 
 <script>
+  import { track } from '@/lib/track.js';
   import { tick, onMount } from 'svelte';
 
   // ------------------------------------------------------------
@@ -103,6 +104,7 @@
 
   function startGame() {
     if (isPlaying || isFinished) return;
+    track('zentype-reverse', 'round_start');
     isPlaying = true;
     startTime = Date.now();
     timerInterval = setInterval(() => {
@@ -124,6 +126,7 @@
   }
 
   function endGame() {
+    track('zentype-reverse', 'round_complete');
     clearInterval(timerInterval);
     isPlaying = false;
     isFinished = true;

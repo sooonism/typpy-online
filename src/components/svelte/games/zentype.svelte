@@ -1,5 +1,6 @@
 <!-- ZenType.svelte -->
 <script>
+  import { track } from '@/lib/track.js';
   import { onMount, tick } from 'svelte';
 
   // ─── Word bank ────────────────────────────────────
@@ -173,6 +174,7 @@
   // ─── Game flow ────────────────────────────────────
   function startGame() {
     if (isPlaying || isFinished) return;
+    track('zentype', 'round_start');
     isPlaying = true;
     startTime = Date.now();
     cursorVisible = true;
@@ -180,6 +182,7 @@
 
   function endGame() {
     if (isFinished) return;
+    track('zentype', 'round_complete');
     isPlaying = false;
     isFinished = true;
     cursorVisible = false;

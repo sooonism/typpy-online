@@ -16,6 +16,7 @@
 </svelte:head>
 
 <script>
+  import { track } from '@/lib/track.js';
 	import { onMount, onDestroy, afterUpdate, tick } from 'svelte';
 
 	const PANGRAMS = [
@@ -189,6 +190,7 @@
 	}
 
 	function endGame() {
+		track('typerush', 'round_complete');
 		isFinished = true;
 		isPlaying = false;
 		clearInterval(timerInterval);
@@ -198,6 +200,7 @@
 
 	function startGame() {
 		if (isPlaying || isFinished) return;
+		track('typerush', 'round_start');
 		isPlaying = true;
 		const tickRate = 100;
 		timerInterval = setInterval(() => {

@@ -1,4 +1,5 @@
 <script>
+  import { track } from '@/lib/track.js';
 	import { onMount, afterUpdate, tick } from 'svelte';
 
 	// --- Constants ---
@@ -136,6 +137,7 @@
 		// Start timer on first valid keypress
 		if (!isPlaying) {
 			isPlaying = true;
+			track('typespace', 'round_start');
 			startTime = Date.now();
 			cursorBlink = false;
 		}
@@ -173,6 +175,7 @@
 	}
 
 	function endGame() {
+		track('typespace', 'round_complete', { score });
 		isFinished = true;
 		isPlaying = false;
 		cursorBlink = false;

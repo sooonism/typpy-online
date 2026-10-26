@@ -1,3 +1,4 @@
+import { track } from '@/lib/track.js';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { RefreshCw, Heart, Shield, Binary } from 'lucide-react';
 
@@ -149,6 +150,12 @@ const App = () => {
     }, 800);
   }, [currentWordLength, difficultyStep, totalCorrect, highScore]);
 
+  // GA4: one start per session of play (first letter typed), one complete per game over
+  const startedRef = useRef(false);
+  useEffect(() => {
+    if (status === 'gameover') { track('scrambletype', 'round_complete', { score }); startedRef.current = false; }
+  }, [status]);
+
   // Handle Keyboard Input
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -156,6 +163,7 @@ const App = () => {
       
       const char = e.key.toUpperCase();
       if (/^[A-Z]$/.test(char)) {
+        if (!startedRef.current) { startedRef.current = true; track('scrambletype', 'round_start'); }
         if (targetWord[userInput.length] === char) {
           const nextInput = userInput + char;
           setUserInput(nextInput);

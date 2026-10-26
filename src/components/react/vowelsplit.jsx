@@ -1,3 +1,4 @@
+import { track } from '@/lib/track.js';
 import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Word pairs ──────────────────────────────────────────────
@@ -114,6 +115,7 @@ export default function VowerSplit() {
 		setFeedbackMsg("");
 		setWordAnim("");
 		setGhost(null);
+		track("vowelsplit", "round_start");
 		setGameState("playing");
 	}, [level]);
 
@@ -149,6 +151,7 @@ export default function VowerSplit() {
 			clearInterval(timerRef.current);
 			timerRef.current = null;
 		}
+		track("vowelsplit", "round_complete");
 		setGameState("done");
 		setWordAnim("");
 		setFeedback(null);

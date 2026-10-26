@@ -1,4 +1,5 @@
 <script>
+  import { track } from '@/lib/track.js';
   import { onMount, onDestroy } from 'svelte';
 
   // ──────────────────────────────────────
@@ -258,6 +259,7 @@
   }
 
   function startGame() {
+    track('typefall', 'round_start');
     initAudio();
     score = 0;
     combo = 0;
@@ -281,6 +283,7 @@
   }
 
   function endGame() {
+    track('typefall', 'round_complete', { score });
     gameRunning = false;
     gameOver = true;
     clearInterval(spawnTimer);
