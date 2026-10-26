@@ -1,12 +1,24 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
-const title = 'Learn Japanese Vocabulary by Typing — Typpy';
-const description = 'Learn 3,000 common Japanese words by typing their romaji. Calm, no-timer typing practice that shows each word with its kana reading and an English meaning.';
+const title = 'Japanese Typing Practice (Romaji): 3,000 Common Words — Typpy';
+const description = 'Free Japanese typing practice in romaji: type 3,000 common words, with the kanji, kana reading and English meaning shown for each. No timer, no sign-up.';
 const url = 'https://typpy.online/learn-japanese/';
-const keywords = 'learn japanese vocabulary, japanese typing game, romaji typing practice, common japanese words, learn japanese by typing, japanese vocabulary practice';
+const keywords = 'japanese typing practice, romaji typing practice, japanese typing game, romaji typing game, learn japanese vocabulary, common japanese words, learn japanese by typing';
 
 const faqs = [
+  {
+    q: 'What is Japanese romaji typing practice?',
+    a: 'Romaji typing means typing Japanese words with the Latin letters of their pronunciation, for example "mori" for 森. It is how most people type Japanese on a normal keyboard: the computer converts the romaji into kana and kanji. Typpy lets you practise that with real vocabulary.'
+  },
+  {
+    q: 'Is this a Japanese typing test?',
+    a: 'No. There is no timer, no WPM score and no ranking. It is a calm practice game for building vocabulary and getting used to typing romaji, not a speed test.'
+  },
+  {
+    q: 'Does it teach hiragana and katakana typing?',
+    a: 'Not directly. You type romaji, and each word is shown with its kana reading, so you see the kana again and again. It does not drill kana one character at a time.'
+  },
   {
     q: 'Can you learn Japanese vocabulary by typing?',
     a: 'Typing the romaji for each word gives you repetition, and Typpy shows the kana reading and the English meaning each time you clear a word. It works best next to other study, like a course or reading, and it is an experiment rather than a proven method.'
@@ -60,8 +72,11 @@ const schema = [
       <header>
         <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing · 日本語</p>
         <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
-          Learn Japanese vocabulary by <span class="text-brand-red italic">typing</span>
+          Japanese typing practice, <span class="text-brand-red italic">in romaji</span>
         </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Free Japanese typing practice: type the romaji of 3,000 common words and see each word&apos;s kanji, kana reading and English meaning. No timer, no account.
+        </p>
         <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
           Textbooks and apps get you the basics, but real sentences still read like a wall of unknown words.
           Tidy 日本語 gives you 3,000 common Japanese words to clear one at a time. Each shows the kanji, the reading, and an English meaning.
