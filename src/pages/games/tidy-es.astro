@@ -72,6 +72,7 @@ const schema = [
   html.framed .back-link { display: none; }
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKXKL01WVD"></script>
+<script is:inline src="/poll.js" defer></script>
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -118,6 +119,7 @@ import MEANINGS from '../../data/tidy-es-meanings.json';
   var roundOpen = false, roundCounted = false, roundSize = 0, roundT0 = 0;
   function track(name, params) {
     try { if (window.gtag) window.gtag('event', name, Object.assign({ game: GAME, language: LANG }, params)); } catch (e) {}
+    if (name === 'round_complete') window.dispatchEvent(new Event('typpy:round_complete'));
   }
 
   var ROUND_MIN = 30, ROUND_MAX = 500;
