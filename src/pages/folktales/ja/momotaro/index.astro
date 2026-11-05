@@ -1,0 +1,148 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import WORDS from '@/data/folktale-ja-momotaro-words.json';
+
+const title = 'Momotaro in Japanese: Read the Folktale with Romaji and English — Typpy';
+const description = 'Read Momotaro (桃太郎) in simple Japanese with furigana, romaji and an English translation, then practise its 38 key words in a calm typing game. Free, no sign-up.';
+const url = 'https://typpy.online/folktales/ja/momotaro/';
+const keywords = 'momotaro in japanese, momotaro japanese text, 桃太郎, japanese folktale for learners, japanese story with romaji, japanese reading practice, learn japanese with stories';
+
+// ja: ruby markup for furigana, ro: romaji as typed in the game, en: translation
+const story = [
+  { ja: 'むかしむかし、ある<ruby>村<rt>むら</rt></ruby>に、おじいさんとおばあさんが<ruby>住<rt>す</rt></ruby>んでいました。', ro: 'Mukashi mukashi, aru mura ni, ojiisan to obaasan ga sunde imashita.', en: 'Long, long ago, an old man and an old woman lived in a village.' },
+  { ja: 'ある<ruby>日<rt>ひ</rt></ruby>、おじいさんは<ruby>山<rt>やま</rt></ruby>へ<ruby>芝刈<rt>しばか</rt></ruby>りに、おばあさんは<ruby>川<rt>かわ</rt></ruby>へ<ruby>洗濯<rt>せんたく</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました。', ro: 'Aru hi, ojiisan wa yama e shibakari ni, obaasan wa kawa e sentaku ni ikimashita.', en: 'One day, the old man went to the mountain to cut grass and brush, and the old woman went to the river to do the washing.' },
+  { ja: 'おばあさんが<ruby>洗濯<rt>せんたく</rt></ruby>をしていると、<ruby>川上<rt>かわかみ</rt></ruby>から<ruby>大<rt>おお</rt></ruby>きな<ruby>桃<rt>もも</rt></ruby>が<ruby>流<rt>なが</rt></ruby>れてきました。', ro: 'Obaasan ga sentaku o shite iru to, kawakami kara ookina momo ga nagarete kimashita.', en: 'While the old woman was washing, a huge peach came floating down from upstream.' },
+  { ja: 'おばあさんは<ruby>桃<rt>もも</rt></ruby>を<ruby>拾<rt>ひろ</rt></ruby>って、<ruby>家<rt>いえ</rt></ruby>に<ruby>持<rt>も</rt></ruby>ち<ruby>帰<rt>かえ</rt></ruby>りました。', ro: 'Obaasan wa momo o hirotte, ie ni mochikaerimashita.', en: 'She picked up the peach and carried it home.' },
+  { ja: 'おじいさんが<ruby>桃<rt>もも</rt></ruby>を<ruby>切<rt>き</rt></ruby>ろうとすると、<ruby>桃<rt>もも</rt></ruby>がぱかっと<ruby>割<rt>わ</rt></ruby>れて、<ruby>中<rt>なか</rt></ruby>から<ruby>元気<rt>げんき</rt></ruby>な<ruby>男<rt>おとこ</rt></ruby>の<ruby>子<rt>こ</rt></ruby>が<ruby>出<rt>で</rt></ruby>てきました。', ro: 'Ojiisan ga momo o kirou to suru to, momo ga pakatto warete, naka kara genki na otoko no ko ga dete kimashita.', en: 'When the old man tried to cut the peach, it split open with a pop, and a lively baby boy came out.' },
+  { ja: '<ruby>二人<rt>ふたり</rt></ruby>は<ruby>男<rt>おとこ</rt></ruby>の<ruby>子<rt>こ</rt></ruby>を<ruby>桃太郎<rt>ももたろう</rt></ruby>と<ruby>名<rt>な</rt></ruby>づけて、<ruby>大切<rt>たいせつ</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>てました。', ro: 'Futari wa otoko no ko o Momotarou to nazukete, taisetsu ni sodatemashita.', en: 'The two named the boy Momotaro and raised him with great care.' },
+  { ja: '<ruby>桃太郎<rt>ももたろう</rt></ruby>は<ruby>強<rt>つよ</rt></ruby>い<ruby>男<rt>おとこ</rt></ruby>の<ruby>子<rt>こ</rt></ruby>になりました。「<ruby>鬼ヶ島<rt>おにがしま</rt></ruby>の<ruby>鬼<rt>おに</rt></ruby>を<ruby>退治<rt>たいじ</rt></ruby>しに<ruby>行<rt>い</rt></ruby>きます」と<ruby>言<rt>い</rt></ruby>いました。', ro: 'Momotarou wa tsuyoi otoko no ko ni narimashita. "Onigashima no oni o taiji shi ni ikimasu" to iimashita.', en: 'Momotaro grew up strong. "I will go and defeat the ogres of Ogre Island," he said.' },
+  { ja: 'おばあさんは、きびだんごを<ruby>作<rt>つく</rt></ruby>ってくれました。<ruby>旅<rt>たび</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で、<ruby>犬<rt>いぬ</rt></ruby>と<ruby>猿<rt>さる</rt></ruby>と<ruby>雉<rt>きじ</rt></ruby>が<ruby>仲間<rt>なかま</rt></ruby>になりました。', ro: 'Obaasan wa, kibidango o tsukutte kuremashita. Tabi no tochuu de, inu to saru to kiji ga nakama ni narimashita.', en: 'The old woman made him kibi dango, millet dumplings. On the journey, a dog, a monkey and a pheasant became his companions.' },
+  { ja: '<ruby>四人<rt>よにん</rt></ruby>は<ruby>船<rt>ふね</rt></ruby>で<ruby>鬼ヶ島<rt>おにがしま</rt></ruby>へ<ruby>渡<rt>わた</rt></ruby>り、<ruby>力<rt>ちから</rt></ruby>を<ruby>合<rt>あ</rt></ruby>わせて<ruby>鬼<rt>おに</rt></ruby>と<ruby>戦<rt>たたか</rt></ruby>いました。<ruby>鬼<rt>おに</rt></ruby>はとうとう<ruby>降参<rt>こうさん</rt></ruby>しました。', ro: 'Yonin wa fune de Onigashima e watari, chikara o awasete oni to tatakaimashita. Oni wa toutou kousan shimashita.', en: 'The four crossed to Ogre Island by boat and fought the ogres together. In the end, the ogres gave up.' },
+  { ja: '<ruby>桃太郎<rt>ももたろう</rt></ruby>たちは<ruby>宝物<rt>たからもの</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>村<rt>むら</rt></ruby>に<ruby>帰<rt>かえ</rt></ruby>りました。おじいさんとおばあさんは<ruby>大喜<rt>おおよろこ</rt></ruby>びしました。', ro: 'Momotarou tachi wa takaramono o motte mura ni kaerimashita. Ojiisan to obaasan wa ooyorokobi shimashita.', en: 'Momotaro and his friends took the treasure back to the village. The old man and the old woman were overjoyed.' },
+];
+
+const faqs = [
+  {
+    q: 'Who is Momotaro?',
+    a: 'Momotaro (桃太郎, "Peach Boy") is the hero of one of Japan\'s best-known folktales. A boy found inside a giant peach grows up, sets out for Ogre Island with a dog, a monkey and a pheasant, and defeats the ogres. The story is traditional, and many versions exist.'
+  },
+  {
+    q: 'Is this the original text?',
+    a: 'No. It is a short retelling written for Typpy in simple Japanese, based on the traditional story. It is not a copy of any published edition, and details differ between versions of the tale. A native speaker has not reviewed it yet, so if you spot a mistake, tell us through the contact page.'
+  },
+  {
+    q: 'What level of Japanese is it?',
+    a: 'Roughly beginner to lower intermediate. Sentences are short and polite-form (-masu), kanji have furigana, and each sentence has romaji and an English translation. It is meant for reading practice with support, not as a graded test.'
+  },
+  {
+    q: 'What is the typing game?',
+    a: 'It is Tidy, Typpy\'s calm typing game, using only the 38 words from this story. A pile of words drops into a room and you type the romaji of each one to clear it. There is no timer or score. The kanji, kana reading and English meaning show when you clear a word.'
+  },
+  {
+    q: 'Why does the game use romaji?',
+    a: 'Romaji (Latin letters) is how most people type Japanese on a normal keyboard. You do not need a Japanese keyboard. Both "shi" and "si", "chi" and "ti", "tsu" and "tu" are accepted.'
+  },
+  {
+    q: 'Will you add more Japanese folktales?',
+    a: 'Probably, if people use this one. Urashima Taro, Kaguya-hime, Kintaro and Issun-boshi are the likely next ones. Tell us which you would want.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: ['en', 'ja']
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Folktales by typing · 桃太郎</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Momotaro in Japanese, <span class="text-brand-red italic">then type its words</span>
+        </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Read the folktale of Momotaro (桃太郎) in simple Japanese with furigana, romaji and an English translation. Then clear a room made only of the story&apos;s {WORDS.length} words, by typing their romaji.
+        </p>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          Words stick better when they come from a story you have just read than from a random list. No timer, no account.
+        </p>
+        <a href="/folktales/ja/momotaro/play/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Skip to the game
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-6">The story: 桃太郎</h2>
+        <div class="space-y-8">
+          {story.map(s => (
+            <div>
+              <p class="text-xl md:text-2xl leading-loose text-on-surface" lang="ja" set:html={s.ja} />
+              <p class="text-on-surface-variant mt-1">{s.ro}</p>
+              <p class="text-on-surface mt-1">{s.en}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="rounded-2xl border border-outline-variant p-6">
+        <h2 class="text-2xl font-bold tracking-tight mb-2">Now type the words</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          A room of the story&apos;s {WORDS.length} words drops in. Type each word&apos;s romaji to clear it, and you see the kanji, the reading and the meaning again each time.
+        </p>
+        <a href="/folktales/ja/momotaro/play/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy 桃太郎
+        </a>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Vocabulary from the story</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-on-surface-variant">
+            <thead><tr class="border-b border-outline-variant text-on-surface"><th class="py-2 pr-4">Word</th><th class="py-2 pr-4">Reading</th><th class="py-2 pr-4">Type</th><th class="py-2">Meaning</th></tr></thead>
+            <tbody>
+              {WORDS.map(w => (
+                <tr class="border-b border-outline-variant/50"><td class="py-2 pr-4 text-on-surface" lang="ja">{w.w}</td><td class="py-2 pr-4" lang="ja">{w.r}</td><td class="py-2 pr-4">{w.k[0]}</td><td class="py-2">{w.m}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <p class="text-on-surface-variant leading-relaxed">
+        More Japanese: <a class="text-brand-red font-semibold" href="/learn-japanese/">Japanese typing practice</a> with 3,000 common words,
+        or all the <a class="text-brand-red font-semibold" href="/tidy/">Tidy</a> languages.
+      </p>
+    </div>
+  </main>
+</Layout>

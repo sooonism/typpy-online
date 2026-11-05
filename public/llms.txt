@@ -26,6 +26,8 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 - [Learn Malay by typing](https://typpy.online/learn-malay/): overview of Tidy Bahasa Melayu, word source and FAQ.
 - [Learn Japanese by typing](https://typpy.online/learn-japanese/): overview of Tidy 日本語, word source (JMdict) and FAQ.
 - [Learn Chinese by typing](https://typpy.online/learn-chinese/): overview of Tidy 简体中文 (pinyin), word source and FAQ.
+- [Momotaro in Japanese](https://typpy.online/folktales/ja/momotaro/): the folktale in simple Japanese with furigana, romaji and English, plus a Tidy typing game of its 38 words (first of a planned folktale series).
+- [Japanese texting slang](https://typpy.online/slang/ja/): why chat Japanese differs from textbook Japanese, 40 common slang words (りょ, 草, とりま) with meanings and examples, and a Tidy typing game of them. Casual register; list is a curated sample.
 - [About Tidy](https://typpy.online/tidy/): what Tidy is, the five language versions, how a round works, FAQ.
 - [About](https://typpy.online/about/): who makes Typpy and why.
 - [Mission](https://typpy.online/mission/): what Typpy is trying to do for players.

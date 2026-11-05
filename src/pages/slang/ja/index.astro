@@ -1,0 +1,137 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import WORDS from '@/data/slang-ja-words.json';
+
+const title = 'Japanese Texting Slang: 40 Words You Will See in LINE Chats — Typpy';
+const description = 'Why textbook Japanese is not enough for chats, and 40 common texting slang words (りょ, 草, とりま, それな) with meanings and examples. Then practise them in a calm typing game.';
+const url = 'https://typpy.online/slang/ja/';
+const keywords = 'japanese texting slang, japanese slang, gen z japanese slang, japanese line slang, りょ meaning, 草 meaning japanese, とりま meaning, それな meaning, learn japanese slang';
+
+const categories = [...new Set(WORDS.map(w => w.c))];
+const grouped = categories.map(c => ({ c, words: WORDS.filter(w => w.c === c) }));
+
+const reasons = [
+  { h: 'Chats are not written like textbooks', p: 'Courses teach polite, complete sentences. Friends texting on LINE or commenting online write short, casual forms: りょ instead of 了解 (understood), おつ instead of お疲れ様 (good work), とりま instead of とりあえず (for now). If you only know the textbook versions, a lot of real messages are hard to read.' },
+  { h: 'Short words repeat constantly', p: 'This vocabulary is small and shows up again and again, so a few dozen words cover a surprising share of casual messages. That is the kind of vocabulary where repetition pays off.' },
+  { h: 'You meet slang by reading it, so practise reading it', p: 'Slang is mostly kana and short kanji, so it is easy to type in romaji. Typing each one, then seeing its reading and meaning, gives you the repetition without needing a Japanese keyboard.' },
+  { h: 'It is the part apps skip', p: 'Slang is hard to teach well because it changes quickly and is not always polite. That is the reason to give it some practice, as long as it is clearly labelled as casual.' }
+];
+
+const limits = [
+  'Slang ages fast. Some words here are already dated (ぴえん peaked around 2020), and new ones appear every year. Treat this list as a sample, not a dictionary.',
+  'It is casual. Do not use it with a teacher, a manager or someone you have just met. A few words (陰キャ, 陽キャ) can sound rude about a real person.',
+  'We built the list from several learner guides and kept only terms that appear across them and that we are confident about. Those guides are not linguistic studies and disagree on some words. A native speaker has not reviewed the page yet, so tell us through the contact page if something is wrong.'
+];
+
+const faqs = [
+  { q: 'What is Japanese texting slang?', a: 'Casual abbreviations and trendy words young people write in chats and on social media, for example りょ (got it), 草 (lol) and それな (so true). It differs from the polite Japanese taught in most courses.' },
+  { q: 'Is it only for Gen Z?', a: 'Not exactly. Many words, such as りょ, おつ and 草, are used by a wide range of younger people and sometimes older ones online. A few are tied to a period, like ぴえん. We call the page "Gen Z" only loosely.' },
+  { q: 'Should a beginner learn it?', a: 'After the basics. Learn polite Japanese first, then use slang to read and understand real chats. Slang is for recognising and using with friends, not for formal situations.' },
+  { q: 'How does the typing game work?', a: 'It is Tidy, Typpy\'s calm typing game, using only these 40 words. A pile of words drops into a room and you type the romaji of each one to clear it. There is no timer or score, and the reading and meaning show when you clear a word.' },
+  { q: 'Do I need a Japanese keyboard?', a: 'No. You type romaji with a normal keyboard. Alternatives like "si" for し and "ti" for ち are accepted.' },
+  { q: 'Is the list complete?', a: 'No. It is 40 common words chosen for being widely used and easy to verify. More may follow if people use this one.' }
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: title.split(' — ')[0], description, url, inLanguage: ['en', 'ja'] },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing · スラング</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Japanese texting slang, <span class="text-brand-red italic">the words courses skip</span>
+        </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Why chat Japanese looks different from textbook Japanese, and {WORDS.length} common slang words (りょ, 草, とりま, それな) with meanings and examples. Then type them in a calm game.
+        </p>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          No timer, no account. The word list is below; the game is one click away.
+        </p>
+        <a href="/slang/ja/play/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy 日本語スラング
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-6">Why learn this</h2>
+        <div class="space-y-6">
+          {reasons.map(r => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{r.h}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{r.p}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">What this list is not</h2>
+        <ul class="space-y-3 text-on-surface-variant leading-relaxed list-disc pl-6">
+          {limits.map(l => <li>{l}</li>)}
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-outline-variant p-6">
+        <h2 class="text-2xl font-bold tracking-tight mb-2">Type them</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          A room of these {WORDS.length} words drops in. Type each word&apos;s romaji to clear it; the reading and meaning show each time.
+        </p>
+        <a href="/slang/ja/play/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy 日本語スラング
+        </a>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-6">The words</h2>
+        <div class="space-y-10">
+          {grouped.map(g => (
+            <div>
+              <h3 class="text-xl font-bold text-on-surface mb-3">{g.c}</h3>
+              <ul class="space-y-4">
+                {g.words.map(w => (
+                  <li class="text-on-surface-variant leading-relaxed">
+                    <span class="text-on-surface font-bold text-lg" lang="ja">{w.w}</span>
+                    {w.r !== w.w && <span lang="ja"> ({w.r})</span>}
+                    <span> · {w.k[0]} · {w.m}</span>
+                    <br />
+                    <span lang="ja">{w.x}</span> <span class="italic">{w.xe}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <p class="text-xs text-on-surface-variant/70 leading-relaxed">
+        Background: <a class="underline" href="https://japantimes.co.jp/life/2023/04/14/language/long-story-short-abbreviated-japanese-good-value-time" rel="noopener">The Japan Times on abbreviated Japanese</a>,
+        <a class="underline" href="https://migaku.com/blog/japanese/japanese-texting-slang" rel="noopener">Migaku&apos;s guide to Japanese texting slang</a>.
+        Meanings and examples are our own summaries.
+        More Japanese: <a class="underline" href="/learn-japanese/">Japanese typing practice</a>, <a class="underline" href="/folktales/ja/momotaro/">Momotaro in Japanese</a>.
+      </p>
+    </div>
+  </main>
+</Layout>
