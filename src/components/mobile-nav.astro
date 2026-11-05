@@ -9,7 +9,17 @@ import { primaryNavLinks } from '@/data/site-links';
 
 <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-header-cream border-b border-warm-silver/20 z-40">
   <nav class="flex flex-col gap-0 p-4">
-    {primaryNavLinks.map(link => (
+    {primaryNavLinks.map(link => link.children ? (
+      <>
+        <span class="py-3 px-2 text-dark-surface font-semibold flex items-center gap-2">
+          {link.label}
+          {link.badge && <span class="rounded-full bg-brand-red text-white text-[10px] font-bold leading-none px-2 py-1 uppercase tracking-wide">{link.badge}</span>}
+        </span>
+        {link.children.map(c => (
+          <a class="mobile-nav-link text-olive-gray hover:text-dark-surface py-3 pl-6 pr-2 border-b border-transparent" href={c.href}>{c.label}</a>
+        ))}
+      </>
+    ) : (
       <a class="mobile-nav-link text-olive-gray hover:text-dark-surface py-3 px-2 border-b border-transparent" href={link.href}>{link.label}</a>
     ))}
   </nav>

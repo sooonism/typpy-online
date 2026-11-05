@@ -1,0 +1,140 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Chinese Typing Practice (Pinyin): 3,000 Common Words — Typpy';
+const description = 'Free Chinese typing practice in pinyin: type 3,000 common Simplified Chinese words, with the hanzi, tone-marked pinyin and English meaning shown for each. No timer, no sign-up.';
+const url = 'https://typpy.online/learn-chinese/';
+const keywords = 'chinese typing practice, pinyin typing practice, chinese typing game, pinyin typing game, learn chinese vocabulary, common chinese words, simplified chinese typing, learn chinese by typing';
+
+const faqs = [
+  {
+    q: 'What is Chinese pinyin typing practice?',
+    a: 'Pinyin is the Latin-letter spelling of Mandarin pronunciation, for example "ni hao" for 你好. It is how most people type Chinese on a normal keyboard: you type the pinyin and an input method turns it into hanzi. Typpy lets you practise typing pinyin with real vocabulary.'
+  },
+  {
+    q: 'Is this a Chinese typing test?',
+    a: 'No. There is no timer, no WPM score and no ranking. It is a calm practice game for building vocabulary and getting used to typing pinyin, not a speed test.'
+  },
+  {
+    q: 'Do I type the tones?',
+    a: 'No. You type plain letters without tone marks or tone numbers, the same way a pinyin input method works. Each word is shown with its tone-marked pinyin, so you still see the tones every time you clear one. The game does not test whether you know them.'
+  },
+  {
+    q: 'Does it teach me to type hanzi with a Chinese keyboard?',
+    a: 'Not completely. You type the pinyin letters, but the game does not show the candidate list that a real input method uses to pick the right character among homophones. It builds pinyin spelling and vocabulary, and works as a warm-up for typing Chinese, not a replacement for practising with an input method.'
+  },
+  {
+    q: 'How do I type ü?',
+    a: 'Type "v" for ü, as most Chinese input methods do: "nv" for 女 (nǚ), "lv" for 绿 (lǜ). Plain "u" also works when it does not clash with another word, so "nu" is accepted for 女 as well.'
+  },
+  {
+    q: 'Does it use Simplified or Traditional characters?',
+    a: 'Simplified only. There is no Traditional Chinese version yet.'
+  },
+  {
+    q: 'Which Chinese words are included?',
+    a: 'About 3,000 of the most frequent words from a Chinese vocabulary list (the complete HSK vocabulary dataset, with English meanings from the CC-CEDICT dictionary). Particles, surnames, proper nouns and words under three pinyin letters, such as 的 or 你, are left out. Words with several readings show the most common one.'
+  },
+  {
+    q: 'Can you learn Chinese vocabulary by typing?',
+    a: 'Typing the pinyin for each word gives you repetition, and Typpy shows the hanzi, the tone-marked pinyin and the English meaning each time you clear a word. It works best next to other study, like a course or reading, and it is an experiment rather than a proven method.'
+  },
+  {
+    q: 'Does it teach me to write characters?',
+    a: 'No. It shows you each word in hanzi next to its pinyin so you start recognising the characters, but it does not teach stroke order or handwriting.'
+  },
+  {
+    q: 'Will it repeat the words I already know?',
+    a: 'New rooms use words you have not cleared yet first. Your progress is saved in your browser, so it stays on that device.'
+  },
+  {
+    q: 'Is it free?',
+    a: 'Yes. There is no sign-up and no timer.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: 'en'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Language by typing · 简体中文</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Chinese typing practice, <span class="text-brand-red italic">in pinyin</span>
+        </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Free Chinese typing practice: type the pinyin of 3,000 common Simplified Chinese words and see each word&apos;s hanzi, tone-marked pinyin and English meaning. No timer, no account.
+        </p>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          Textbooks and apps get you the basics, but real text still reads like a wall of unknown characters.
+          Tidy 简体中文 gives you 3,000 common Chinese words to clear one at a time. Each shows the hanzi, the pinyin with tones, and an English meaning.
+        </p>
+        <a href="/games/tidy-zh/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy 简体中文
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">How it works</h2>
+        <ol class="space-y-3 text-on-surface-variant leading-relaxed list-decimal pl-6">
+          <li>Pick a room size from 30 to 500 words. A pile of Chinese words drops onto the screen, each with its pinyin underneath.</li>
+          <li>Type the pinyin, without tones, to clear a word. The tone-marked reading and meaning appear underneath, for example <em>森林 (sēn lín) senlin = forest</em>.</li>
+          <li>As the room empties, the same few words come around again and again, which is the repetition vocabulary needs.</li>
+          <li>Words you have cleared are remembered in your browser, so new rooms start with words you haven&apos;t met yet.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Who it&apos;s for</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-4">
+          People learning Mandarin who want more exposure to common words and their pinyin. It complements lessons rather
+          than replacing them: you get repetition, the reading and the meaning, but not grammar, listening or writing.
+        </p>
+        <p class="text-on-surface-variant leading-relaxed">
+          It is part of <a class="text-brand-red font-semibold" href="/tidy/">Tidy</a>, which also comes in
+          <a class="text-brand-red font-semibold" href="/learn-spanish/">Spanish</a>,
+          <a class="text-brand-red font-semibold" href="/learn-japanese/">Japanese</a> and
+          <a class="text-brand-red font-semibold" href="/learn-malay/">Malay</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <p class="text-xs text-on-surface-variant/70 leading-relaxed">
+        Word list from <a class="underline" href="https://github.com/drkameleon/complete-hsk-vocabulary" rel="noopener">complete-hsk-vocabulary</a> (MIT).
+        English meanings from <a class="underline" href="https://cc-cedict.org/wiki/" rel="noopener">CC-CEDICT</a>, used under
+        <a class="underline" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>.
+      </p>
+    </div>
+  </main>
+</Layout>

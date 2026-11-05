@@ -12,7 +12,7 @@ const schema = [
     name: 'Tidy en español',
     description,
     url,
-    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     applicationCategory: 'Casual Typing Game',
     operatingSystem: 'Web',
     author: { '@type': 'Organization', name: 'Typpy' },
@@ -85,7 +85,7 @@ const schema = [
 </script>
 </head>
 <body>
-<a class="back-link" href="/games">← Juegos</a>
+<a class="back-link" href="/games/">← Juegos</a>
 <h1 class="sr-only">Tidy en español: juego de mecanografía tranquilo</h1>
 <p class="sr-only" lang="es">Tidy en español es un juego de mecanografía gratuito y sin cronómetro. Escribe las 3000 palabras más comunes del español para vaciar la habitación; al despejar cada palabra ves su significado en inglés. Puedes escribir sin acentos. Elige una habitación de 30 a 500 palabras.</p>
 <canvas id="c" tabindex="0"></canvas>

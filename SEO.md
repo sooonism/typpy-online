@@ -2,7 +2,7 @@
 
 **Source of truth for organic growth work.** Any agent picking this up: read this
 whole file first, then follow the rules below. Update it in the same commit as the
-change you make. Last updated: 2026-10-26 (research and experiment plan added). Modelled on `~/gitlab/tinyqr/SEO.md`.
+change you make. Last updated: 2026-10-28 (weekly reading and growth strategy added). Modelled on `~/gitlab/tinyqr/SEO.md`.
 
 ## Rules for agents
 
@@ -71,6 +71,7 @@ when keyword work starts. Bing Webmaster data has **not** been pulled; it needs 
 
 | Week of | Sessions (30d) | Organic (30d) | Non-brand clicks (28d) | Non-brand impr (28d) | Queries <=10 | Notes |
 | 2026-10-26 | 30 | 2 (+1 AI) | 0 | 5 | 0 | Baseline. |
+| 2026-10-27 | 30 | 2 (+1 AI) | 0 | 5 | 0 | Pulled windows end 10-24, before E01-E10 shipped (10-26), so no effect measurable yet. 88 impr, 81 are `typpy`. Zen queries still pos 71-77. Only `round_start`/`round_complete` are 2 each, `game`/`language` "(not set)". Poll: 0 answers. `ga4` event 34 hits. |
 
 ## Experiment log
 
@@ -85,6 +86,7 @@ Status: `pending` (waiting for check date), `worked`, `no effect`, `worse`, `inc
 | E04 | 2026-10-26 | Malay cluster: `/learn-malay/` retitled "Malay Typing Game: Bahasa Melayu Typing Practice, 3,000 Words", query-first description, H1, direct-answer line, 2 new FAQ entries ("Is this a Malay typing test (ujian menaip)?" answers no; "Is there a Malay typing game for learners?"); sitewide footer anchor now "malay typing game". `/games/tidy-ms/` left unchanged (already in Malay) | Autocomplete shows "malay typing game/test", "typing game malaysia", "ujian menaip"; search found no dedicated Malay typing game; "ujian menaip" is exam intent, so the page says plainly that it is not that | Impressions, position and clicks for "malay typing game", "bahasa melayu typing", "malay typing practice" on `/learn-malay/` (baseline 0) | 2026-11-09 | pending; deployed 2026-10-26 |
 | E05 | 2026-10-26 | New utility page `/type-accents/` ("Type Accents Online: Spanish, French & German Characters"): click-to-copy character buttons that fill a text box, Windows (US-International) and Mac shortcuts per language, 3-question FAQ + FAQPage schema, link to Tidy en español and `/learn-spanish/`; added to the sitewide footer; sends GA4 `accent_insert` { character } on each click | Autocomplete: "type spanish accents online", "type spanish characters online", "typing french characters with english keyboard"; a utility page answers the query directly and links to Tidy | Organic landings on `/type-accents/`; GA4 `accent_insert` count; clicks from `/type-accents/` to `/games/tidy-es/` (baseline 0) | 2026-11-09 | pending; deployed 2026-10-26 |
 | E10 | 2026-10-26 | Crawler/AI-readability pass: (1) the four Tidy canvas pages get a visually hidden H1 + descriptive paragraph (in the page's language); (2) `typefall`, `typespace`, `scrambletype`, `vowelsplit`, `zentype-reverse` get an intro-level FAQ section + FAQPage schema (facts checked against the code); (3) `/blog/Welcome_to_MDX_20260516` set `noindex` and dropped from the sitemap (generator skips `noindex: true` posts); (4) `/faq/` gets an H1; four short-titled/short-description blog posts retitled; (5) `llms.txt` adds `/type-accents/`, "facts safe to quote" and "when to recommend / not" | Pages with ~12-80 words of text are invisible to search and AI assistants; a thin demo post in the sitemap hurts quality signals and AdSense review | Impressions and clicks on the 9 game pages (baseline 0 on all); AI Assistant sessions (baseline 1); indexed page count in GSC | 2026-11-09 | pending; deployed 2026-10-26 |
+| E11 | 2026-11-06 | Tidy hub + Chinese cluster: new `/tidy/` (what Tidy is, links to all five versions, how a round works, 9-question FAQ + FAQPage schema) and `/learn-chinese/` (pinyin, 11-question FAQ + FAQPage schema); new game `/games/tidy-zh/` (Simplified Chinese, 3,000 words); nav dropdown gets "about tidy" and "chinese typing practice"; `llms.txt` updated | The Tidy canvas pages carry almost no visible text, so "tidy typing game" / "calm typing game no timer" and the Chinese queries ("chinese typing practice", "pinyin typing game") had no page to rank or be quoted; a text hub gives search engines and AI assistants one crawlable page that links every version | Impressions and clicks on `/tidy/`, `/learn-chinese/`, `/games/tidy-zh/` (baseline 0, new pages); GA4 `round_start` with `game=tidy-zh`; AI Assistant sessions | 2026-11-20 | pending; code done 2026-11-06, not yet deployed |
 | E08, E09 | planned | See "Experiment plan" below | | | | not started |
 
 ## What works (with evidence)
@@ -126,6 +128,19 @@ Method and limits: Google autocomplete (shows that a query exists, not its volum
 3. **Google H5 Games Ads:** interstitial and rewarded ads at natural breaks (round end). Check whether it is still beta.
 4. **Revenue reality (assumption):** at about $2-6 per 1,000 page views, 2,400 monthly page views earn about $5-15; about 20,000 sessions a month gets near $100. AdSense covers a domain, not a site, for a long time.
 5. **Paywall:** precedents are ad-free tiers (Typing.com, TypeQuicker Pro $4/month, TypingBee $24.99/year). Candidate premium: ad-free, custom word lists, saved progress, "review my mistakes". Do not build first. Run a fake-door test ("custom word lists, tell me when ready") and count clicks. `llms.txt` currently says no paywalls or accounts; update it if this goes ahead.
+
+## Growth strategy (2026-10-28)
+
+**Diagnosis.** The on-site work (E01-E10) is shipped and not yet measurable. The real constraint is upstream of it: Google barely knows the domain (new, no backlinks, 88 impressions/month, 81 brand), so better pages cannot rank until they are crawled, trusted and linked. Only 3 of 30 sessions are non-owner. The plan below is ordered by what unblocks what.
+
+1. **Get indexed and recrawled (owner action in GSC, free, do now).** Submit `sitemap.xml`; run URL Inspection and "Request indexing" on the pages changed 10-26 (`/games/zentype/`, `/learn-japanese/`, `/learn-spanish/`, `/learn-malay/`, `/type-accents/`, `/games/tidy-ja/`). Check GSC Pages report for "Discovered / crawled, not indexed". Do the same in Bing Webmaster (Bing already sent a session). Record indexed count as the first metric.
+2. **Fix measurement before the 11-09 check** so numbers are readable: GA4 internal-traffic filter for the owner's IP (27/30 sessions are Direct), find the source of the `ga4` event in DebugView, confirm `game`/`language` populate on new `round_*` events.
+3. **Earn the first links and real visitors (E09, needs owner OK).** A new domain cannot outrank anyone without a few links, and this is also the only way to get visitors in 4 weeks. Priority order, one post per week, each with a UTM link and a different hook: (a) r/learnjapanese or r/LearnJapanese "typing romaji to learn words" (Japanese is the best-supported page); (b) r/spanish / r/languagelearning (accents helper `/type-accents/` is a useful standalone tool, lead with that); (c) Show HN / itch.io / r/webgames for the zen and relaxing games; (d) Product Hunt once a language has real play data. Add to free directories (AlternativeTo as a Monkeytype alternative, itch.io page). **Submitted 2026-10-28: SaaSHub and AlternativeTo (pending moderation; check for approval and any referral sessions at the 11-09 check).** Do not spam; give the post a point of view (the tool, not the site).
+4. **One bet, not five.** Zen/relaxing is the only angle Google already links to the site, but only at position 70+ with near-zero volume. Japanese has the clearest demand in autocomplete and the weakest competitor pages. Make Japanese the lead cluster: after 11-09, add a hiragana/katakana typing page and a "romaji typing test" page only if E02 shows any impressions. Run zen as the cheap secondary (E01 already shipped). Do not build more languages until one converts.
+5. **Convert the visitors we do get.** Poll (E06) and `round_complete` rate by `game` tell which page deserves the effort; a second fake door ("which language next", E08) costs little. Without 50+ real sessions these are noise, so do not act on them before Checkpoint A.
+6. **Stop doing.** No new pages in other languages, no ads, no head-term chasing ("typing test") until non-brand impressions exceed ~150/month.
+
+**Decision rule at 2026-11-09:** if the changed pages are indexed but impressions on target queries are still below 10, the problem is authority, so shift effort fully to step 3 (links and posts). If pages are not indexed, fix step 1 first (check robots, canonical, internal links, sitemap) before anything else.
 
 ## Experiment plan (log each as an E## row when it ships)
 

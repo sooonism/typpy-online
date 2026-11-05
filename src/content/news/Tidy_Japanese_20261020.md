@@ -7,13 +7,13 @@ excerpt: "The Spanish version of Tidy was an experiment in learning vocabulary b
 
 ## It started with Spanish
 
-A few days ago I wrote about [turning Tidy into a Spanish vocabulary tool](/blog/Tidy_Spanish_20261020). The problem was simple: Duolingo had given me the grammar basics, but I didn't know enough words to understand real sentences. [Tidy en español](/games/tidy-es) clears a pile of the 3,000 most common Spanish words, shows an English meaning for each, and remembers which ones you've already cleared.
+A few days ago I wrote about [turning Tidy into a Spanish vocabulary tool](/blog/Tidy_Spanish_20261020/). The problem was simple: Duolingo had given me the grammar basics, but I didn't know enough words to understand real sentences. [Tidy en español](/games/tidy-es/) clears a pile of the 3,000 most common Spanish words, shows an English meaning for each, and remembers which ones you've already cleared.
 
 It's still an experiment, and I'm still testing whether it helps. But the structure held up: a calm room, a pile of words, repetition without a timer. That doesn't depend on Spanish.
 
 ## So, Japanese
 
-[Tidy 日本語](/games/tidy-ja) is the same game with 3,000 common Japanese words. The same things carry over:
+[Tidy 日本語](/games/tidy-ja/) is the same game with 3,000 common Japanese words. The same things carry over:
 
 - **No clock.** Pick a room of 30 to 500 words and work through it.
 - **The room narrows.** The same few words come around again and again as the pile empties, which is the repetition vocabulary needs.
@@ -36,6 +36,6 @@ Same limits as the Spanish version. It gives you exposure, repetition, readings 
 
 ## Try it
 
-[Tidy 日本語](/games/tidy-ja) is live, and there's a short [Learn Japanese page](/learn-japanese) with the details. If you're learning Japanese, I'd love to hear whether it helps. If there's another language you'd want, tell me.
+[Tidy 日本語](/games/tidy-ja/) is live, and there's a short [Learn Japanese page](/learn-japanese/) with the details. If you're learning Japanese, I'd love to hear whether it helps. If there's another language you'd want, tell me.
 
 Happy typing. *楽しいタイピングを。*

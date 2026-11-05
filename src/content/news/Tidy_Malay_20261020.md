@@ -5,9 +5,9 @@ author: "Typpy Team"
 excerpt: "After Spanish and Japanese, Tidy now has a Malay version. Same calm physics, no clock, and a pile made of the 3000 most common Malay words with English meanings."
 ---
 
-Tidy started as a calm, no-clock typing game: a pile of words drops into a room, you type them away one by one, and the pile quietly repeats a few words as it empties. That repetition is exactly what vocabulary needs, so we've already cloned it for [Spanish](/blog/Tidy_Spanish_20261020) and [Japanese](/blog/Tidy_Japanese_20261020).
+Tidy started as a calm, no-clock typing game: a pile of words drops into a room, you type them away one by one, and the pile quietly repeats a few words as it empties. That repetition is exactly what vocabulary needs, so we've already cloned it for [Spanish](/blog/Tidy_Spanish_20261020/) and [Japanese](/blog/Tidy_Japanese_20261020/).
 
-Now there's a Malay one: [Tidy Bahasa Melayu](/games/tidy-ms).
+Now there's a Malay one: [Tidy Bahasa Melayu](/games/tidy-ms/).
 
 ## What's in it
 
@@ -22,6 +22,6 @@ Subtitle lists are informal. You'll see casual forms (*nak*, *tak*, *awak*) and 
 
 ## Try it
 
-Pick a small room, 30 words is a nice first lap, and let the pile do the repeating. There's more on the method at [Learn Malay by typing](/learn-malay).
+Pick a small room, 30 words is a nice first lap, and let the pile do the repeating. There's more on the method at [Learn Malay by typing](/learn-malay/).
 
 Happy typing. *Selamat menaip!*

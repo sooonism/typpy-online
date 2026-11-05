@@ -12,7 +12,7 @@ const schema = [
     name: 'Tidy 日本語',
     description,
     url,
-    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     applicationCategory: 'Casual Typing Game',
     operatingSystem: 'Web',
     author: { '@type': 'Organization', name: 'Typpy' },
@@ -83,7 +83,7 @@ const schema = [
 </script>
 </head>
 <body>
-<a class="back-link" href="/games">← ゲーム</a>
+<a class="back-link" href="/games/">← ゲーム</a>
 <h1 class="sr-only">Tidy 日本語: Japanese typing game in romaji</h1>
 <p class="sr-only">Tidy 日本語 is a free Japanese typing game with no timer. Type the romaji of 3,000 common Japanese words to clear the room; each word shows its kanji, kana reading and English meaning. Choose a room size from 30 to 500 words.</p>
 <canvas id="c" tabindex="0"></canvas>

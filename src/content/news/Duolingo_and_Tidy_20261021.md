@@ -7,7 +7,7 @@ excerpt: "Duolingo taught me how sentences fit together. Tidy is for the words t
 
 I've used Duolingo for years. It taught me enough to see how sentences are put together: word order, verb forms, the little patterns that make a language click. But I kept hitting the same wall. I understood the sentence, yet a few words in it just wouldn't stick.
 
-[Tidy](/games/tidy) started as an experiment to fix that. You type a word, at your own speed, and it shows you the meaning. There are no streaks, no hearts, and no timer. Nothing tells you to hurry.
+[Tidy](/games/tidy/) started as an experiment to fix that. You type a word, at your own speed, and it shows you the meaning. There are no streaks, no hearts, and no timer. Nothing tells you to hurry.
 
 This isn't a "Tidy vs. Duolingo" story. They do different jobs.
 
@@ -30,4 +30,4 @@ In the language versions, every word you clear shows its meaning. By the end of 
 
 If you want a push, Duolingo is great. If you just want to sit down and quietly pick up the words you keep forgetting, try Tidy. Using both works well too: Duolingo for how the language fits together, Tidy for the words that fill it in.
 
-Pick your language: [Spanish](/games/tidy-es), [Bahasa Melayu](/games/tidy-ms), or [日本語](/games/tidy-ja).
+Pick your language: [Spanish](/games/tidy-es/), [Bahasa Melayu](/games/tidy-ms/), or [日本語](/games/tidy-ja/).

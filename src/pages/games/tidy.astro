@@ -12,7 +12,7 @@ const schema = [
     name: title.split(" — ")[0],
     description,
     url,
-    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     applicationCategory: 'Casual Typing Game',
     operatingSystem: 'Web',
     author: { '@type': 'Organization', name: 'Typpy' },
@@ -85,9 +85,9 @@ const schema = [
 </script>
 </head>
 <body>
-<a class="back-link" href="/games">← Games</a>
+<a class="back-link" href="/games/">← Games</a>
 <h1 class="sr-only">Tidy: a calm typing game with no timer</h1>
-<p class="sr-only">Tidy is a free typing game with no timer. A pile of words drops into a room and you type each word to clear it, until the room is empty. Choose a room size from 30 to 500 words. Also available in Spanish, Malay and Japanese.</p>
+<p class="sr-only">Tidy is a free typing game with no timer. A pile of words drops into a room and you type each word to clear it, until the room is empty. Choose a room size from 30 to 500 words. Also available in Spanish, Japanese, Chinese and Malay.</p>
 <canvas id="c" tabindex="0"></canvas>
 <input id="mi" type="text" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-label="Type here" tabindex="-1" />
 <script>

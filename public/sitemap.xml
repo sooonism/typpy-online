@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://typpy.online/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/about/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/blog/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/blog/Duolingo_and_Tidy_20261021/</loc>
@@ -66,86 +66,98 @@
   </url>
   <url>
     <loc>https://typpy.online/contact/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/disclaimer/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/faq/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/scrambletype/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/tidy-es/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/tidy-ja/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/tidy-ms/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/games/tidy-zh/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/tidy/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typefall/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typerush/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/typespace/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/vowelsplit/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/zentype-reverse/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/games/zentype/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-30</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/learn-chinese/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/learn-japanese/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/learn-malay/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/learn-spanish/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/mission/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/privacy/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-29</lastmod>
+  </url>
+  <url>
+    <loc>https://typpy.online/tidy/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://typpy.online/type-accents/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
 </urlset>

@@ -19,7 +19,7 @@ So I thought: what if I hide something *else* in that gap — something the brai
 
 ## The game idea
 
-Meet [VowerSplit](/games/vowelsplit): two words merge with a hidden vowel in between. Your job is to spot it and type it.
+Meet [VowerSplit](/games/vowelsplit/): two words merge with a hidden vowel in between. Your job is to spot it and type it.
 
 `horseariding` → the missing letter is **a**. Type it. Next word. Ten seconds on the clock.
 
@@ -45,7 +45,7 @@ Plus, it's oddly satisfying when the rhythm clicks: type, spot, type, spot, and 
 
 ## Play it
 
-The game is live at [VowerSplit](/games/vowelsplit) — and it's now the featured game on the [Typpy home page](/) if you just want to dive in.
+The game is live at [VowerSplit](/games/vowelsplit/) — and it's now the featured game on the [Typpy home page](/) if you just want to dive in.
 
 Warning: after a few rounds, you may start seeing hidden vowels in every word you read. That's normal. That's the game working.
 

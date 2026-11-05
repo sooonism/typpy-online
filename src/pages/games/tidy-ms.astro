@@ -12,7 +12,7 @@ const schema = [
     name: 'Tidy Bahasa Melayu',
     description,
     url,
-    brand: { '@type': 'Brand', name: 'Typpy', description: 'Typpy — happy typing' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     applicationCategory: 'Casual Typing Game',
     operatingSystem: 'Web',
     author: { '@type': 'Organization', name: 'Typpy' },
@@ -85,7 +85,7 @@ const schema = [
 </script>
 </head>
 <body>
-<a class="back-link" href="/games">← Permainan</a>
+<a class="back-link" href="/games/">← Permainan</a>
 <h1 class="sr-only">Tidy Bahasa Melayu: permainan menaip yang tenang</h1>
 <p class="sr-only" lang="ms">Tidy Bahasa Melayu ialah permainan menaip percuma tanpa pemasa. Taip 3000 perkataan Melayu paling lazim untuk mengosongkan bilik; maksud bahasa Inggeris dipaparkan bagi setiap perkataan. Pilih saiz bilik dari 30 hingga 500 perkataan.</p>
 <canvas id="c" tabindex="0"></canvas>

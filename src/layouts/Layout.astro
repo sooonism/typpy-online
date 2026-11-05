@@ -120,7 +120,22 @@ const canonicalUrl = url || new URL(pathname, site).toString();
 <a class="text-2xl font-black text-brand-red tracking-tighter" href="/"><img src="/logo.svg" alt="Typpy Logo" width="140"></a>
 <!-- Navigation Links (Desktop) -->
 <nav id="top-nav" class="hidden md:flex items-center gap-8">
-        {primaryNavLinks.map(link => (
+        {primaryNavLinks.map(link => link.children ? (
+            <div class="relative group">
+                <a class="nav-link text-olive-gray hover:text-dark-surface transition-colors pb-1 border-b-2 border-transparent inline-flex items-center gap-1.5" href={link.href} aria-haspopup="true">
+                    {link.label}
+                    {link.badge && <span class="rounded-full bg-brand-red text-white text-[10px] font-bold leading-none px-2 py-1 uppercase tracking-wide">{link.badge}</span>}
+                    <span class="material-symbols-outlined text-base leading-none" aria-hidden="true">expand_more</span>
+                </a>
+                <div class="absolute left-0 top-full pt-3 hidden group-hover:block group-focus-within:block">
+                    <div class="min-w-56 rounded-xl border border-warm-silver/30 bg-header-cream shadow-lg py-2">
+                        {link.children.map(c => (
+                            <a class="nav-link block px-4 py-2 text-olive-gray hover:text-dark-surface hover:bg-warm-light whitespace-nowrap" href={c.href}>{c.label}</a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        ) : (
             <a class="nav-link text-olive-gray hover:text-dark-surface transition-colors pb-1 border-b-2 border-transparent" href={link.href}>{link.label}</a>
         ))}
 </nav>

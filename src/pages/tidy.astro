@@ -1,0 +1,168 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Tidy: A Calm Typing Game With No Timer — Typpy';
+const description = 'Tidy is a free, calm typing game with no timer: type each word to clear a falling pile. Play in English, Spanish, Japanese, Chinese or Malay. No sign-up.';
+const url = 'https://typpy.online/tidy/';
+const keywords = 'tidy typing game, calm typing game, relaxing typing game, typing game no timer, zen typing game, typing game to learn languages';
+
+const versions = [
+  {
+    "href": "/games/tidy/",
+    "name": "Tidy",
+    "lang": "English",
+    "blurb": "Type calm everyday English words. A curated list of soft, ordinary words, no definitions.",
+    "learn": undefined
+  },
+  {
+    "href": "/games/tidy-es/",
+    "name": "Tidy en español",
+    "lang": "Spanish",
+    "blurb": "3,000 common Spanish words with English meanings. Accents optional.",
+    "learn": "/learn-spanish/"
+  },
+  {
+    "href": "/games/tidy-ja/",
+    "name": "Tidy 日本語",
+    "lang": "Japanese",
+    "blurb": "3,000 common Japanese words in romaji, with kanji, kana and meaning.",
+    "learn": "/learn-japanese/"
+  },
+  {
+    "href": "/games/tidy-zh/",
+    "name": "Tidy 简体中文",
+    "lang": "Chinese",
+    "blurb": "3,000 common Simplified Chinese words in pinyin, with hanzi, tones and meaning.",
+    "learn": "/learn-chinese/"
+  },
+  {
+    "href": "/games/tidy-ms/",
+    "name": "Tidy Bahasa Melayu",
+    "lang": "Malay",
+    "blurb": "3,000 common Malay words with English meanings.",
+    "learn": "/learn-malay/"
+  }
+];
+
+const faqs = [
+  {
+    q: 'What is Tidy?',
+    a: 'Tidy is a free typing game that runs in your browser. A pile of words drops into a room, and you clear it by typing each word. There is no timer, no score and no game over: the round ends when the room is empty.'
+  },
+  {
+    q: 'Is there a timer or a score?',
+    a: 'No. Tidy has no countdown, no WPM score and no ranking. It is meant for calm practice, not speed. If you want pressure, Typpy has other games for that, like TypeFall and Type Rush.'
+  },
+  {
+    q: 'How does a round work?',
+    a: 'You choose a room size from 30 to 500 words. Typing a word clears every copy of it, and each cleared word is replaced by a copy of a word still in the room. So the vocabulary only narrows as you play, and the last word clears the room.'
+  },
+  {
+    q: 'Which languages does Tidy come in?',
+    a: 'English, Spanish, Japanese, Simplified Chinese and Malay. The four language versions use the 3,000 most common words of that language and show an English meaning when you clear a word.'
+  },
+  {
+    q: 'Can I learn a language with Tidy?',
+    a: 'It can help with vocabulary and typing the language. You see each word again and again and get its meaning when you clear it. It is an experiment, not a proven method, and it works best next to a course or reading. It does not teach grammar or listening.'
+  },
+  {
+    q: 'How do I type Japanese and Chinese words?',
+    a: 'You type romaji for Japanese and pinyin for Chinese, using a normal keyboard. You do not need a Japanese or Chinese input method installed, and Chinese tones are shown but not typed.'
+  },
+  {
+    q: 'Does it work on a phone?',
+    a: 'Yes. Tap the screen to bring up the keyboard and type as usual. A physical keyboard is more comfortable for longer rooms.'
+  },
+  {
+    q: 'Does Tidy remember my progress?',
+    a: 'The Spanish, Japanese, Chinese and Malay versions remember which words you have cleared, so new rooms start with words you have not met yet. That is saved in your browser only, so it stays on that device. The English version does not save anything.'
+  },
+  {
+    q: 'Is Tidy free?',
+    a: 'Yes. There is no sign-up and no account. Typpy is supported by ads.'
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title.split(' — ')[0],
+    description,
+    url,
+    inLanguage: 'en'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description} url={url} keywords={keywords} schema={schema}>
+  <main class="flex-grow w-full px-6 md:px-12 py-section">
+    <div class="max-w-3xl mx-auto pt-16 md:pt-24 space-y-12">
+      <header>
+        <p class="text-sm uppercase tracking-[0.28em] text-on-surface-variant mb-4">Type to chill</p>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-6 leading-[1]">
+          Tidy, a typing game <span class="text-brand-red italic">with no timer</span>
+        </h1>
+        <p class="text-lg text-on-surface font-semibold leading-relaxed mb-4">
+          Tidy is a free, calm typing game: a pile of words drops into a room and you clear it by typing each one. No clock, no score, no account. Play it in English, Spanish, Japanese, Chinese or Malay.
+        </p>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed mb-8">
+          It is the opposite of a typing test. The room settles, you tidy it, and your head clears with it.
+        </p>
+        <a href="/games/tidy/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-red text-white font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Play Tidy
+        </a>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Pick a language</h2>
+        <ul class="space-y-4">
+          {versions.map(v => (
+            <li class="text-on-surface-variant leading-relaxed">
+              <a class="text-brand-red font-semibold" href={v.href}>{v.name}</a>
+              <span> · {v.lang}. {v.blurb}</span>
+              {v.learn && <span> <a class="underline" href={v.learn}>About it</a>.</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">How it works</h2>
+        <ol class="space-y-3 text-on-surface-variant leading-relaxed list-decimal pl-6">
+          <li>Pick a room size from 30 to 500 words. The words drop in and pile up.</li>
+          <li>Type a word to clear it. Every copy of that word leaves the room together, and anything resting on it tumbles down.</li>
+          <li>Each cleared word is replaced by a copy of one still in the room, so the vocabulary narrows until the last word empties it.</li>
+          <li>In the language versions, the meaning of each word you clear appears under the room.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(f => (
+            <div>
+              <h3 class="font-bold text-on-surface mb-1">{f.q}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <p class="text-on-surface-variant leading-relaxed">
+        Why it exists: <a class="text-brand-red font-semibold" href="/blog/Tidy_20261018/">the Tidy launch post</a>.
+        More calm games are in the <a class="text-brand-red font-semibold" href="/games/">games catalogue</a>.
+      </p>
+    </div>
+  </main>
+</Layout>

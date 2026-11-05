@@ -17,11 +17,11 @@ Vocabulary is the bottleneck, and Duolingo, for me, drips it out slowly, one the
 
 ## The idea that showed up while I was playing
 
-I was playing [Tidy](/games/tidy), our calm no-clock typing game, when I noticed something about how it works. You clear a word, and instead of a fresh random one, the pile *duplicates a word that's already there*. By the end of a room you're typing the same small handful of words over and over, faster each time.
+I was playing [Tidy](/games/tidy/), our calm no-clock typing game, when I noticed something about how it works. You clear a word, and instead of a fresh random one, the pile *duplicates a word that's already there*. By the end of a room you're typing the same small handful of words over and over, faster each time.
 
 That's repetition. It's the thing vocabulary needs and the thing I wasn't getting enough of.
 
-So I cloned the game into Spanish: [Tidy en español](/games/tidy-es). Same physics, same no-rush room, but the pile is made of the most common Spanish words.
+So I cloned the game into Spanish: [Tidy en español](/games/tidy-es/). Same physics, same no-rush room, but the pile is made of the most common Spanish words.
 
 ## How it's built
 
@@ -52,8 +52,8 @@ If you're learning Spanish, I'd love to know if it helps you too. It's free, the
 
 ## Try it
 
-[Tidy en español](/games/tidy-es) is live. Pick a small room to start, 30 words is a nice first lap, and let the pile do the repeating.
+[Tidy en español](/games/tidy-es/) is live. Pick a small room to start, 30 words is a nice first lap, and let the pile do the repeating.
 
-The [original English Tidy](/games/tidy) is still there too, for when you want to tidy something you already know.
+The [original English Tidy](/games/tidy/) is still there too, for when you want to tidy something you already know.
 
 Happy typing. *¡Feliz tecleo!*
