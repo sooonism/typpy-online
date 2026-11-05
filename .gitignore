@@ -28,4 +28,4 @@ pnpm-debug.log*
 !.crew/artifacts/
 !.crew/graphs/
 !.crew/artifacts/.gitkeep
-!.crew/graphs/.gitkeep
+!.crew/graphs/.gitkeep__pycache__/
