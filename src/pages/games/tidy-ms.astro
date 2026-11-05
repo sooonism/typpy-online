@@ -75,6 +75,8 @@ const schema = [
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKXKL01WVD"></script>
 <script is:inline src="/poll.js" defer></script>
 <script is:inline>
+  // owner opt-out: visit any page with ?notrack=1 once per browser (?notrack=0 undoes it)
+  try { var q = location.search; if (/[?&]notrack=1/.test(q)) localStorage.setItem('typpy.notrack', '1'); if (/[?&]notrack=0/.test(q)) localStorage.removeItem('typpy.notrack'); if (localStorage.getItem('typpy.notrack')) window['ga-disable-G-FKXKL01WVD'] = true; } catch (e) {}
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
