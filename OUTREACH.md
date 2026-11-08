@@ -18,6 +18,8 @@ The point of three hooks is to find out which positioning works. Every link carr
 
 ## A. Calm (hook_calm)
 
+**Posted 2026-11-09: r/WebGames** (https://www.reddit.com/r/WebGames/comments/1xrc69d/tidy_a_typing_game_with_no_timer_you_just_clear/), link post to `/games/tidy/` with the UTM above, body as first comment. Read GA4 on 2026-11-16 (campaign `hook_calm`: sessions, `round_start`/sessions, `round_complete`/`round_start`) plus comments. Pass line (proposed): 30+ sessions, 40%+ start, 25%+ of starts finish.
+
 **Show HN: Tidy, a typing game with no timer**
 Link: https://typpy.online/tidy/?utm_source=hn&utm_medium=social&utm_campaign=hook_calm
 

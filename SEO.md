@@ -72,6 +72,7 @@ when keyword work starts. Bing Webmaster data has **not** been pulled; it needs 
 | Week of | Sessions (30d) | Organic (30d) | Non-brand clicks (28d) | Non-brand impr (28d) | Queries <=10 | Notes |
 | 2026-10-26 | 30 | 2 (+1 AI) | 0 | 5 | 0 | Baseline. |
 | 2026-10-27 | 30 | 2 (+1 AI) | 0 | 5 | 0 | Pulled windows end 10-24, before E01-E10 shipped (10-26), so no effect measurable yet. 88 impr, 81 are `typpy`. Zen queries still pos 71-77. Only `round_start`/`round_complete` are 2 each, `game`/`language` "(not set)". Poll: 0 answers. `ga4` event 34 hits. |
+| 2026-11-09 | 44 | 8 (+1 AI) | 0 | 22 | 3 | GA4 30d to 11-06, GSC 28d to ~11-06, so E11-E14 (shipped 11-06) are not in it. 98 impr, 76 brand. 14 queries (5 at baseline). New non-brand: "typing test malay" (pos 65), "menaip" (85) on `/learn-malay/`. Page-1 non-brand: "learn spanish by typing" (8), "relaxing typing games" (6), "typefall" (6.5), all 1-2 impressions. Google organic 3 sessions (was 1), Bing 3. Direct 35 of 44. `round_start` 7 (tidy 2, tidy-zh 2, typefall 1, 2 unattributed), `round_complete` 3, `poll_answer` 1 ("practice"). `ga4` event still 30 (unchanged since 11-06, likely historical). |
 
 ## Experiment log
 
@@ -157,6 +158,7 @@ Method and limits: Google autocomplete (shows that a query exists, not its volum
 | E07 | Done in code, see log | All | see log |
 | E08 | "Which language next?" vote (Korean, French, German, Chinese) | New-language demand | Votes per option |
 | E09 | **Drafts in `OUTREACH.md` (2026-11-06), not posted; needs owner OK.** Share on r/learnjapanese, r/languagelearning, r/typing, Product Hunt, itch.io with UTM-tagged links | All | Round completion rate per source |
+| E15 | **Hook A posted 2026-11-09 on r/WebGames** (`utm_campaign=hook_calm`); read 2026-11-16 | All | Sessions, start rate, finish rate for `hook_calm`; comments on "no pressure" |
 
 Sequence: week 1 E07, E06 and the measurement fixes (internal-traffic filter, `ga4` event); weeks 1-3 E01-E04; weeks 3-4 E05, E08; E09 after approval. At Checkpoint A read the poll and votes, pick one language to focus on, and decide on applying for AdSense.
 
