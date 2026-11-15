@@ -57,6 +57,13 @@ export const games = [
 		href: "/games/tidy/",
 	},
 	{
+		slug: "words-and-ladders",
+		title: "Words and Ladders",
+		description:
+			"A snakes-and-ladders word chain — type words along the path, link them by last letter, and climb to the crown.",
+		href: "/games/words-and-ladders/",
+	},
+	{
 		slug: "tidy-es",
 		title: "Tidy en español",
 		description:

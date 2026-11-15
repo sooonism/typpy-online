@@ -1,0 +1,1042 @@
+---
+const title = 'Words and Ladders — Word Chain Typing Game — Typpy';
+const description = 'Words and Ladders: a calm word game on a snakes-and-ladders board. Type words along the path, chain them by their last letter, and climb to the crown. Free, no signup.';
+const keywords = 'word ladder game, word chain game, snakes and ladders word game, calm typing game, relaxing word game';
+const url = 'https://typpy.online/games/words-and-ladders/';
+const image = 'https://typpy.online/og/default.png';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Words and Ladders',
+    description,
+    url,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    applicationCategory: 'Casual Word Game',
+    operatingSystem: 'Web',
+    author: { '@type': 'Organization', name: 'Typpy' },
+    publisher: { '@type': 'Organization', name: 'Typpy' },
+    genre: 'Puzzle',
+    datePublished: '2026-11-15'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://typpy.online' },
+      { '@type': 'ListItem', position: 2, name: 'Games', item: 'https://typpy.online/games/' },
+      { '@type': 'ListItem', position: 3, name: 'Words and Ladders', item: url }
+    ]
+  }
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-visual" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<link rel="canonical" href={url} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Typpy" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;padding:56px 16px 24px;background:#efe7da;
+    background:radial-gradient(circle at top,#faf6ef,#efe7da 60%,#e6dbcb);
+    color:#4a3f31;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+  }
+  .back-link{
+    position:fixed;top:14px;left:14px;z-index:10;
+    font:500 12px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#8a7a66;text-decoration:none;letter-spacing:.04em;
+    padding:6px 10px;border-radius:999px;opacity:.6;transition:opacity .2s;
+  }
+  .back-link:hover{opacity:1}
+  html.framed .back-link{display:none}
+  h1{margin:0;font-size:clamp(22px,4vw,32px);font-weight:700;color:#4a3f31}
+  .sub{margin:0;color:#8a7a66;max-width:840px;text-align:center;font-size:14px;line-height:1.55}
+  .sub strong{color:#4a3f31}
+  .game{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:flex-start;width:100%;max-width:1080px}
+  canvas{
+    width:min(92vw,592px);height:auto;display:block;background:#faf6ef;
+    border:1px solid #e0d5c3;border-radius:16px;box-shadow:0 12px 40px rgba(110,90,60,.15);
+  }
+  .panel{
+    width:min(92vw,360px);background:#faf6ef;border:1px solid #e0d5c3;
+    border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;
+  }
+  .status{padding:10px 12px;border-radius:10px;background:#f3ecdf;border:1px solid #e0d5c3;color:#6d5f4e;line-height:1.45;font-size:14px;min-height:60px}
+  .status.good{color:#3f5f3a;border-color:#b7c9a8;background:#e8efdc}
+  .status.bad{color:#8a2f1f;border-color:#e0b4a6;background:#f6e2da}
+  .status.warn{color:#7a5a1c;border-color:#e3cf9f;background:#f6edd3}
+  .status.win{color:#3f5f3a;border-color:#9cb88a;background:#e8efdc;font-weight:600}
+  .req-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .req-box{padding:10px 12px;background:#f3ecdf;border:1px solid #e0d5c3;border-radius:10px;display:flex;flex-direction:column;gap:2px}
+  .req-box .label{color:#8a7a66;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .req-box .letter{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:800;font-size:26px;color:rgb(206,106,58);line-height:1}
+  .req-box .letter.min{color:#a8761c}
+  .row{display:flex;gap:8px}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+  input.shake{animation:shake .35s;border-color:#c0583a}
+  input{flex:1;min-width:0;padding:11px 12px;border-radius:10px;border:1px solid #d6c9b4;background:#fff;color:#4a3f31;font-size:16px;outline:none}
+  input:focus{border-color:rgb(206,106,58);box-shadow:0 0 0 3px rgba(206,106,58,.18)}
+  input:disabled{opacity:.5}
+  button{padding:11px 14px;border-radius:10px;border:1px solid rgb(206,106,58);background:rgb(206,106,58);color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+  button:hover{background:rgb(184,90,45)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  button.secondary{background:#f3ecdf;border-color:#d6c9b4;color:#6d5f4e}
+  button.secondary:hover{background:#ebe1d0}
+  .icon-btn{padding:11px 10px;min-width:44px}
+  .progress{width:100%;height:8px;background:#e6dbcb;border-radius:99px;overflow:hidden}
+  .progress>div{height:100%;background:linear-gradient(90deg,#8fa86f,rgb(206,106,58));width:0%;transition:width .3s}
+  .progress-wrap{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#8a7a66}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#8a7a66}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:5px;vertical-align:middle}
+  .debug{font-size:12px;color:#8a7a66;border-top:1px solid #e0d5c3;padding-top:8px;line-height:1.6;font-family:ui-monospace,Menlo,monospace}
+  .debug b{color:#4a3f31;font-weight:600}
+  .board-wrap{display:contents}
+  #rulesBtn,#miniBtn{display:none}
+  dialog{border:1px solid #e0d5c3;border-radius:16px;background:#faf6ef;color:#4a3f31;padding:20px;max-width:min(92vw,420px)}
+  dialog::backdrop{background:rgba(74,63,49,.45)}
+  dialog p{margin:0 0 14px;font-size:14px;line-height:1.55;color:#6d5f4e;text-align:left}
+  dialog strong{color:#4a3f31}
+
+  /* Mobile: board plus a one-line status and one input row. The layout is pinned to the
+     visual viewport (see fit() below) so the soft keyboard never covers the input. */
+  @media (max-width:700px){
+    html,body{overflow:hidden}
+    body{position:fixed;left:0;right:0;top:0;height:var(--vh,100dvh);min-height:0;padding:34px 8px 8px;gap:6px}
+    h1,.sub,.req-grid,.progress-wrap,.legend,.debug{display:none}
+    .back-link{top:6px;left:8px;opacity:.8}
+    #rulesBtn{display:block;position:fixed;top:4px;right:8px;z-index:10;padding:4px 12px;border-radius:999px;font-size:14px}
+    .game{flex:1;min-height:0;flex-direction:column;flex-wrap:nowrap;gap:6px;width:100%;max-width:none;justify-content:flex-start}
+    .board-wrap{display:block;position:relative;flex:1;min-height:0;width:100%}
+    canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:none;box-shadow:none}
+    .panel{width:100%;padding:8px;gap:6px;border-radius:12px}
+    .status{padding:6px 10px;min-height:0;font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .row button{padding:10px 12px}
+    .panel{position:relative}
+    #miniBtn{display:flex;align-items:center;justify-content:center;position:absolute;top:-13px;right:12px;z-index:2;width:30px;height:26px;padding:0;border-radius:999px;font-size:13px;line-height:1;background:#faf6ef;border:1px solid #d6c9b4;color:#8a7a66}
+    #miniBtn:hover{background:#f3ecdf}
+    .panel.mini .status,.panel.mini .tools{display:none}
+    .row .secondary{flex:1}
+    .row .icon-btn{flex:0 0 auto}
+  }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FKXKL01WVD"></script>
+<script is:inline src="/poll.js" defer></script>
+<script is:inline>
+  // owner opt-out: visit any page with ?notrack=1 once per browser (?notrack=0 undoes it)
+  try { var q = location.search; if (/[?&]notrack=1/.test(q)) localStorage.setItem('typpy.notrack', '1'); if (/[?&]notrack=0/.test(q)) localStorage.removeItem('typpy.notrack'); if (localStorage.getItem('typpy.notrack')) window['ga-disable-G-FKXKL01WVD'] = true; } catch (e) {}
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FKXKL01WVD');
+  if (window.self !== window.top) document.documentElement.classList.add('framed');
+</script>
+</head>
+<body>
+  <a class="back-link" href="/games/">← Games</a>
+  <button type="button" id="rulesBtn" class="secondary" aria-label="How to play">?</button>
+  <dialog id="rules"><p id="rulesText"></p><button type="button" id="rulesClose">Got it</button></dialog>
+  <h1>Words and Ladders</h1>
+  <p class="sub">
+    Start at the lower-left cell. Each round, a random <strong>minimum word length</strong>
+    (2–6, with 6 most likely) is rolled. Letters fill along the snake path one at a time.
+    When a word ends, only the <strong>last letter</strong> stays — that's what your next
+    word must begin with.<br><br>
+    <strong>Links are random each game</strong> (7–10 pairs). Only the last letter triggers
+    a link — passing through one mid-word is ignored. Reach the crown to win.
+  </p>
+
+  <div class="game">
+    <div class="board-wrap" id="boardWrap"><canvas id="board"></canvas></div>
+    <div class="panel" id="panel">
+      <button type="button" id="miniBtn" aria-label="Minimise controls">▾</button>
+      <div id="status" class="status">Loading...</div>
+      <div class="req-grid">
+        <div class="req-box">
+          <span class="label">Start with</span>
+          <span id="nextLetter" class="letter">-</span>
+        </div>
+        <div class="req-box">
+          <span class="label">Min letters</span>
+          <span id="minLetter" class="letter min">-</span>
+        </div>
+      </div>
+      <div class="row">
+        <input id="wordInput" placeholder="Type a word..." autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" />
+        <button type="button" id="submitBtn">Place</button>
+      </div>
+      <div class="row tools">
+        <button type="button" id="hintBtn" class="secondary">Hint</button>
+        <button type="button" id="soundBtn" class="secondary icon-btn" title="Toggle sound">🔊</button>
+        <button type="button" id="resetBtn" class="secondary">Reset</button>
+      </div>
+      <div class="progress-wrap">
+        <div style="display:flex;justify-content:space-between">
+          <span>Progress</span>
+          <span id="progressText">0 / 0</span>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:#6f9a5a"></span>Start</span>
+        <span><span class="dot" style="background:#c9942b"></span>Crown</span>
+        <span><span class="dot" style="background:#4f8f92"></span>Links: <b id="linkCount">-</b></span>
+      </div>
+      <div class="debug">
+        <div>Position: <b id="dbgPos">-</b></div>
+        <div>Required: <b id="dbgRequired">-</b></div>
+        <div>Round min: <b id="dbgMin">-</b></div>
+        <div>Words: <b id="dbgWords">-</b></div>
+      </div>
+    </div>
+  </div>
+
+<script is:inline>
+(function () {
+  "use strict";
+
+  // ===== CONFIG =====
+  var N = 10;
+  var CELL = 52;
+  var PAD = 36;
+  var SIZE = PAD * 2 + CELL * N;
+
+  var START = [0, 0];
+  var GOAL  = [9, 0];
+
+  var LINK_MIN_PAIRS = 7;
+  var LINK_MAX_PAIRS = 10;
+
+  var POP_MS = 240;   // per-letter pop duration
+
+  var LINK_PAIRS = [];
+  var LINK_MAP = {};
+
+  var HINT_WORDS = [
+    "AT","IN","ON","GO","DO","UP","BY","MY","SO","TO","WE","HE","ME","BE","NO",
+    "AM","AN","AS","IS","IT","OF","OR","OX","AX","EX","OH","HI","HA",
+    "CAT","DOG","RUN","BIG","RED","SUN","MAP","JAM","KEY","FLY",
+    "BAT","CUP","HAT","TOP","EYE","BOX","CUB","GUM","ICE","JOB",
+    "GOOD","DUCK","BIRD","FISH","WALK","JUMP","KITE","PLAY","FROG","MOON",
+    "BARN","TREE","CAKE","FIRE","GATE","LAKE","MASK","NEST","OVEN","ROPE",
+    "APPLE","GRAPE","HOUSE","MOUSE","SNAKE","PLANT","STONE","BRAVE","LEMON","PEACH",
+    "BREAD","CRANE","DREAM","EAGLE","FLUTE","GIANT","HONEY","IGLOO","JELLY","KNIFE",
+    "ORANGE","BANANA","ROCKET","GUITAR","SILVER","PURPLE","YELLOW","FLOWER","GARDEN","MONKEY",
+    "BRIDGE","CASTLE","DRAGON","ENGINE","FALCON","GOBLIN","HAMMER","INSECT","JUNGLE","KITTEN"
+  ];
+
+  // ===== DICTIONARY =====
+  // Base words only (public/words-and-ladders.txt, see scripts/build-ladder-words.py);
+  // plurals, -ed, -ing, -er, -est and -ly are matched by stripping the suffix.
+  var DICT = null;
+  fetch("/words-and-ladders.txt").then(function (r) { return r.text(); }).then(function (t) {
+    DICT = {};
+    t.split("\n").forEach(function (w) { if (w) DICT[w] = 1; });
+  }).catch(function () {}); // ponytail: if the list fails to load the check is skipped, not blocking play
+
+  function isWord(w) {
+    if (!DICT) return true;
+    w = w.toLowerCase();
+    if (DICT[w]) return true;
+    var n = w.length, c = [];
+    function sfx(suf, add) { if (n > suf.length + 2 && w.slice(-suf.length) === suf) c.push(w.slice(0, n - suf.length) + add); }
+    function dbl(suf) { // running -> run, bigger -> big
+      var b = w.slice(0, n - suf.length);
+      if (w.slice(-suf.length) === suf && b.length > 2 && b.slice(-1) === b.slice(-2, -1)) c.push(b.slice(0, -1));
+    }
+    sfx("s", ""); sfx("es", ""); sfx("ies", "y");
+    sfx("ed", ""); sfx("ed", "e"); sfx("ied", "y"); dbl("ed");
+    sfx("ing", ""); sfx("ing", "e"); dbl("ing");
+    sfx("er", ""); sfx("er", "e"); sfx("ier", "y"); dbl("er");
+    sfx("est", ""); sfx("est", "e"); sfx("iest", "y"); dbl("est");
+    sfx("ly", ""); sfx("ily", "y");
+    for (var i = 0; i < c.length; i++) if (DICT[c[i]]) return true;
+    return false;
+  }
+
+  // ===== DOM =====
+  var canvas      = document.getElementById("board");
+  var ctx         = canvas.getContext("2d");
+  var statusEl    = document.getElementById("status");
+  var nextEl      = document.getElementById("nextLetter");
+  var minEl       = document.getElementById("minLetter");
+  var input       = document.getElementById("wordInput");
+  var submitBtn   = document.getElementById("submitBtn");
+  var hintBtn     = document.getElementById("hintBtn");
+  var soundBtn    = document.getElementById("soundBtn");
+  var resetBtn    = document.getElementById("resetBtn");
+  var progressBar = document.getElementById("progressBar");
+  var progressTxt = document.getElementById("progressText");
+  var linkCountEl = document.getElementById("linkCount");
+  var dbgPos      = document.getElementById("dbgPos");
+  var dbgRequired = document.getElementById("dbgRequired");
+  var dbgMin      = document.getElementById("dbgMin");
+  var dbgWords    = document.getElementById("dbgWords");
+
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+
+  // ===== STATE =====
+  var letters = {};
+  var animLetters = {};      // key -> appear timestamp (for pop anim)
+  var cursorPos = [START[0], START[1]];
+  var required = null;
+  var won = false;
+  var words = [];
+  var placing = false;
+  var roundMin = 2;
+  var soundOn = true;
+
+  // Animation cancellation
+  var animToken = 0;
+  var animTimeouts = [];
+  var animLoopRunning = false;
+
+  // GA4: round_start on the first word of a game, round_complete on reaching the crown
+  var GAME = "words-and-ladders", roundT0 = 0;
+  function track(name, params) {
+    try { if (window.gtag) window.gtag("event", name, Object.assign({ game: GAME, language: "en" }, params)); } catch (e) {}
+    if (name === "round_complete") window.dispatchEvent(new Event("typpy:round_complete"));
+  }
+
+  // ===== AUDIO =====
+  var audioCtx = null;
+
+  function ensureAudio() {
+    if (!audioCtx) {
+      try {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (Ctx) audioCtx = new Ctx();
+      } catch (e) { audioCtx = null; }
+    }
+    if (audioCtx && audioCtx.state === "suspended") {
+      audioCtx.resume().catch(function () {});
+    }
+    return audioCtx;
+  }
+
+  function playTick(freq, volume) {
+    if (!soundOn) return;
+    var ac = ensureAudio();
+    if (!ac) return;
+    var osc = ac.createOscillator();
+    var gain = ac.createGain();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    var t = ac.currentTime;
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(volume || 0.07, t + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.085);
+    osc.connect(gain);
+    gain.connect(ac.destination);
+    osc.start(t);
+    osc.stop(t + 0.1);
+  }
+
+  function playJump() {
+    if (!soundOn) return;
+    var ac = ensureAudio();
+    if (!ac) return;
+    var osc = ac.createOscillator();
+    var gain = ac.createGain();
+    osc.type = "triangle";
+    var t = ac.currentTime;
+    osc.frequency.setValueAtTime(380, t);
+    osc.frequency.exponentialRampToValueAtTime(1300, t + 0.16);
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.09, t + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+    osc.connect(gain);
+    gain.connect(ac.destination);
+    osc.start(t);
+    osc.stop(t + 0.22);
+  }
+
+  function playWin() {
+    if (!soundOn) return;
+    var ac = ensureAudio();
+    if (!ac) return;
+    var notes = [523.25, 659.25, 783.99, 1046.5];
+    for (var i = 0; i < notes.length; i++) {
+      (function (note, idx) {
+        var osc = ac.createOscillator();
+        var gain = ac.createGain();
+        osc.type = "sine";
+        osc.frequency.value = note;
+        var t = ac.currentTime + idx * 0.11;
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(0.075, t + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start(t);
+        osc.stop(t + 0.3);
+      })(notes[i], i);
+    }
+  }
+
+  // ===== HELPERS =====
+  function keyOf(r, c) { return r + "," + c; }
+
+  function cellXY(r, c) {
+    return { x: PAD + c * CELL, y: PAD + (N - 1 - r) * CELL };
+  }
+  function cellCenter(r, c) {
+    var xy = cellXY(r, c);
+    return { x: xy.x + CELL / 2, y: xy.y + CELL / 2 };
+  }
+
+  function snakeNext(r, c) {
+    if (r % 2 === 0) {
+      if (c < N - 1) return [r, c + 1];
+      if (r < N - 1) return [r + 1, N - 1];
+    } else {
+      if (c > 0) return [r, c - 1];
+      if (r < N - 1) return [r + 1, 0];
+    }
+    return null;
+  }
+
+  function snakeIndex(r, c) {
+    return (r % 2 === 0) ? r * N + c : r * N + (N - 1 - c);
+  }
+
+  function clearAnimTimeouts() {
+    for (var i = 0; i < animTimeouts.length; i++) clearTimeout(animTimeouts[i]);
+    animTimeouts = [];
+  }
+  function scheduleAnim(fn, delay) {
+    var id = setTimeout(fn, delay);
+    animTimeouts.push(id);
+    return id;
+  }
+
+  // ===== LINK GENERATION =====
+  function regenerateLinks() {
+    LINK_PAIRS = [];
+    LINK_MAP = {};
+    var target = LINK_MIN_PAIRS + Math.floor(Math.random() * (LINK_MAX_PAIRS - LINK_MIN_PAIRS + 1));
+    var used = {};
+    used[keyOf(START[0], START[1])] = true;
+    used[keyOf(GOAL[0], GOAL[1])] = true;
+
+    var attempts = 0;
+    while (LINK_PAIRS.length < target && attempts < 4000) {
+      attempts++;
+      var r1 = Math.floor(Math.random() * N);
+      var c1 = Math.floor(Math.random() * N);
+      var r2 = Math.floor(Math.random() * N);
+      var c2 = Math.floor(Math.random() * N);
+      if (r1 === r2) continue;
+      var k1 = keyOf(r1, c1);
+      var k2 = keyOf(r2, c2);
+      if (used[k1] || used[k2]) continue;
+      used[k1] = true;
+      used[k2] = true;
+      LINK_PAIRS.push([[r1, c1], [r2, c2]]);
+      LINK_MAP[k1] = [r2, c2];
+      LINK_MAP[k2] = [r1, c1];
+    }
+  }
+
+  // ===== WEIGHTED MIN ROLL =====
+  function rollMinLength() {
+    var r = Math.random() * 100;
+    if (r < 5)  return 2;
+    if (r < 15) return 3;
+    if (r < 30) return 4;
+    if (r < 55) return 5;
+    return 6;
+  }
+
+  // ===== STATUS / UI =====
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = "status" + (kind ? " " + kind : "");
+  }
+
+  function updateUI() {
+    nextEl.textContent = won ? "-" : (required || "ANY");
+
+    var idx = snakeIndex(cursorPos[0], cursorPos[1]);
+    var remaining = N * N - idx;
+    var effMin = Math.min(roundMin, remaining);
+
+    if (won) {
+      minEl.textContent = "-";
+      minEl.style.fontSize = "26px";
+    } else if (effMin < roundMin) {
+      minEl.textContent = effMin + " of " + roundMin;
+      minEl.style.fontSize = "20px";
+    } else {
+      minEl.textContent = effMin;
+      minEl.style.fontSize = "26px";
+    }
+
+    var pct = won ? 100 : ((N * N - remaining) / (N * N - 1)) * 100;
+    progressBar.style.width = pct + "%";
+    progressTxt.textContent = (N * N - remaining) + " / " + (N * N - 1) + " cells";
+
+    linkCountEl.textContent = LINK_PAIRS.length;
+    dbgPos.textContent = "row " + (cursorPos[0] + 1) + ", col " + (cursorPos[1] + 1);
+    dbgRequired.textContent = won ? "-" : (required || "any");
+    dbgMin.textContent = won ? "-" : (roundMin + " -> " + effMin);
+    dbgWords.textContent = words.length;
+
+    hintBtn.disabled = won || placing;
+    submitBtn.disabled = won || placing;
+    input.disabled = won;
+    input.readOnly = placing;
+
+    soundBtn.textContent = soundOn ? "🔊" : "🔇";
+  }
+
+  // ===== RESET =====
+  function resetGame() {
+    animToken++;
+    clearAnimTimeouts();
+    animLoopRunning = false;
+    placing = false;
+
+    letters = {};
+    animLetters = {};
+    cursorPos = [START[0], START[1]];
+    required = null;
+    won = false;
+    words = [];
+    roundMin = 3 + Math.floor(Math.random() * 2); // first round is always an easy 3-4 letters
+
+    regenerateLinks();
+
+    input.disabled = false;
+    input.readOnly = false;
+    input.value = "";
+
+    var firstEx = HINT_WORDS.filter(function (w) { return w.length === roundMin; });
+    setStatus("Start here: type " + firstEx[Math.floor(Math.random() * firstEx.length)] +
+              " and press Enter. Its last letter starts your next word.", "warn");
+    render();
+    updateUI();
+    input.focus();
+  }
+
+  // ===== ANIMATION LOOP =====
+  function startAnimLoop() {
+    if (animLoopRunning) return;
+    animLoopRunning = true;
+    requestAnimationFrame(animFrame);
+  }
+
+  function animFrame() {
+    render();
+    var now = performance.now();
+    var any = false;
+    for (var k in animLetters) {
+      if (now - animLetters[k] < POP_MS + 60) { any = true; break; }
+    }
+    if (any || placing) {
+      requestAnimationFrame(animFrame);
+    } else {
+      animLoopRunning = false;
+    }
+  }
+
+  // ===== PLACE WORD =====
+  function placeWord(raw) {
+    if (placing) return;
+    if (won) { setStatus("You already won! Click Reset.", "warn"); return; }
+
+    ensureAudio();
+
+    var word = String(raw || "").trim().toUpperCase();
+    if (!word) { setStatus("Type a word first.", "bad"); return; }
+    if (!/^[A-Z]+$/.test(word)) { setStatus("Only letters A-Z are allowed.", "bad"); return; }
+    if (!isWord(word)) { setStatus("'" + word + "' isn't in the dictionary. Try another word.", "bad");
+      input.classList.remove("shake"); void input.offsetWidth; input.classList.add("shake"); // restart the animation
+      input.focus(); input.select();
+      return;
+    }
+    if (required && word.charAt(0) !== required) {
+      setStatus("Next word must start with '" + required + "'. You typed '" + word.charAt(0) + "'.", "bad");
+      return;
+    }
+
+    var idxCursor = snakeIndex(cursorPos[0], cursorPos[1]);
+    var remaining = N * N - idxCursor;
+    var effectiveMin = Math.min(roundMin, remaining);
+
+    if (word.length < effectiveMin) {
+      var suffix = (effectiveMin < roundMin)
+        ? " (rolled " + roundMin + " but only " + effectiveMin + " cells remain)"
+        : "";
+      setStatus("Word must be at least " + effectiveMin + " letters this round" + suffix + ".", "bad");
+      return;
+    }
+    if (word.length > remaining) {
+      setStatus("Word too long — only " + remaining + " cell(s) remain to reach the goal.", "bad");
+      return;
+    }
+
+    // Build placements along the snake
+    var placements = [];
+    var pos = [cursorPos[0], cursorPos[1]];
+    for (var i = 0; i < word.length; i++) {
+      placements.push({ pos: [pos[0], pos[1]], ch: word.charAt(i) });
+      if (i < word.length - 1) pos = snakeNext(pos[0], pos[1]);
+    }
+
+    var lastP = placements[placements.length - 1];
+    var lastOriginalPos = [lastP.pos[0], lastP.pos[1]];
+    var linkTarget = LINK_MAP[keyOf(lastP.pos[0], lastP.pos[1])];
+    var teleported = !!linkTarget;
+
+    var newCursorPos = teleported ? [linkTarget[0], linkTarget[1]] : [lastP.pos[0], lastP.pos[1]];
+    var newRequired = lastP.ch;
+    var placedWord = word;
+    var isWin = (newCursorPos[0] === GOAL[0] && newCursorPos[1] === GOAL[1]);
+
+    if (!words.length) { roundT0 = performance.now(); track("round_start", {}); }
+
+    // Freeze input
+    placing = true;
+    input.value = "";
+    input.readOnly = true;
+    submitBtn.disabled = true;
+    hintBtn.disabled = true;
+
+    letters = {};
+    animLetters = {};
+
+    // Animation timing: total ~2.5s max, per-letter 50-140ms
+    var perLetter = Math.max(50, Math.min(140, 2800 / placements.length));
+    var myToken = ++animToken;
+    var lastSound = 0;
+
+    function step() {
+      if (animToken !== myToken) return;
+
+      var idx = 0;
+
+      function placeNext() {
+        if (animToken !== myToken) return;
+
+        if (idx >= placements.length) {
+          // All letters placed — hold briefly then finish
+          scheduleAnim(afterAllPlaced, 320);
+          return;
+        }
+
+        var p = placements[idx];
+        var k = keyOf(p.pos[0], p.pos[1]);
+        letters[k] = p.ch;
+        animLetters[k] = performance.now();
+
+        var now = performance.now();
+        if (now - lastSound >= 50) {
+          // Rising pitch per letter, capped so it doesn't get shrill
+          var baseFreq = 620 + Math.min(520, idx * 55);
+          var vol = 0.065 + Math.min(0.04, idx * 0.004);
+          playTick(baseFreq, vol);
+          lastSound = now;
+        }
+
+        startAnimLoop();
+        idx++;
+        scheduleAnim(placeNext, perLetter);
+      }
+
+      placeNext();
+    }
+
+    function afterAllPlaced() {
+      if (animToken !== myToken) return;
+
+      if (teleported) {
+        // Jump sound + move last letter to link target
+        playJump();
+        var lastK = keyOf(lastOriginalPos[0], lastOriginalPos[1]);
+        var targetK = keyOf(newCursorPos[0], newCursorPos[1]);
+        delete letters[lastK];
+        delete animLetters[lastK];
+        letters[targetK] = newRequired;
+        animLetters[targetK] = performance.now();
+        startAnimLoop();
+        scheduleAnim(finalize, 420);
+      } else {
+        finalize();
+      }
+    }
+
+    function finalize() {
+      if (animToken !== myToken) return;
+
+      // Keep only the last letter
+      letters = {};
+      letters[keyOf(newCursorPos[0], newCursorPos[1])] = newRequired;
+      animLetters = {};
+
+      cursorPos = newCursorPos;
+      required = newRequired;
+      words.push(placedWord);
+      roundMin = rollMinLength();
+
+      if (isWin) {
+        won = true;
+        playWin();
+        track("round_complete", { room_size: words.length, duration_s: Math.round((performance.now() - roundT0) / 1000) });
+        setStatus("You reached the crown! '" + placedWord + "' wins the game!", "win");
+      } else {
+        var newIdx = snakeIndex(cursorPos[0], cursorPos[1]);
+        var newRem = N * N - newIdx;
+        var newEff = Math.min(roundMin, newRem);
+        var msg = "Placed '" + placedWord + "'.";
+        if (teleported) {
+          msg += " LINK! Jumped from row " + (lastOriginalPos[0] + 1) +
+                 ", col " + (lastOriginalPos[1] + 1) +
+                 " to row " + (newCursorPos[0] + 1) +
+                 ", col " + (newCursorPos[1] + 1) + ".";
+        }
+        msg += " Next word: min " + newEff + " letters, start with '" + required + "'.";
+        setStatus(msg, "good");
+      }
+
+      placing = false;
+      render();
+      updateUI();
+      if (!won) { input.value = required; input.focus(); } // prefill the letter the next word must start with
+    }
+
+    step();
+  }
+
+  // ===== HINT =====
+  function suggestHint() {
+    if (won || placing) return;
+
+    var idxCursor = snakeIndex(cursorPos[0], cursorPos[1]);
+    var remaining = N * N - idxCursor;
+    var effectiveMin = Math.min(roundMin, remaining);
+
+    var candidates = HINT_WORDS.filter(function (w) {
+      return w.length >= effectiveMin &&
+             w.length <= remaining &&
+             (!required || w.charAt(0) === required);
+    });
+
+    if (candidates.length === 0) {
+      var fb = "";
+      for (var i = 0; i < effectiveMin; i++) fb += (required || "A");
+      input.value = fb;
+      input.focus();
+      input.select();
+      setStatus("Hint: no dictionary word found. Try any " + effectiveMin +
+                "+ letters starting with '" + (required || "any") + "', e.g. '" + fb + "'.", "warn");
+      return;
+    }
+
+    var winCands = candidates.filter(function (w) { return w.length === remaining; });
+    var pick, extra = "";
+    if (winCands.length > 0) {
+      pick = winCands[Math.floor(Math.random() * winCands.length)];
+      extra = " — exactly long enough to hit the crown!";
+    } else {
+      pick = candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    input.value = pick;
+    input.focus();
+    input.select();
+    setStatus("Hint: try '" + pick + "' (" + pick.length + " letters, starts with '" +
+              pick.charAt(0) + "')" + extra, "warn");
+  }
+
+  // ===== ROW / GOAL ICONS =====
+  function drawRightArrow(cx, cy, size, color) {
+    var head = 11;
+    ctx.strokeStyle = color; ctx.fillStyle = color;
+    ctx.lineWidth = 9; ctx.lineCap = "butt";
+    ctx.beginPath(); ctx.moveTo(cx - size, cy); ctx.lineTo(cx + size - head, cy); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx + size, cy);
+    ctx.lineTo(cx + size - head, cy - head);
+    ctx.lineTo(cx + size - head, cy + head);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function drawLeftArrow(cx, cy, size, color) {
+    var head = 11;
+    ctx.strokeStyle = color; ctx.fillStyle = color;
+    ctx.lineWidth = 9; ctx.lineCap = "butt";
+    ctx.beginPath(); ctx.moveTo(cx + size, cy); ctx.lineTo(cx - size + head, cy); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - size, cy);
+    ctx.lineTo(cx - size + head, cy - head);
+    ctx.lineTo(cx - size + head, cy + head);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function drawUpArrow(cx, cy, size, color) {
+    var head = 11;
+    ctx.strokeStyle = color; ctx.fillStyle = color;
+    ctx.lineWidth = 9; ctx.lineCap = "butt";
+    ctx.beginPath(); ctx.moveTo(cx, cy + size); ctx.lineTo(cx, cy - size + head); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - size);
+    ctx.lineTo(cx - head, cy - size + head);
+    ctx.lineTo(cx + head, cy - size + head);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function drawCrown(cx, cy, size, color) {
+    var w = size;
+    var h = size * 1.25;
+    ctx.fillStyle = color;
+    ctx.fillRect(cx - w, cy + h * 0.30, w * 2, h * 0.35);
+    ctx.beginPath();
+    ctx.moveTo(cx - w, cy + h * 0.30);
+    ctx.lineTo(cx - w, cy - h * 0.10);
+    ctx.lineTo(cx - w * 0.5, cy + h * 0.10);
+    ctx.lineTo(cx, cy - h * 0.55);
+    ctx.lineTo(cx + w * 0.5, cy + h * 0.10);
+    ctx.lineTo(cx + w, cy - h * 0.10);
+    ctx.lineTo(cx + w, cy + h * 0.30);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath(); ctx.arc(cx - w, cy - h * 0.10, 1.4, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx,     cy - h * 0.55, 1.4, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx + w, cy - h * 0.10, 1.4, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // ===== RENDER =====
+  function drawLinkArrow(x, y, ang, color) {
+    var head = 7;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x - head * Math.cos(ang - Math.PI / 6), y - head * Math.sin(ang - Math.PI / 6));
+    ctx.lineTo(x - head * Math.cos(ang + Math.PI / 6), y - head * Math.sin(ang + Math.PI / 6));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    ctx.fillStyle = "#faf6ef";
+    ctx.fillRect(0, 0, SIZE, SIZE);
+
+    // Cells
+    for (var r = 0; r < N; r++) {
+      for (var c = 0; c < N; c++) {
+        var xy = cellXY(r, c);
+        var k = keyOf(r, c);
+        var isStart = (r === START[0] && c === START[1]);
+        var isGoal  = (r === GOAL[0]  && c === GOAL[1]);
+        var isLink  = !!LINK_MAP[k];
+        var filled  = !!letters[k];
+
+        if (isStart)      ctx.fillStyle = filled ? "#bcd3a8" : "#dbe7cd";
+        else if (isGoal)  ctx.fillStyle = filled ? "#f0d28a" : "#f6e6bb";
+        else if (isLink)  ctx.fillStyle = filled ? "#a9d0d1" : "#d3e6e6";
+        else              ctx.fillStyle = filled ? "#f1e3cd" : "#f3ecdf";
+
+        ctx.fillRect(xy.x + 2, xy.y + 2, CELL - 4, CELL - 4);
+        ctx.strokeStyle = "#d6c9b4";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(xy.x + 2.5, xy.y + 2.5, CELL - 5, CELL - 5);
+      }
+    }
+
+    // Minimum-length guide: orange outline on the cells the next word must cover
+    if (!won && !placing) {
+      var mp = [cursorPos[0], cursorPos[1]];
+      var mEff = Math.min(roundMin, N * N - snakeIndex(mp[0], mp[1]));
+      var pulse = 0.5 + 0.5 * Math.sin(performance.now() / 260);
+      for (var mi = 0; mi < mEff && mp; mi++) {
+        ctx.strokeStyle = mi === 0 ? "rgba(206,106,58," + (0.45 + 0.55 * pulse) + ")" : "rgb(206,106,58)";
+        ctx.lineWidth = mi === 0 ? 2.5 + 2 * pulse : 2.5;
+        var mxy = cellXY(mp[0], mp[1]);
+        ctx.strokeRect(mxy.x + 2.5, mxy.y + 2.5, CELL - 5, CELL - 5);
+        mp = snakeNext(mp[0], mp[1]);
+      }
+    }
+
+    // Row direction + up/crown indicators
+    var IND_COLOR = "#e6dccb"; // faint, blends into the cell
+    for (var ri = 0; ri < N; ri++) {
+      var isEvenRow = (ri % 2 === 0);
+      var firstCol = isEvenRow ? 0 : (N - 1);
+      var lastCol  = isEvenRow ? (N - 1) : 0;
+
+      var fxy = cellXY(ri, firstCol);
+      var fcx = fxy.x + CELL / 2;
+      var fcy = fxy.y + CELL / 2;
+      if (isEvenRow) drawRightArrow(fcx, fcy, 15, IND_COLOR);
+      else           drawLeftArrow(fcx, fcy, 15, IND_COLOR);
+
+      var lxy = cellXY(ri, lastCol);
+      var lcx = lxy.x + CELL / 2;
+      var lcy = lxy.y + 11;
+      if (ri === N - 1) drawCrown(lcx, lcy + 1, 7, "#c9942b");
+      else              drawUpArrow(lcx, lxy.y + CELL / 2, 15, IND_COLOR);
+    }
+
+    // Links
+    var LINK_COLOR = "rgba(79, 143, 146, 0.8)";
+    for (var li = 0; li < LINK_PAIRS.length; li++) {
+      var A = LINK_PAIRS[li][0], B = LINK_PAIRS[li][1];
+      var aC = cellCenter(A[0], A[1]);
+      var bC = cellCenter(B[0], B[1]);
+      var ang = Math.atan2(bC.y - aC.y, bC.x - aC.x);
+      var gap = 18;
+      var ax = aC.x + Math.cos(ang) * gap;
+      var ay = aC.y + Math.sin(ang) * gap;
+      var bx = bC.x - Math.cos(ang) * gap;
+      var by = bC.y - Math.sin(ang) * gap;
+
+      ctx.strokeStyle = LINK_COLOR;
+      ctx.lineWidth = 1.6;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+      ctx.setLineDash([]);
+      drawLinkArrow(ax, ay, ang + Math.PI, LINK_COLOR);
+      drawLinkArrow(bx, by, ang, LINK_COLOR);
+    }
+
+    // START label
+    var sPos = cellXY(START[0], START[1]);
+    ctx.fillStyle = "#5b8a45";
+    ctx.font = "bold 9px system-ui, sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("START", sPos.x + 5, sPos.y + 5);
+
+    // Letters (with pop animation)
+    ctx.fillStyle = "#4a3f31";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    var now = performance.now();
+    var letterKeys = Object.keys(letters);
+    for (var lk = 0; lk < letterKeys.length; lk++) {
+      var kk = letterKeys[lk];
+      var parts = kk.split(",");
+      var rr = parseInt(parts[0], 10), cc = parseInt(parts[1], 10);
+      var cp = cellCenter(rr, cc);
+
+      var scale = 1;
+      var appearAt = animLetters[kk];
+      if (appearAt) {
+        var t = (now - appearAt) / POP_MS;
+        if (t >= 0 && t < 1) {
+          scale = 1 + 0.4 * Math.sin(t * Math.PI) * (1 - t * 0.3);
+        }
+      }
+
+      ctx.save();
+      ctx.translate(cp.x, cp.y);
+      ctx.scale(scale, scale);
+      ctx.font = "bold 22px ui-monospace, Menlo, Consolas, monospace";
+      ctx.fillText(letters[kk], 0, 1);
+      ctx.restore();
+    }
+
+    // Win glow
+    if (won) {
+      var gp = cellCenter(GOAL[0], GOAL[1]);
+      ctx.strokeStyle = "#6f9a5a";
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.arc(gp.x, gp.y, 24, 0, Math.PI * 2); ctx.stroke();
+    }
+  }
+
+  // ===== EVENTS =====
+  submitBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    ensureAudio();
+    placeWord(input.value);
+  });
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      ensureAudio();
+      placeWord(input.value);
+    }
+  });
+
+  input.addEventListener("animationend", function () { input.classList.remove("shake"); });
+  hintBtn.addEventListener("click", suggestHint);
+
+  soundBtn.addEventListener("click", function () {
+    soundOn = !soundOn;
+    updateUI();
+    if (soundOn) {
+      ensureAudio();
+      playTick(880, 0.06);
+    }
+  });
+
+  resetBtn.addEventListener("click", function () {
+    ensureAudio();
+    resetGame();
+  });
+
+  // ===== MOBILE: rules popup, fit to visual viewport =====
+  var rulesEl = document.getElementById("rules");
+  document.getElementById("rulesText").innerHTML = document.querySelector(".sub").innerHTML;
+  document.getElementById("rulesBtn").addEventListener("click", function () { rulesEl.showModal(); });
+  document.getElementById("rulesClose").addEventListener("click", function () { rulesEl.close(); });
+
+  var panelEl = document.getElementById("panel");
+  document.getElementById("miniBtn").addEventListener("click", function () { var m = panelEl.classList.toggle("mini"); this.textContent = m ? "▴" : "▾"; });
+
+  var wrap = document.getElementById("boardWrap");
+  var mobileMQ = window.matchMedia("(max-width:700px)");
+  var vv = window.visualViewport;
+  function fit() {
+    if (!mobileMQ.matches) {
+      canvas.style.width = canvas.style.height = "";
+      document.body.style.top = "";
+      return;
+    }
+    // follow the soft keyboard: pin the body to the visible area
+    document.documentElement.style.setProperty("--vh", (vv ? vv.height : innerHeight) + "px");
+    document.body.style.top = (vv ? vv.offsetTop : 0) + "px";
+    var s = Math.floor(Math.min(wrap.clientWidth, wrap.clientHeight));
+    if (s > 0) canvas.style.width = canvas.style.height = s + "px";
+  }
+  if (vv) { vv.addEventListener("resize", fit); vv.addEventListener("scroll", fit); }
+  window.addEventListener("resize", fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(wrap);
+  // tapping a button must not blur the input (that would close the keyboard)
+  document.querySelectorAll(".panel button").forEach(function (b) {
+    b.addEventListener("pointerdown", function (e) { e.preventDefault(); });
+  });
+
+  // ===== INIT =====
+  (function idle() { if (!won && !placing) render(); requestAnimationFrame(idle); })(); // drives the first-cell pulse
+  resetGame();
+  fit();
+})();
+</script>
+</body>
+</html>
