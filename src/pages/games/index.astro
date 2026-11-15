@@ -7,7 +7,7 @@ const title = 'Relaxing Typing Games, No Timer — Typpy';
 const description = 'Cozy typing games with no countdown, led by Tidy, plus a few arcade ones against the clock. Each game is labeled so you can pick your mood. Free in your browser.';
 
 // no countdown (Tidy has no clock at all; the others count up for stats only)
-const calm = new Set(['tidy', 'tidy-es', 'tidy-ja', 'tidy-ms', 'tidy-zh', 'zentype', 'zentype-reverse', 'typespace']);
+const calm = new Set(['tidy', 'tidy-es', 'tidy-ja', 'tidy-ms', 'tidy-zh', 'zentype', 'zentype-reverse', 'typespace', 'words-and-ladders']);
 const sorted = [...games].sort((a, b) => Number(calm.has(b.slug)) - Number(calm.has(a.slug)));
 const url = 'https://typpy.online/games/';
 

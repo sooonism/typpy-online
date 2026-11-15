@@ -5,7 +5,20 @@ const keywords = 'word ladder game, word chain game, snakes and ladders word gam
 const url = 'https://typpy.online/games/words-and-ladders/';
 const image = 'https://typpy.online/og/default.png';
 
+const faq = [
+  ['What is Words and Ladders?', 'Words and Ladders is a free word game on a 10x10 snakes-and-ladders board. You type real English words, the letters fill the board along a snake path, and you try to reach the crown in the top-left.'],
+  ['How do the rules work?', 'Each round rolls a minimum word length from 2 to 6. Type a word at least that long and its letters fill the path. Only the last letter stays on the board, and your next word must start with it.'],
+  ['What are the links?', 'Each game has 7 to 10 random pairs of linked cells. If the last letter of your word lands on a linked cell, you jump to its partner, which can send you up or down the board. Passing through a link in the middle of a word does nothing.'],
+  ['Does it check that my word is real?', 'Yes. Words are checked against an English dictionary, and common plurals and verb endings (-s, -ed, -ing) are accepted. Anything else shakes the input so you can try again.'],
+  ['Is it free, and does it work on a phone?', 'Free, with no account. On mobile the board fills the screen and the controls collapse out of the way of the keyboard.']
+];
+
 const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
@@ -113,6 +126,10 @@ const schema = [
   .debug{font-size:12px;color:#8a7a66;border-top:1px solid #e0d5c3;padding-top:8px;line-height:1.6;font-family:ui-monospace,Menlo,monospace}
   .debug b{color:#4a3f31;font-weight:600}
   .board-wrap{display:contents}
+  .faq{width:100%;max-width:840px;margin-top:20px;font-size:14px;line-height:1.55;color:#6d5f4e}
+  .faq h2{font-size:18px;margin:0 0 10px;color:#4a3f31}
+  .faq dt{font-weight:700;color:#4a3f31;margin-top:10px}
+  .faq dd{margin:2px 0 0}
   #rulesBtn,#miniBtn{display:none}
   dialog{border:1px solid #e0d5c3;border-radius:16px;background:#faf6ef;color:#4a3f31;padding:20px;max-width:min(92vw,420px)}
   dialog::backdrop{background:rgba(74,63,49,.45)}
@@ -126,6 +143,7 @@ const schema = [
     body{position:fixed;left:0;right:0;top:0;height:var(--vh,100dvh);min-height:0;padding:34px 8px 8px;gap:6px}
     h1,.sub,.req-grid,.progress-wrap,.legend,.debug{display:none}
     .back-link{top:6px;left:8px;opacity:.8}
+    .faq{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap} /* same as Tidy's sr-only text: in the DOM, off-screen */
     #rulesBtn{display:block;position:fixed;top:4px;right:8px;z-index:10;padding:4px 12px;border-radius:999px;font-size:14px}
     .game{flex:1;min-height:0;flex-direction:column;flex-wrap:nowrap;gap:6px;width:100%;max-width:none;justify-content:flex-start}
     .board-wrap{display:block;position:relative;flex:1;min-height:0;width:100%}
@@ -211,6 +229,11 @@ const schema = [
       </div>
     </div>
   </div>
+
+  <section class="faq">
+    <h2>Words and Ladders: questions</h2>
+    <dl>{faq.map(([q, a]) => (<div><dt>{q}</dt><dd>{a}</dd></div>))}</dl>
+  </section>
 
 <script is:inline>
 (function () {

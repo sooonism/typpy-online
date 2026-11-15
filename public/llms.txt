@@ -17,6 +17,7 @@ Typpy is ad-supported and has no paywalls, logins, or user accounts. Every game 
 - [TypeFall](https://typpy.online/games/typefall/): Falling words you must clear before they hit the bottom — a timed arcade mode.
 - [Type Rush](https://typpy.online/games/typerush/): Fast arcade typing with collectible diamonds.
 - [TypeSpace](https://typpy.online/games/typespace/): Type short quotes to build rhythm, speed, and accuracy.
+- [Words and Ladders](https://typpy.online/games/words-and-ladders/): A calm word game on a 10x10 snakes-and-ladders board. Type real English words along a snake path; only the last letter carries over as the next word's first letter, random links jump you up or down, and you win by reaching the crown. Dictionary-checked, works on mobile, no timer.
 - [ScrambleType](https://typpy.online/games/scrambletype/): Unscramble a word one letter at a time to sharpen spelling and focus.
 
 ## About
