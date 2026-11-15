@@ -13,6 +13,7 @@ export const primaryNavLinks = [
     ]
   },
   { href: '/games/', label: 'games' },
+  { href: '/games/words-and-ladders/', label: 'words and ladders', badge: 'new' },
   {
     href: '/learn-spanish/', label: 'learn',
     children: [

@@ -9,6 +9,9 @@ const description = 'Cozy typing games with no countdown, led by Tidy, plus a fe
 // no countdown (Tidy has no clock at all; the others count up for stats only)
 const calm = new Set(['tidy', 'tidy-es', 'tidy-ja', 'tidy-ms', 'tidy-zh', 'zentype', 'zentype-reverse', 'typespace', 'words-and-ladders']);
 const sorted = [...games].sort((a, b) => Number(calm.has(b.slug)) - Number(calm.has(a.slug)));
+// newest game goes right after Tidy, with a "New" pill
+const newSlug = 'words-and-ladders';
+sorted.splice(1, 0, ...sorted.splice(sorted.findIndex(g => g.slug === newSlug), 1));
 const url = 'https://typpy.online/games/';
 
 // games list is provided by /src/data/games.ts
@@ -51,7 +54,7 @@ const schema = [
             Games
           </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-on-surface mb-5 leading-[0.95]">Relaxing typing games</h1>
-          <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-7">Calm typing games with no countdown, led by <a href="/games/tidy/" class="underline hover:text-primary">Tidy</a>. A few arcade games with a clock are here too, and every game is labeled so you can pick your mood.</p>
+          <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-7">Calm typing games with no countdown, led by <a href="/games/tidy/" class="underline hover:text-primary">Tidy</a> and the new <a href="/games/words-and-ladders/" class="underline hover:text-primary">Words and Ladders</a>. A few arcade games with a clock are here too, and every game is labeled so you can pick your mood.</p>
           <div class="flex flex-wrap gap-4 items-center">
             <button
               id="random-game-btn"
@@ -78,6 +81,7 @@ const schema = [
             )}
             <div class="p-4 bg-surface">
               <span class="inline-block mb-2 px-2 py-0.5 rounded-full border border-outline-variant text-[11px] uppercase tracking-[0.15em] text-on-surface-variant">{calm.has(game.slug) ? 'No countdown' : 'Against the clock'}</span>
+              {game.slug === newSlug && <span class="inline-block mb-2 ml-2 px-2 py-0.5 rounded-full bg-brand-red text-white text-[11px] font-bold uppercase tracking-[0.15em]">New</span>}
               <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{game.title}</h2>
               <p class="text-sm text-on-surface-variant mt-2">{game.description}</p>
               <div class="mt-4">
